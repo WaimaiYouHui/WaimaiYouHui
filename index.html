@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外卖优惠券领取中心</title>
+    <!-- 引入Tailwind CSS（用于快速美化页面） -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome（用于图标） -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- 导航栏 -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 text-center">
+            <h1 class="text-2xl font-bold text-orange-500">
+                <i class="fa fa-cutlery mr-2"></i>外卖优惠券中心
+            </h1>
+            <p class="text-gray-500 mt-1">每日更新，领券更省钱</p>
+        </div>
+    </header>
+
+    <!-- 优惠券展示区 -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- 美团优惠券 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden transform transition hover:scale-105">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/id/237/60/60" alt="美团Logo" class="w-12 h-12 rounded-full">
+                        <h2 class="ml-4 text-xl font-bold text-yellow-600">美团外卖优惠券</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6">满30减8 | 满50减15 | 新用户立减18元</p>
+                    <a href="https://example.com/meituan" target="_blank" class="block w-full text-center bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-lg transition">
+                        <i class="fa fa-gift mr-1"></i>立即领取
+                    </a>
+                </div>
+            </div>
+
+            <!-- 饿了么优惠券 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden transform transition hover:scale-105">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/id/239/60/60" alt="饿了么Logo" class="w-12 h-12 rounded-full">
+                        <h2 class="ml-4 text-xl font-bold text-blue-500">饿了么外卖红包</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6">随机大额红包 | 周末专享券 | 超市满减券</p>
+                    <a href="https://example.com/eleme" target="_blank" class="block w-full text-center bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg transition">
+                        <i class="fa fa-gift mr-1"></i>立即领取
+                    </a>
+                </div>
+            </div>
+
+            <!-- 其他平台示例 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden transform transition hover:scale-105">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/id/240/60/60" alt="商超Logo" class="w-12 h-12 rounded-full">
+                        <h2 class="ml-4 text-xl font-bold text-green-600">商超生鲜券</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6">满99减30 | 生鲜专用券 | 次日达免运费</p>
+                    <a href="https://example.com/supermarket" target="_blank" class="block w-full text-center bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg transition">
+                        <i class="fa fa-gift mr-1"></i>立即领取
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 底部信息 -->
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>更新时间：2025年8月</p>
+            <p class="mt-2 text-sm text-gray-400">本网站仅提供优惠券跳转服务，最终解释权归各平台所有</p>
+        </div>
+    </footer>
+</body>
+</html>
