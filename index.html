@@ -1,501 +1,1222 @@
- <!doctype html>
-<html lang=zh-CN>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<meta charset=UTF-8>
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
-<title>外卖领券</title>
-<script src=https://cdn.tailwindcss.com></script>
-<link href=https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css rel=stylesheet>
-<script>tailwind.config={theme:{extend:{colors:{primary:"#FF7D00",meituan:"#F5CA20",eleme:"#27AAE2",flashbuy:"#E16942",express:"#be0e17",travel:"#e92d34"}}}}</script>
-<style type=text/tailwindcss>
-@layer utilities {
-      .content-auto {
-        content-visibility: auto;  /* 自动控制内容可见性，优化性能 */
-      }
-      .scrollbar-thin {
-        scrollbar-width: thin;     /* 细滚动条 */
-      }
-      .text-shadow {
-        text-shadow: 0 1px 2px rgba(0,0,0,0.1);  /* 文本阴影效果 */
-      }
-      .card-shadow {
-        box-shadow: 0 1px 4px rgba(0,0,0,0.05);  /* 卡片阴影效果 */
-      }
-      .touch-active {
-        /* 优化触摸反馈，移除移动端点击时的高亮效果 */
-        -webkit-tap-highlight-color: transparent;
-      }
-      /* 按钮触摸样式 */
-      .btn-touch {
-        transition: transform 0.2s ease;  /* 添加transform过渡动画，实现平滑缩放 */
-      }
-      .btn-touch:active {
-        transform: scale(0.98);  /* 按钮被点击时缩小至98% */
+  <meta charset="UTF-8">
+  <!-- 视口配置：确保在手机等移动设备上正确显示，禁止用户缩放 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>外卖领券</title>
+  <!-- 引入Tailwind CSS框架，用于快速构建响应式布局 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Font Awesome图标库，提供各类图标支持 -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 配置Tailwind自定义主题，定义项目所需的品牌颜色 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF7D00',      // 主色调：橙色
+            meituan: '#F5CA20',      // 美团品牌黄色
+            eleme: '#27AAE2',        // 饿了么品牌蓝色
+            flashbuy: '#E16942',     // 闪购品牌红色
+            express: '#be0e17',      // 快递服务红色
+            travel: '#e92d34',       // 出行服务红色
+          },
+        },
       }
     }
-</style>
-<style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif}html{font-size:calc(100vw / 375 * 7)}body{background-color:#f5f5f5;color:#333;font-size:1.4rem;overflow-x:hidden;padding-bottom:7rem}.header{height:6.5rem;line-height:6.5rem;text-align:center;font-size:1.8rem;background-color:#fff;border-bottom:1px solid #eee;position:relative}.back-btn{position:absolute;left:1.2rem;top:50%;transform:translateY(-50%);width:3rem;height:3rem;background:url('data:image/svg+xml;utf8,<svg fill="%23333" viewBox="0 0 1024 1024" width="16" height="16"><path d="M328.448 512l339.712 339.712c10.24 10.24 10.24 26.624 0 36.864s-26.624 10.24-36.864 0L291.136 548.864c-10.24-10.24-10.24-26.624 0-36.864l339.136-339.712c10.24-10.24 26.624-10.24 36.864 0s10.24 26.624 0 36.864L328.448 512z"/></svg>') no-repeat center}.banner-swiper{width:96%;height:18rem;margin:0 2%;margin-top:1rem;margin:.9rem auto!important;border-radius:1rem;overflow:hidden;position:relative}.banner-slide{width:100%;height:100%;display:none}.banner-slide.active{display:block}.banner-swiper img{width:100%!important;height:100%!important;object-fit:cover!important}.button-container{display:flex;padding:1rem;gap:1rem;box-sizing:border-box;background-color:#f5f5f5}.btn{border:none;padding:0;margin:0;background:0 0;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:1rem;position:relative;min-height:48px;min-width:48px}.big-btn{width:50%;height:13.5rem}.right-buttons{display:flex;flex-direction:column;gap:1rem;flex:1}.small-btn{width:100%;height:5.5rem}.btn-img{position:absolute;top:0;left:0;width:100%!important;height:100%!important;object-fit:cover;flex-shrink:0}.btn:active{transform:scale(.9);opacity:.7}.button-bar-container{position:relative;margin-top:.5rem}.button-bar-placeholder{width:100%}.button-bar{position:absolute;top:0;left:0;width:100%;background-color:#f5f5f4;padding:.8rem .5rem .5rem;box-sizing:border-box;white-space:nowrap;transition:all .2s ease;display:flex;justify-content:space-between}.button-bar.fixed{position:fixed;z-index:999;box-shadow:0 .1rem .5rem rgba(0,0,0,.1);top:0}.button-item{flex:1;display:inline-block;padding:.6rem 0;font-size:2rem;color:#333;margin:0 .3rem;border-radius:3rem;background-color:#fff;transition:all .3s;border:none;cursor:pointer;text-align:center;max-width:20%;min-height:39px;display:flex;align-items:center;justify-content:center}.button-item.active{font-weight:700;box-shadow:0 .2rem .6rem rgba(0,0,0,.2)}.button-item[data-tab=tab1].active,.button-item[data-tab=tab1]:active{background-color:#f5ca20;color:#fff;transform:scale(.96)}.button-item[data-tab=tab2].active,.button-item[data-tab=tab2]:active{background-color:#27aae2;color:#fff;transform:scale(.96)}.button-item[data-tab=tab3].active,.button-item[data-tab=tab3]:active{background-color:#e16942;color:#fff;transform:scale(.96)}.button-item[data-tab=tab4].active,.button-item[data-tab=tab4]:active{background-color:#be0e17;color:#fff;transform:scale(.96)}.button-item[data-tab=tab5].active,.button-item[data-tab=tab5]:active{background-color:#e92d34;color:#fff;transform:scale(.96)}.card{width:96%!important;height:15rem!important;min-height:15rem;margin-top:.7rem!important;margin-bottom:1.5rem!important;margin:0 1rem;background-color:#fff;border-radius:1rem!important;border:1px solid #eee!important;box-shadow:0 .1rem .5rem rgba(0,0,0,.05)!important;display:flex;overflow:hidden;cursor:pointer}.card img{width:41%!important;height:auto!important;min-height:12rem;margin:1rem!important;border-radius:.8rem!important;object-fit:fill!important}.card-content{flex:1;padding:1.2rem .5rem;display:flex;flex-direction:column;position:relative}.card-title{display:block!important;color:#030303!important;font-size:2rem!important;font-weight:700!important;margin:.3rem .8rem!important;text-align:left!important;line-height:1.2!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.card-desc{display:block!important;color:#5e5d5d!important;font-size:1.7rem!important;margin:.5rem .8rem!important;text-align:left!important;line-height:1.4!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.card-button{position:absolute;right:1.2rem;bottom:1.2rem;background-color:#ffc837!important;color:#f8f7f6!important;font-size:1.7rem!important;font-weight:700!important;width:10.5rem!important;height:4.9rem!important;line-height:4.9rem!important;text-align:center;border-radius:.8rem!important;cursor:pointer;-webkit-tap-highlight-color:transparent!important;transition:transform .2s ease}.card-button:active{transform:scale(.9)}.card-button.top-btn{bottom:7.9rem;background-color:#ff9500!important}.card-time{display:block!important;color:#cfcbcb!important;font-size:1.6rem!important;margin-top:auto;margin-left:.8rem!important;margin-bottom:-.3rem!important;text-align:left!important;line-height:1.2!important}.notice-container{background:#eeeeec;border-radius:1rem;margin:1.5rem;padding:1.2rem;box-shadow:0 .1rem .5rem rgba(0,0,0,.05)}.notice-title{font-size:1.8rem;font-weight:700;color:#333;margin-bottom:.8rem}.notice-list{max-height:20rem;overflow-y:auto}.notice-item{font-size:1.5rem;color:#2b2b2b;line-height:3rem;border-bottom:1px solid #aaa}.popup-mask{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.5);z-index:998;display:none;justify-content:center;align-items:center}.popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:90%!important;max-width:500px;background-color:#fff;border-radius:1rem;box-shadow:0 .3rem 1rem rgba(0,0,0,.15);z-index:999;padding:2rem;box-sizing:border-box;max-height:90vh;overflow-y:auto}.popup-close{position:absolute;top:1.5rem;right:1.5rem;width:3rem;height:3rem;line-height:2.8rem;text-align:center;font-size:2rem;color:#999;border-radius:50%;background-color:#f5f5f5;cursor:pointer}.popup-close:active{background-color:#e0e0e0}.popup-title{font-size:1.8rem;font-weight:700;color:#333;text-align:center;margin-bottom:1.5rem;padding-top:.5rem}.link-container{width:100%;background-color:#fff9e6;border-radius:.8rem;padding:1.5rem;box-sizing:border-box;margin-bottom:1.5rem;border:1px solid #ffe8a3}.link-text{font-size:1.4rem;color:#333;word-break:break-all;line-height:1.5}.popup-desc-container{width:100%;margin-bottom:1.5rem}.popup-desc{font-size:1.3rem;color:#666;text-align:left;line-height:1.4;margin-bottom:.5rem}.copy-btn{width:100%;height:5rem;line-height:5rem;text-align:center;background-color:#ff7d00;color:#fff;font-size:1.6rem;font-weight:700;border-radius:.8rem;box-shadow:0 .2rem 0 #e06a00;margin-top:.5rem;border:none;cursor:pointer}.copy-btn:active{background-color:#e06a00;box-shadow:0 .1rem 0 #c05a00;transform:translateY(.1rem)}.shareCon{background-image:linear-gradient(#ffd622,#eb7200,hsla(0,0%,100%,0));border-radius:6rem 0 0 6rem;top:15rem;right:-1rem;position:fixed;color:#fdfdfd;width:7rem;height:5rem;font-size:1.6rem;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;border:none;cursor:pointer}.shareget:active{transform:scale(.95)}.more_hint{align-items:center;color:#5e5c5c;display:flex;font-size:1.4rem;justify-content:center;margin-top:2rem;padding:.5rem}.bottom-nav{position:fixed;bottom:0;left:0;width:100%;height:7rem;display:flex;background-color:#fff;border-top:1px solid #eee;z-index:9999}.nav-item{flex:1;display:flex;justify-content:center;align-items:center;font-size:2rem;color:#666;position:relative;cursor:pointer;min-height:48px}.nav-item.active{color:#ff7d00}.nav-item.active::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:3rem;height:.4rem;background-color:#ff7d00;border-radius:.2rem}.content-container{padding-bottom:1rem}.tutorial-content{padding:1rem .5rem;background-color:#f5f5f5;min-height:calc(100vh - 7rem);box-sizing:border-box}.tutorial-box{background-color:#ffd622;border-radius:1rem;padding:1.5rem;width:calc(100% - 1rem);margin:.6rem .5rem;box-sizing:border-box}.notice-box{border:2px solid #f7ca20;border-radius:1rem;padding:1rem 1.5rem;width:calc(100% - 1rem);margin-top:1rem;margin-bottom:2rem;margin-left:.5rem;margin-right:.5rem;background-color:#fdfdfd;box-sizing:border-box}.tutorial-title{font-size:2rem;font-weight:700;color:#070707;display:block;margin-bottom:1.5rem;padding-left:.5rem;text-align:left}.tutorial-btn{width:100%;margin-bottom:1.5rem;border-radius:.8rem;overflow:hidden;box-shadow:0 .1rem .3rem rgba(0,0,0,.1);cursor:pointer;transition:opacity .2s ease}.tutorial-btn:active{opacity:.7;transform:scale(.95)}.tutorial-btn:last-child{margin-bottom:.5rem}.tutorial-img{width:100%;height:10rem;object-fit:cover;display:block}.page-content,.tab-content{display:none}.page-content.active,.tab-content.active{display:block}.toast{position:fixed;top:40%;left:50%;transform:translate(-50%,-50%);background-color:rgba(0,0,0,.7);color:#fff;padding:.8rem 1.5rem;border-radius:.5rem;font-size:2rem;z-index:1000;opacity:0;transition:opacity .3s}.toast.show{opacity:1}.banner-slide:active{opacity:.7}</style>
+  </script>
+  
+  <!-- 自定义Tailwind工具类，扩展框架功能 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto; /* 自动控制内容可见性，优化渲染性能 */
+      }
+      .scrollbar-thin {
+        scrollbar-width: thin; /* 定义细滚动条样式 */
+      }
+      .text-shadow {
+        text-shadow: 0 1px 2px rgba(0,0,0,0.1); /* 文本阴影效果，增强可读性 */
+      }
+      .card-shadow {
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05); /* 卡片阴影，增强层次感 */
+      }
+    }
+  </style>
+  
+  <style>
+    /* 全局样式重置与基础设置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box; /* 盒模型计算方式：width/height包含边框和内边距 */
+      /* 使用系统默认字体栈，确保在不同设备上显示一致 */
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    
+    html {
+      /* 响应式字体计算：以375px屏幕为基准，动态调整字体大小 */
+      font-size: calc(100vw / 375 * 7);
+    }
+    
+    body {
+      background-color: #f5f5f5; /* 页面背景色：浅灰色 */
+      color: #333; /* 主要文本颜色：深灰色 */
+      font-size: 1.4rem; /* 基础字体大小 */
+      overflow-x: hidden; /* 隐藏水平滚动条，防止页面横向溢出 */
+      padding-bottom: 7rem; /* 底部预留空间，避免被导航栏遮挡 */
+    }
+    
+    /* 头部区域样式 */
+    .header {
+      height: 6.5rem; /* 头部高度 */
+      line-height: 6.5rem; /* 行高等于高度，实现文字垂直居中 */
+      text-align: center; /* 文字水平居中 */
+      font-size: 1.8rem; /* 标题字体大小 */
+      background-color: #fff; /* 白色背景 */
+      border-bottom: 1px solid #eee; /* 底部浅灰色边框，分隔头部与内容 */
+      position: relative; /* 相对定位，用于内部元素绝对定位 */
+    }
+    
+    .back-btn {
+      position: absolute; /* 绝对定位，相对于header */
+      left: 1.2rem; /* 距离左侧1.2rem */
+      top: 50%; /* 垂直方向居中起点 */
+      transform: translateY(-50%); /* 向上移动自身50%高度，实现垂直居中 */
+      width: 3rem; /* 按钮宽度 */
+      height: 3rem; /* 按钮高度 */
+      /* 背景图：返回箭头SVG图标 */
+      background: url('data:image/svg+xml;utf8,<svg fill="%23333" viewBox="0 0 1024 1024" width="16" height="16"><path d="M328.448 512l339.712 339.712c10.24 10.24 10.24 26.624 0 36.864s-26.624 10.24-36.864 0L291.136 548.864c-10.24-10.24-10.24-26.624 0-36.864l339.136-339.712c10.24-10.24 26.624-10.24 36.864 0s10.24 26.624 0 36.864L328.448 512z"/></svg>') no-repeat center;
+    }
+    
+    /* 轮播图容器样式 - 首页边距基准元素 */
+    .banner-swiper {
+      width: 96%; /* 宽度占屏幕94% */
+      height: 20rem; /* 轮播图高度 */
+      margin: 0 2%; /* 左右各3%边距 - 首页核心边距标准 */
+      margin-top: 1rem; /* 顶部1rem间距 */
+      border-radius: 1rem; /* 1rem圆角 */
+      overflow: hidden; /* 隐藏超出容器的内容 */
+      position: relative; /* 相对定位，用于轮播项定位 */
+    }
+    
+    .banner-slide {
+      width: 100%; /* 轮播项宽度占满容器 */
+      height: 100%; /* 轮播项高度占满容器 */
+      display: none; /* 默认隐藏 */
+    }
+    
+    .banner-slide.active {
+      display: block; /* 激活状态的轮播项显示 */
+    }
+    
+    .banner-swiper img {
+      width: 100% !important; /* 图片宽度占满容器 */
+      height: 100% !important; /* 图片高度占满容器 */
+      object-fit: cover !important; /* 图片自适应裁剪，保持比例并覆盖容器 */
+    }
+    
+    /* 快捷按钮容器样式 */
+    .button-container {
+      display: flex; /* 使用flex布局，子元素横向排列 */
+      padding: 1rem; /* 内边距1rem */
+      gap: 1rem; /* 子元素之间间距1rem */
+      box-sizing: border-box; /* 盒模型计算方式 */
+      background-color: #f5f5f5; /* 与页面背景色一致 */
+    }
+    
+    .btn {
+      border: none; /* 去除边框 */
+      padding: 0; /* 去除内边距 */
+      margin: 0; /* 去除外边距 */
+      background: transparent; /* 透明背景 */
+      display: flex; /* flex布局，内容居中 */
+      align-items: center; /* 垂直居中 */
+      justify-content: center; /* 水平居中 */
+      overflow: hidden; /* 隐藏超出部分 */
+      border-radius: 1rem; /* 1rem圆角 */
+      position: relative; /* 相对定位，用于图片绝对定位 */
+    }
+    
+    .big-btn {
+      width: 50%; /* 宽度占容器一半 */
+      height: 12rem; /* 高度12rem */
+    }
+    
+    .right-buttons {
+      display: flex; /* flex布局 */
+      flex-direction: column; /* 子元素纵向排列 */
+      gap: 1rem; /* 子元素之间间距1rem */
+      flex: 1; /* 占据剩余空间 */
+    }
+    
+    .small-btn {
+      width: 100%; /* 宽度占满父容器 */
+      height: 5.5rem; /* 高度5.5rem */
+    }
+    
+    .btn-img {
+      position: absolute; /* 绝对定位，覆盖按钮 */
+      top: 0; /* 顶部对齐 */
+      left: 0; /* 左侧对齐 */
+      width: 100% !important; /* 宽度占满按钮 */
+      height: 100% !important; /* 高度占满按钮 */
+      object-fit: cover; /* 图片自适应裁剪 */
+      flex-shrink: 0; /* 不缩小 */
+    }
+    
+    .btn:active {
+      transform: scale(0.98); /* 点击时轻微缩小，提供反馈 */
+      opacity: 0.9; /* 点击时轻微透明 */
+    }
+    
+    /* 标签栏容器样式 */
+    .button-bar-container {
+      position: relative; /* 相对定位 */
+      margin-top: 0.5rem; /* 顶部0.5rem间距 */
+    }
+    
+    .button-bar-placeholder {
+      width: 100%; /* 宽度占满 */
+      /* 高度将通过JS动态设置，用于占位防止滚动跳动 */
+    }
+    
+    .button-bar {
+      position: absolute; /* 绝对定位 */
+      top: 0; /* 顶部对齐 */
+      left: 0; /* 左侧对齐 */
+      width: 100%; /* 宽度占满 */
+      background-color: #f5f5f4; /* 背景色 */
+      padding: 0.8rem 0.5rem 0.5rem; /* 内边距：上0.8rem，左右0.5rem，下0.5rem */
+      box-sizing: border-box; /* 盒模型计算方式 */
+      white-space: nowrap; /* 不换行，确保按钮在一行显示 */
+      transition: all 0.2s ease; /* 过渡动画，0.2秒缓动 */
+      display: flex; /* flex布局 */
+      justify-content: space-between; /* 子元素均匀分布 */
+    }
+    
+    .button-bar.fixed {
+      position: fixed; /* 固定定位，滚动时保持在顶部 */
+      z-index: 999; /* 层级999，避免被遮挡 */
+      box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1); /* 轻微阴影 */
+      top: 0; /* 顶部对齐 */
+    }
+    
+    .button-item {
+      flex: 1; /* 平均分配宽度 */
+      display: inline-block; /* 行内块元素 */
+      padding: 0.6rem 0; /* 垂直内边距0.6rem */
+      font-size: 2rem; /* 字体大小2rem */
+      color: #333; /* 文字颜色 */
+      margin: 0 0.3rem; /* 左右0.3rem间距 */
+      border-radius: 3rem; /* 3rem圆角 */
+      background-color: #ffffff; /* 白色背景 */
+      transition: all 0.3s; /* 过渡动画0.3秒 */
+      border: none; /* 去除边框 */
+      cursor: pointer; /* 鼠标指针为手型 */
+      text-align: center; /* 文字居中 */
+      max-width: 20%; /* 最大宽度限制20% */
+    }
+    
+    .button-item.active {
+      font-weight: bold; /* 激活状态文字加粗 */
+      box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.2); /* 激活状态阴影 */
+    }
+    
+    /* 各平台标签按钮激活状态样式 */
+    .button-item[data-tab="tab1"].active,
+    .button-item[data-tab="tab1"]:active {
+      background-color: #F5CA20; color: #ffffff; transform: scale(0.96);
+    }
+    .button-item[data-tab="tab2"].active,
+    .button-item[data-tab="tab2"]:active {
+      background-color: #27AAE2; color: #ffffff; transform: scale(0.96);
+    }
+    .button-item[data-tab="tab3"].active,
+    .button-item[data-tab="tab3"]:active {
+      background-color: #E16942; color: #ffffff; transform: scale(0.96);
+    }
+    .button-item[data-tab="tab4"].active,
+    .button-item[data-tab="tab4"]:active {
+      background-color: #be0e17; color: #ffffff; transform: scale(0.96);
+    }
+    .button-item[data-tab="tab5"].active,
+    .button-item[data-tab="tab5"]:active {
+      background-color: #e92d34; color: #ffffff; transform: scale(0.96);
+    }
+    
+    /* 首页卡片样式 - 边距基准元素 */
+    .card {
+      width: 96% !important; /* 宽度占屏幕96% - 核心边距标准 */
+      height: 15rem !important; /* 高度15rem */
+      margin: 0.6rem auto !important; /* 上下0.6rem，水平居中 - 核心边距标准 */
+      background-color: #fff; /* 白色背景 */
+      border-radius: 1rem !important; /* 1rem圆角 */
+      border: 1px solid #eee !important; /* 浅灰色边框 */
+      box-shadow: 0 0.1rem 0.5rem rgba(0,0,0,0.05) !important; /* 轻微阴影 */
+      display: flex; /* flex布局 */
+      overflow: hidden; /* 隐藏超出部分 */
+      cursor: pointer; /* 鼠标指针为手型 */
+    }
+    
+.card img {
+  width: 41% !important; /* 图片宽度占卡片41% */
+  height: 86% !important; /* 图片高度占卡片86% */
+  margin-left: 0.8rem !important; /* 左0.8rem */
+  margin-right: -0.5rem !important; /* 右-0.5rem */
+  margin-top: 1rem !important; /* 上1.2rem */
+  margin-bottom: 0.5rem !important; /* 下0.5rem */
+  border-radius: 0.8rem !important; /* 0.8rem圆角 */
+  object-fit: fill !important; /* 改为fill，强制铺满容器（会拉伸变形） */
+}
+    
+    .card-content {
+      flex: 1; /* 占据剩余空间 */
+      padding: 1.2rem; /* 内边距1.2rem */
+      display: flex; /* flex布局 */
+      flex-direction: column; /* 纵向排列 */
+      position: relative; /* 相对定位 */
+    }
+    
+    .card-title {
+      display: block !important; /* 块级元素 */
+      color: #030303 !important; /* 标题颜色 */
+      font-size: 2rem !important; /* 2rem字体 */
+      font-weight: bold !important; /* 加粗 */
+      margin-top: -0.3rem !important; /* 上-0.3rem */
+      margin-bottom: 0.3rem !important; /* 下0.3rem */
+      margin-left: 0.8rem !important; /* 左0.8rem */
+      text-align: left !important; /* 左对齐 */
+      line-height: 1.2 !important; /* 行高1.2 */
+      white-space: nowrap; /* 不换行 */
+      overflow: hidden; /* 隐藏超出部分 */
+      text-overflow: ellipsis; /* 超出显示省略号 */
+    }
+    
+    .card-desc {
+      display: block !important; /* 块级元素 */
+      color: #5E5D5D !important; /* 描述颜色 */
+      font-size: 1.7rem !important; /* 1.7rem字体 */
+      margin-top: 0.1rem !important; /* 上0.1rem */
+      margin-bottom: 0.8rem !important; /* 下0.8rem */
+      margin-left: 0.8rem !important; /* 左0.8rem */
+      text-align: left !important; /* 左对齐 */
+      line-height: 1.4 !important; /* 行高1.4 */
+      display: -webkit-box; /* WebKit盒模型 */
+      -webkit-line-clamp: 2; /* 最多显示2行 */
+      -webkit-box-orient: vertical; /* 纵向排列 */
+      overflow: hidden; /* 隐藏超出部分 */
+    }
+    
+    .card-button {
+      position: absolute; /* 绝对定位 */
+      right: 1.2rem; /* 右1.2rem */
+      bottom: 1.2rem; /* 下1.2rem */
+      background-color: #FFC837 !important; /* 按钮颜色 */
+      color: #f8f7f6 !important; /* 按钮文字颜色 */
+      font-size: 1.7rem !important; /* 1.7rem字体 */
+      font-weight: bold !important; /* 加粗 */
+      width: 10.5rem !important; /* 宽度12rem */
+      height: 4.8rem !important; /* 高度4rem */
+      line-height: 4.8rem !important; /* 行高4rem，垂直居中 */
+      text-align: center; /* 水平居中 */
+      border-radius: 0.8rem !important; /* 0.8rem圆角 */
+      cursor: pointer; /* 手型指针 */
+    }
+    
+    /* 上方按钮样式 - 用于区分两个按钮并调整位置 */
+    .card-button.top-btn {
+      bottom: 8rem; /* 距离底部6rem，与下方按钮保持间距 */
+      background-color: #FF9500 !important; /* 不同颜色区分功能 */
+    }
+    
+    .card-time {
+      display: block !important; /* 块级元素 */
+      color: #CFCBCB !important; /* 时间颜色 */
+      font-size: 1.6rem !important; /* 1.6rem字体 */
+      margin-top: auto; /* 自动上外边距，推至底部 */
+      margin-left: 0.8rem !important; /* 左0.8rem */
+      text-align: left !important; /* 左对齐 */
+      line-height: 1.2 !important; /* 行高1.2 */
+    }
+    
+    /* 通知容器样式 */
+    .notice-container {
+      background: #eeeeec; /* 背景色 */
+      border-radius: 1rem; /* 1rem圆角 */
+      margin: 1.5rem; /* 1.5rem外边距 */
+      padding: 1.2rem; /* 1.2rem内边距 */
+      box-shadow: 0 0.1rem 0.5rem rgba(0,0,0,0.05); /* 轻微阴影 */
+    }
+    
+    .notice-title {
+      font-size: 2rem; /* 2rem字体 */
+      font-weight: bold; /* 加粗 */
+      color: #333; /* 颜色 */
+      margin-bottom: 0.8rem; /* 下0.8rem */
+    }
+    
+    .notice-list {
+      max-height: 20rem; /* 最大高度20rem */
+      overflow-y: auto; /* 垂直滚动 */
+    }
+    
+    .notice-item {
+      font-size: 1.7rem; /* 1.7rem字体 */
+      color: rgb(43, 43, 43); /* 颜色 */
+      line-height: 3rem; /* 行高3rem */
+      border-bottom: 1px solid #aaaaaa; /* 底部边框 */
+    }
+    
+    /* 弹窗遮罩样式 */
+    .popup-mask {
+      position: fixed; /* 固定定位 */
+      top: 0; /* 顶部对齐 */
+      left: 0; /* 左侧对齐 */
+      width: 100%; /* 宽度100% */
+      height: 100%; /* 高度100% */
+      background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色 */
+      z-index: 998; /* 层级998 */
+      display: none; /* 默认隐藏 */
+      justify-content: center; /* 水平居中 */
+      align-items: center; /* 垂直居中 */
+    }
+    
+    .popup {
+      position: fixed; /* 固定定位 */
+      top: 50%; /* 垂直居中起点 */
+      left: 50%; /* 水平居中起点 */
+      transform: translate(-50%, -50%); /* 平移居中 */
+      width: 90% !important; /* 宽度90% */
+      max-width: 500px; /* 最大宽度500px */
+      background-color: #fff; /* 白色背景 */
+      border-radius: 1rem; /* 1rem圆角 */
+      box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.15); /* 阴影 */
+      z-index: 999; /* 层级999 */
+      padding: 2rem; /* 2rem内边距 */
+      box-sizing: border-box; /* 盒模型计算 */
+    }
+    
+    .popup-close {
+      position: absolute; /* 绝对定位 */
+      top: 1.5rem; /* 上1.5rem */
+      right: 1.5rem; /* 右1.5rem */
+      width: 3rem; /* 宽3rem */
+      height: 3rem; /* 高3rem */
+      line-height: 2.8rem; /* 行高2.8rem */
+      text-align: center; /* 居中 */
+      font-size: 2rem; /* 2rem字体 */
+      color: #999; /* 颜色 */
+      border-radius: 50%; /* 圆形 */
+      background-color: #f5f5f5; /* 背景色 */
+      cursor: pointer; /* 手型指针 */
+    }
+    
+    .popup-close:active {
+      background-color: #e0e0e0; /* 点击时背景色 */
+    }
+    
+    .popup-title {
+      font-size: 1.8rem; /* 1.8rem字体 */
+      font-weight: bold; /* 加粗 */
+      color: #333; /* 颜色 */
+      text-align: center; /* 居中 */
+      margin-bottom: 1.5rem; /* 下1.5rem */
+      padding-top: 0.5rem; /* 上0.5rem */
+    }
+    
+    .link-container {
+      width: 100%; /* 宽度100% */
+      background-color: #FFF9E6; /* 背景色 */
+      border-radius: 0.8rem; /* 0.8rem圆角 */
+      padding: 1.5rem; /* 1.5rem内边距 */
+      box-sizing: border-box; /* 盒模型 */
+      margin-bottom: 1.5rem; /* 下1.5rem */
+      border: 1px solid #FFE8A3; /* 边框 */
+    }
+    
+    .link-text {
+      font-size: 1.4rem; /* 1.4rem字体 */
+      color: #333; /* 颜色 */
+      word-break: break-all; /* 允许单词内换行 */
+      line-height: 1.5; /* 行高1.5 */
+    }
+    
+    .popup-desc-container {
+      width: 100%; /* 宽度100% */
+      margin-bottom: 1.5rem; /* 下1.5rem */
+    }
+    
+    .popup-desc {
+      font-size: 1.3rem; /* 1.3rem字体 */
+      color: #666; /* 颜色 */
+      text-align: left; /* 左对齐 */
+      line-height: 1.4; /* 行高1.4 */
+      margin-bottom: 0.5rem; /* 下0.5rem */
+    }
+    
+    .copy-btn {
+      width: 100%; /* 宽度100% */
+      height: 5rem; /* 高度5rem */
+      line-height: 5rem; /* 行高5rem */
+      text-align: center; /* 居中 */
+      background-color: #FF7D00; /* 背景色 */
+      color: #fff; /* 文字色 */
+      font-size: 1.6rem; /* 1.6rem字体 */
+      font-weight: bold; /* 加粗 */
+      border-radius: 0.8rem; /* 0.8rem圆角 */
+      box-shadow: 0 0.2rem 0 #E06A00; /* 阴影 */
+      margin-top: 0.5rem; /* 上0.5rem */
+      border: none; /* 无边框 */
+      cursor: pointer; /* 手型指针 */
+    }
+    
+    .copy-btn:active {
+      background-color: #E06A00; /* 点击背景色 */
+      box-shadow: 0 0.1rem 0 #C05A00; /* 点击阴影 */
+      transform: translateY(0.1rem); /* 轻微下移 */
+    }
+    
+    /* 分享按钮样式 */
+    .shareCon {
+      background-image: linear-gradient(#ffd622, #eb7200, hsla(0, 0%, 100%, 0)); /* 渐变背景 */
+      border-radius: 6rem 0 0 6rem; /* 左侧半圆 */
+      top: 15rem; /* 上15rem */
+      right: -1rem; /* 右-1rem（部分超出屏幕） */
+      position: fixed; /* 固定定位 */
+      color: rgb(253, 253, 253); /* 文字色 */
+      width: 7rem; /* 宽7rem */
+      height: 5rem; /* 高5rem */
+      font-size: 1.6rem; /* 1.6rem字体 */
+      display: flex; /* flex布局 */
+      align-items: center; /* 垂直居中 */
+      justify-content: center; /* 水平居中 */
+      padding: 0; /* 无内边距 */
+      line-height: 1; /* 行高1 */
+      border: none; /* 无边框 */
+      cursor: pointer; /* 手型指针 */
+    }
+    
+    .shareget:active {
+      transform: scale(0.95); /* 点击缩小 */
+    }
+    
+    /* 更多提示样式 */
+    .more_hint {
+      align-items: center; /* 垂直居中 */
+      color: rgb(94, 92, 92); /* 颜色 */
+      display: flex; /* flex布局 */
+      font-size: 1.4rem; /* 1.4rem字体 */
+      justify-content: center; /* 水平居中 */
+      margin-top: 2rem; /* 上2rem */
+      padding: 0.5rem; /* 0.5rem内边距 */
+    }
+    
+    /* 底部导航栏样式 */
+    .bottom-nav {
+      position: fixed; /* 固定定位 */
+      bottom: 0; /* 底部对齐 */
+      left: 0; /* 左侧对齐 */
+      width: 100%; /* 宽度100% */
+      height: 7rem; /* 高度7rem */
+      display: flex; /* flex布局 */
+      background-color: #fff; /* 白色背景 */
+      border-top: 1px solid #eee; /* 顶部边框 */
+      z-index: 9999; /* 最高层级 */
+    }
+    
+    .nav-item {
+      flex: 1; /* 平均分配宽度 */
+      display: flex; /* flex布局 */
+      justify-content: center; /* 水平居中 */
+      align-items: center; /* 垂直居中 */
+      font-size: 2.3rem; /* 2.3rem字体 */
+      color: #666; /* 颜色 */
+      position: relative; /* 相对定位 */
+      cursor: pointer; /* 手型指针 */
+    }
+    
+    .nav-item.active {
+      color: #FF7D00; /* 激活状态颜色 */
+    }
+    
+    .nav-item.active::after {
+      content: ''; /* 伪元素内容 */
+      position: absolute; /* 绝对定位 */
+      bottom: 0; /* 底部对齐 */
+      left: 50%; /* 水平居中起点 */
+      transform: translateX(-50%); /* 平移居中 */
+      width: 3rem; /* 宽3rem */
+      height: 0.4rem; /* 高0.4rem */
+      background-color: #FF7D00; /* 背景色 */
+      border-radius: 0.2rem; /* 0.2rem圆角 */
+    }
+    
+    /* 内容容器样式 */
+    .content-container {
+      padding-bottom: 1rem; /* 底部预留7rem空间 */
+    }
+    
+    /* 教程内容样式 */
+    .tutorial-content {
+      padding: 1rem 0.5rem; /* 调整内边距，左右仅0.5rem，让内容更贴近边缘 */
+      background-color: #f5f5f5; /* 背景色 */
+      min-height: calc(100vh - 7rem); /* 最小高度：屏幕高度-导航栏高度 */
+      box-sizing: border-box; /* 盒模型 */
+    }
+    
+    /* 教程盒子样式 - 调整边距使其更贴近屏幕边缘 */
+    .tutorial-box {
+      background-color: #ffd622; /* 背景色 */
+      border-radius: 1rem; /* 1rem圆角 */
+      padding: 1.5rem; /* 内边距 */
+      width: calc(100% - 1rem); /* 宽度：屏幕宽度减去1rem（左右各0.5rem） */
+      margin: 0.6rem 0.5rem; /* 上下0.6rem，左右0.5rem - 更贴近屏幕边缘 */
+      box-sizing: border-box; /* 盒模型 */
+    }
+    
+/* 活动更新通知框样式 - 调整边距使其更贴近屏幕边缘 */
+.notice-box {
+  border: 2px solid #f7ca20; /* 边框 */
+  border-radius: 1rem; /* 1rem圆角 */
+  padding: 1rem 1.5rem; /* 内边距 */
+  width: calc(100% - 1rem); /* 宽度：屏幕宽度减去1rem（左右各0.5rem） */
+  margin-top: 1rem; /* 上边距1rem */
+  margin-bottom: 2rem; /* 下边距0.6rem */
+  margin-left: 0.5rem; /* 左边距0.5rem */
+  margin-right: 0.5rem; /* 右边距0.5rem */
+  background-color: #fdfdfd; /* 背景色 */
+  box-sizing: border-box; /* 盒模型 */
+}
+    
+    .tutorial-title {
+      font-size: 2.2rem; /* 2.2rem字体 */
+      font-weight: bold; /* 加粗 */
+      color: rgb(7, 7, 7); /* 颜色 */
+      display: block; /* 块级 */
+      margin-bottom: 1.5rem; /* 下1.5rem */
+      padding-left: 0.5rem; /* 左0.5rem */
+      text-align: left; /* 左对齐 */
+    }
+    
+    .tutorial-btn {
+      width: 100%; /* 宽度100% */
+      margin-bottom: 1.5rem; /* 下1.5rem */
+      border-radius: 0.8rem; /* 0.8rem圆角 */
+      overflow: hidden; /* 隐藏超出 */
+      box-shadow: 0 0.1rem 0.3rem rgba(0,0,0,0.1); /* 阴影 */
+      cursor: pointer; /* 手型指针 */
+    }
+    
+    .tutorial-btn:active {
+      transform: scale(0.99); /* 点击缩小 */
+    }
+    
+    .tutorial-btn:last-child {
+      margin-bottom: 0.5rem; /* 最后一个按钮下0.5rem */
+    }
+    
+    .tutorial-img {
+      width: 100%; /* 宽度100% */
+      height: 10rem; /* 高度10rem */
+      object-fit: cover; /* 图片裁剪 */
+      display: block; /* 块级 */
+    }
+    
+    /* 标签内容与页面内容显示控制 */
+    .tab-content, .page-content {
+      display: none; /* 默认隐藏 */
+    }
+    
+    .tab-content.active, .page-content.active {
+      display: block; /* 激活状态显示 */
+    }
+    
+    /* 提示框样式 */
+    .toast {
+      position: fixed; /* 固定定位 */
+      top: 40%; /* 垂直居中 */
+      left: 50%; /* 水平居中 */
+      transform: translate(-50%, -50%); /* 平移居中 */
+      background-color: rgba(0, 0, 0, 0.7); /* 半透明黑 */
+      color: #fff; /* 白色文字 */
+      padding: 0.8rem 1.5rem; /* 内边距 */
+      border-radius: 0.5rem; /* 0.5rem圆角 */
+      font-size: 2rem; /* 1.4rem字体 */
+      z-index: 1000; /* 层级1000 */
+      opacity: 0; /* 默认透明 */
+      transition: opacity 0.3s; /* 透明度过渡 */
+    }
+    
+    .toast.show {
+      opacity: 1; /* 显示时不透明 */
+    }
+  </style>
 </head>
 <body>
-<div class=header>
-<div class=back-btn onclick=goBack()></div>
-<div class=title>外卖领券</div>
-</div>
-<div class=content-container>
-<div id=home-page class="page-content active">
-<div class=banner-swiper id=bannerSwiper>
-<div class="banner-slide active" onclick='window.location.href="https://kurl01.cn/763YDG"'>
-<img src=https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png alt=美团神劵包>
-</div>
-<div class=banner-slide onclick='window.location.href="https://activity01.yunzhanxinxi.com/link/100048368a476b9251431000tDtMAyvI"'>
-<img src=https://picui.cn/thumbnails/901f6a65aff411e2c1c86b3d5508f137.png alt=京东外卖>
-</div>
-<div class=banner-slide onclick='window.location.href="https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q"'>
-<img src=https://picui.cn/thumbnails/8371117967ba9e25a3a1989b4e2ea139.png alt=饿了么>
-</div>
-</div>
-<div class=button-container>
-<button class="btn big-btn touch-active btn-touch" onclick='event.stopPropagation(),window.open("https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q")'>
-<img class=btn-img src=https://picui.cn/thumbnails/aa0633d26e5b8291cd70bedbb3a1aff9.png alt=美团>
-</button>
-<div class=right-buttons>
-<button class="btn small-btn touch-active btn-touch" onclick='event.stopPropagation(),window.open("https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q")'>
-<img class=btn-img src=https://picui.cn/thumbnails/ce9a8043103fb8e50834a1b8d8deeae9.png alt=饿了么>
-</button>
-<button class="btn small-btn touch-active btn-touch" onclick='event.stopPropagation(),window.open("https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q")'>
-<img class=btn-img src=https://picui.cn/thumbnails/78f421510067cfae3991f1e104a486de.png alt=京东>
-</button>
-</div>
-</div>
-<div class=page>
-<div class=button-bar-container>
-<div class=button-bar-placeholder id=buttonBarPlaceholder></div>
-<div class=button-bar id=buttonBar>
-<button class="button-item active touch-active" data-tab=tab1 onclick='switchTab("tab1")'>美团</button>
-<button class="button-item touch-active" data-tab=tab2 onclick='switchTab("tab2")'>饿了么</button>
-<button class="button-item touch-active" data-tab=tab3 onclick='switchTab("tab3")'>闪购</button>
-<button class="button-item touch-active" data-tab=tab4 onclick='switchTab("tab4")'>秒送</button>
-<button class="button-item touch-active" data-tab=tab5 onclick='switchTab("tab5")'>出行/住</button>
-</div>
-</div>
-</div>
-<div class="tab-content active" id=tab1>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png alt=美团神劵包>
-<div class=card-content>
-<span class=card-title>1.美团神劵包</span>
-<span class=card-desc>9.9元购600元神劵<br>包</span>
-<span class=card-time>活动期至:<br>2025-08-21</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥rxZmJhYWUxYmQ¥一起领","领取成功，请打开美团APP")'>领取口令</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/5d36251649273e7fd1c23b5b62d55e98.png alt=美团神劵包>
-<div class=card-content>
-<span class=card-title>2.美团外卖节</span>
-<span class=card-desc>惊喜大额红包</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥uuNDUyMjM5MmU¥一起领","领取成功，请打开美团APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl20.cn/7z5eCO"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/0d25d5f4c0fa9d2c0a3742c1c2c70955.png alt=美团神劵包>
-<div class=card-content>
-<span class=card-title>3.美团外卖品质<br>会场🔥🔥</span>
-<span class=card-desc>畅领高额优惠</span>
-<span class=card-time>活动期至:<br>2025-12-01</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥3wNTQxNDc0NDk¥一起领","领取成功，请打开美团APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl02.cn/7670JW"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/9eb60d86e8433a25a74d7f24d9a9a928.png alt=美团神劵包>
-<div class=card-content>
-<span class=card-title>4.美团外卖商品<br>券</span>
-<span class=card-desc>整点抢0.1元奶茶</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥9xZjA5MTdkNjg¥一起领","领取成功，请打开美团APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl06.cn/7672oC"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/6bd8781451be27188ffcb3fd5b403470.png alt=美团神劵包>
-<div class=card-content>
-<span class=card-title>5.美团【团购优<br>惠】</span>
-<span class=card-desc>套餐折上折</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥ffNThlZWIyNmE¥一起领","领取成功，请打开美团APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl12.cn/7ziTVu"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/4a754a8133c426ba8b7e176b45a060bf.png alt=美团神劵包>
-<div class=card-content>
-<span class=card-title>6.十点爆品疯抢</span>
-<span class=card-desc>先领劵再下单</span>
-<span class=card-time>活动期至:<br>2025-09-01</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥ncNDE2OTZmOWQ¥一起领","领取成功，请打开美团APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl04.cn/767cLb"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/0366a02e84a8b7a54b3f88c63556c495.png alt=美团神劵包>
-<div class=card-content>
-<span class=card-title>7.吃喝玩乐2折起</span>
-<span class=card-desc>吃喝玩乐神劵</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥zcNjc5MjIxNjM¥一起领","领取成功，请打开美团APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl15.cn/767cKs"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-</div>
-<div class=tab-content id=tab2>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/e1fc01b9a0f47c9b1917a488d5d009f1.png alt=饿了么>
-<div class=card-content>
-<span class=card-title>1.饿了么天天领<br>红包</span>
-<span class=card-desc>最低0元吃外卖</span>
-<span class=card-time>活动期至:<br>2025-09-30</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"0複制这个 666:/＄4ka44AV＄~.饿了么App【打开饿了么APP 扫红包】","领取成功，请打开饿了么APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl19.cn/767TBl"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/8371117967ba9e25a3a1989b4e2ea139.png alt=饿了么>
-<div class=card-content>
-<span class=card-title>2.饿了么极限暴涨</span>
-<span class=card-desc>天天必得18元<br>暴涨立省18元</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://5kma.cn/7ziTQa"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/523282645324ecceb37285d23126953c.png alt=饿了么>
-<div class=card-content>
-<span class=card-title>3.饿了么天天领红包</span>
-<span class=card-desc>每周五5折红包<br>每月18日红包节</span>
-<span class=card-time>活动期至:<br>2026-02-28</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://5kma.cn/7ziTQa"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/f64a2891e7a8513b5c600ace0255b8d8.png alt=饿了么>
-<div class=card-content>
-<span class=card-title>4.饿了么红包组<br>合</span>
-<span class=card-desc>天天领红包</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"69 HU7405   1:/《hZhY4kZwBOW₴三最高抢66元大额红包","领取成功，请打开饿了么APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl11.cn/7zjpEa"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/f643287ce9ebea8a15b075f574a4cd62.png alt=饿了么>
-<div class=card-content>
-<span class=card-title>5.饿了么超市</span>
-<span class=card-desc>有满减活动<br>可叠加</span>
-<span class=card-time>活动期至:<br>2025-012-31</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl01.cn/767abC"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-</div>
-<div class=tab-content id=tab3>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/c77deada1b014012543914d8aaf6b0c7.png alt=闪购>
-<div class=card-content>
-<span class=card-title>1.闪购超级品牌<br>日</span>
-<span class=card-desc>单单有福利</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"79 HU7405   1:/c9x94k0wOFf₴欢闪购新用户可领首单免单","领取成功，请打开淘宝APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://2kma.cn/767mFF"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/2bf13b551c0d147bd2d51938e7b3b3aa.png alt=闪购>
-<div class=card-content>
-<span class=card-title>2.闪购-爆品团</span>
-<span class=card-desc>免凑单，免运费</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"08 HU7405   1:/efBa4kbqWyK₴三免凑单 免配送","领取成功，请打开淘宝APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl11.cn/767Vr2"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/260e3a788eabfef53475fc40777c53c6.png alt=闪购>
-<div class=card-content>
-<span class=card-title>3.新用户专享</span>
-<span class=card-desc>必得无门槛18元<br>免单卡</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"28 HU7405   2:/₴4k3K4kbcQw1₴四闪购新用户可领首单免单","领取成功，请打开淘宝APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl17.cn/767jgJ"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/ecd20b17655a87adbccd172df5de3e02.png alt=闪购>
-<div class=card-content>
-<span class=card-title>4.闪购惊喜福利</span>
-<span class=card-desc>抽免单卡</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"08 HU7405   2:/₤jFVs4kbnLb2₤十1分钱喝奶茶 领大额红包","领取成功，请打开淘宝APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl15.cn/767Bm7"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/be92cefd16ea31a158d263514ec5f357.png alt=闪购>
-<div class=card-content>
-<span class=card-title>5.淘天版-全国</span>
-<span class=card-desc>叠加红包</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"97 HU7405   2:/《wXlW4kb3xqU₤十邀请好友，共享福利","领取成功，请打开淘宝APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://activity01.yunzhanxinxi.com/link/100070068a4a0dc2410010002cMGtLx7"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/62d1bb5e228acfb9b29db37d52c78a80.png alt=闪购>
-<div class=card-content>
-<span class=card-title>6.闪购-爆品好价</span>
-<span class=card-desc>爆品加倍补<br>好价天天抢</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"58 HU7405   2:/₴gLPi4kbxaLO£四超值爆品加倍补贴！","领取成功，请打开淘宝APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://2kma.cn/767fFW"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/ed5e248c4bfe523c995bf3a84c6de077.png alt=闪购>
-<div class=card-content>
-<span class=card-title>7.闪购-零售品牌日</span>
-<span class=card-desc>超市好价<br>即刻送达</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"79 HU7405   2:/₴qEzH4kY1bsP£欢超市好价 即刻送达","领取成功，请打开淘宝APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl03.cn/767vee"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/0e8f3530e896d4d6cff91125cbcee5c1.png alt=闪购>
-<div class=card-content>
-<span class=card-title>8.闪购-单单返</span>
-<span class=card-desc>单单有礼<br>单单返</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"28 HU7405   666:/《KTuU4kYS19F✔欢下单写优评，高额返现金","领取成功，请打开淘宝APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl12.cn/767vrT"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-</div>
-<div class=tab-content id=tab4>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/901f6a65aff411e2c1c86b3d5508f137.png alt=秒送>
-<div class=card-content>
-<span class=card-title>1.京东外卖百亿<br>补贴</span>
-<span class=card-desc>满减劵 限时抢</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"17:/￥NBCTzB6QuNZPV8OT￥ MF3390 ，⇶𝒥𝓲𝓲𝓲𝓷𝓰▢倲热门促销会场！","领取成功，请打开京东APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl15.cn/767Qf9"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/07143169c51f9d12736a9a12c8990529.png alt=秒送>
-<div class=card-content>
-<span class=card-title>2.京东百亿补贴</span>
-<span class=card-desc>早8晚8限时抢<br>最高20元</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"18:/热门促销会场！⇛椋◄Dσσδng￥G07GfBeuYm59AbuJ￥ MF8335 ","领取成功，请打开京东APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl15.cn/767Yu2"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/b50e0129b3e82dc72d9de1489ada5c1f.png alt=秒送>
-<div class=card-content>
-<span class=card-title>3.京东百亿补贴</span>
-<span class=card-desc>往下滑有满减<br>对半减</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"14:/！ZEU7W78qQ1K4Q6cO！ MF5681 ，↦椋◗D○σδng热门促销会场！","领取成功，请打开京东APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl14.cn/767YLE"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/1bd53694963660d96af7594f67a9aec8.png alt=秒送>
-<div class=card-content>
-<span class=card-title>4.外卖奶茶饮品</span>
-<span class=card-desc>奶茶低至<br>3.9元起</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"10:/热门促销会场！⇒🐋▬Dσδδng￥C9vHK1cr5zVkn9z5￥ ZH9112 ","领取成功，请打开京东APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://2kma.cn/767Yyn"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/1bd53694963660d96af7594f67a9aec8.png alt=秒送>
-<div class=card-content>
-<span class=card-title>5.外卖库迪咖啡</span>
-<span class=card-desc>满11减10<br>限时抢</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"18:/！M2DX42Cq7EfrBfvZ！ MF8335 ，⇶Jι🆖◰東热门促销会场！","领取成功，请打开京东APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl15.cn/767YST"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/0bb4b683693fb30d43b51395380e0818.png alt=秒送>
-<div class=card-content>
-<span class=card-title>6.麦当劳（免运费）</span>
-<span class=card-desc>【仅北京 上海】</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"15:/热门促销会场！↪猄▪D○ōσng￥R17wv7fyCgTqER6G￥ MF5681 ","领取成功，请打开京东APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl20.cn/767Yqa"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://picui.cn/thumbnails/b4721b7fd194d3fc831ad43c4684e7aa.png>
-<div class=card-content>
-<span class=card-title>7.外卖宵夜专场</span>
-<span class=card-desc>每日20-24点<br>最高立减10元</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"17:/热门促销会场！→Jι🆖◄崠￥Z9RCJ78T4YL2H7nx￥ MF3390 ","领取成功，请打开京东APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl16.cn/767YWN"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-<div class="card touch-active">
-<img src=https://static.sichuanyunzhan.com//static/alliance/business_auto/20250723112813243/cover_190691.png alt=秒送>
-<div class=card-content>
-<span class=card-title>8.球迷专属劵</span>
-<span class=card-desc>领10元</span>
-<span class=card-time>活动期至:<br>2025-12-31</span>
-<span class="card-button top-btn touch-active btn-touch" onclick='copyHiddenContent(event,"10:/！ACs07AIUgs78fXn7！ MF5681 ，↪京◪Dσσδng热门促销会场！","领取成功，请打开京东APP")'>领取口令</span>
-<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl11.cn/767rl8"),showToast("正在跳转到活动页面")'>
-点击领取
-</span>
-</div>
-</div>
-</div>
-<div class=tab-content id=tab5>
-<div class="card touch-active" onclick='goToMiniProgram("wxaf35009675aa0b2a","/webx/entry/block-prevention?scene=YQwoRwR&source_id=118141jutuike15053713&ref_from=dunion")'>
-<img src=https://free.picui.cn/free/2025/07/13/6872a38007b68.png alt=滴滴出行>
-<div class=card-content>
-<span class=card-title>1.滴滴出行</span>
-<span class=card-desc>打车5折起</span>
-<div class="card-button touch-active btn-touch" onclick=handleButtonClick(event)>点击领取</div>
-<span class=card-time>活动期至:2026-12-31</span>
-</div>
-</div>
-</div>
-<div class=more_hint>更多功能持续更新中，敬请期待...</div>
-<button class="shareCon touch-active btn-touch" onclick='showToast("分享功能已触发")'>分享</button>
-</div>
-<div id=tutorial-page class=page-content>
-<div class=tutorial-content>
-<div class=notice-box>
-<span class=notice-title>活动更新通知：</span>
-<div class=notice-list>
-<div class=notice-item>2025-08-08 闪购-1.零售品牌日</div>
-<div class=notice-item>2025-08-02 饿了么-3.饿了么天天领红包</div>
-<div class=notice-item>2025-07-25 美团-2.美团外卖节</div>
-<div class=notice-item>2025-08-10 京东-4.京东生鲜日</div>
-<div class=notice-item>2025-08-08 闪购-1.零售品牌日</div>
-<div class=notice-item>2025-08-02 饿了么-3.饿了么天天领红包</div>
-<div class=notice-item>2025-07-25 美团-2.美团外卖节</div>
-<div class=notice-item>2025-08-10 京东-4.京东生鲜日</div>
-<div class=notice-item>2025-08-08 闪购-1.零售品牌日</div>
-<div class=notice-item>2025-08-02 饿了么-3.饿了么天天领红包</div>
-<div class=notice-item>2025-07-25 美团-2.美团外卖节</div>
-<div class=notice-item>2025-08-10 京东-4.京东生鲜日</div>
-<div class=notice-item>2025-08-08 闪购-1.零售品牌日</div>
-<div class=notice-item>2025-08-02 饿了么-3.饿了么天天领红包</div>
-<div class=notice-item>2025-07-25 美团-2.美团外卖节</div>
-<div class=notice-item>2025-08-10 京东-4.京东生鲜日</div>
-<div class=notice-item>2025-08-08 闪购-1.零售品牌日</div>
-<div class=notice-item>2025-08-02 饿了么-3.饿了么天天领红包</div>
-<div class=notice-item>2025-07-25 美团-2.美团外卖节</div>
-<div class=notice-item>2025-08-10 京东-4.京东生鲜日</div>
-</div>
-</div>
-<div class=tutorial-box>
-<span class=tutorial-title>教程.外卖小技巧</span>
-<div class="tutorial-btn touch-active btn-touch" onclick='event.stopPropagation(),window.open("https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q")'>
-<img class=tutorial-img src=https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png alt=教程1>
-</div>
-<div class="tutorial-btn touch-active btn-touch" onclick='event.stopPropagation(),window.open("https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q")'>
-<img class=tutorial-img src=https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png alt=教程2>
-</div>
-<div class="tutorial-btn touch-active btn-touch" onclick='event.stopPropagation(),window.open("https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q")'>
-<img class=tutorial-img src=https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png alt=教程3>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class=popup-mask id=popupMask>
-<div class=popup id=popup>
-<div class="popup-close touch-active btn-touch" onclick=hidePopup()>×</div>
-<div class=popup-title>美团H5链接</div>
-<div class=link-container oncontextmenu=copyLink(event)>
-<text class=link-text id=linkText></text>
-</div>
-<div class=popup-desc-container>
-<div class=popup-desc>✅长按文字或一键复制链接</div>
-<div class=popup-desc>✅复制后把链接发送到任意聊天窗口，再点击发出去的链接就可以享受本地生活补贴啦.</div>
-</div>
-<button class="copy-btn touch-active btn-touch" onclick=copyLink()>一键复制</button>
-</div>
-</div>
-<div class=toast id=toast></div>
-<div class=bottom-nav>
-<div class="nav-item active touch-active btn-touch" onclick='switchNav("home")'>
-<text>首页</text>
-</div>
-<div class="nav-item touch-active btn-touch" onclick='switchNav("tutorial")'>
-<text>教程</text>
-</div>
-</div>
-<script>const state={currentNav:"home",activeTab:"tab1",isFixed:!1,barTop:0,barHeight:0,isPopupShow:!1,currentBanner:0,bannerInterval:null,link:"",touchStartX:0,touchStartTime:0},elements={buttonBar:document.getElementById("buttonBar"),buttonBarPlaceholder:document.getElementById("buttonBarPlaceholder"),buttonItems:document.querySelectorAll(".button-item"),tabContents:document.querySelectorAll(".tab-content"),navItems:document.querySelectorAll(".nav-item"),pageContents:document.querySelectorAll(".page-content"),popupMask:document.getElementById("popupMask"),popup:document.getElementById("popup"),linkText:document.getElementById("linkText"),toast:document.getElementById("toast"),bannerSwiper:document.getElementById("bannerSwiper"),bannerSlides:document.querySelectorAll(".banner-slide")};function init(){initButtonBar(),initBanner(),bindEvents(),bindTouchEvents()}function initButtonBar(){const t=elements.buttonBar.getBoundingClientRect();state.barTop=t.top+window.scrollY,state.barHeight=t.height,elements.buttonBarPlaceholder.style.height=`${state.barHeight}px`}function initBanner(){let t,e;state.bannerInterval=setInterval((()=>{state.currentBanner=(state.currentBanner+1)%elements.bannerSlides.length,updateBanner()}),3e3),elements.bannerSwiper.addEventListener("touchstart",(e=>{t=e.touches[0].clientX,clearInterval(state.bannerInterval)})),elements.bannerSwiper.addEventListener("touchend",(n=>{e=n.changedTouches[0].clientX,function(){t-e>50?state.currentBanner=(state.currentBanner+1)%elements.bannerSlides.length:e-t>50&&(state.currentBanner=(state.currentBanner-1+elements.bannerSlides.length)%elements.bannerSlides.length);updateBanner()}(),state.bannerInterval=setInterval((()=>{state.currentBanner=(state.currentBanner+1)%elements.bannerSlides.length,updateBanner()}),3e3)}))}function updateBanner(){elements.bannerSlides.forEach(((t,e)=>{t.classList.toggle("active",e===state.currentBanner),t.style.display=e===state.currentBanner?"block":"none"}))}function bindEvents(){window.addEventListener("scroll",handleScroll),window.addEventListener("beforeunload",(()=>clearInterval(state.bannerInterval)))}function bindTouchEvents(){document.querySelectorAll(".btn-touch").forEach((t=>{t.addEventListener("touchstart",(e=>{e.stopPropagation(),state.touchStartX=e.touches[0].clientX,state.touchStartTime=Date.now(),t.style.opacity="0.7"})),t.addEventListener("touchend",(e=>{e.stopPropagation(),t.style.opacity="1";const n=e.changedTouches[0].clientX,o=Date.now()-state.touchStartTime;if(Math.abs(n-state.touchStartX)<10&&o<300){const e=new MouseEvent("click",{view:window,bubbles:!0,cancelable:!0});t.dispatchEvent(e)}}))})),document.querySelectorAll(".card.touch-active").forEach((t=>{t.addEventListener("touchstart",(e=>{e.target.closest(".btn-touch")||(t.style.opacity="0.95")})),t.addEventListener("touchend",(e=>{e.target.closest(".btn-touch")||(t.style.opacity="1")}))}))}function handleScroll(){const t=window.scrollY;t>=state.barTop-10&&!state.isFixed?(elements.buttonBar.classList.add("fixed"),state.isFixed=!0):t<state.barTop-10&&state.isFixed&&(elements.buttonBar.classList.remove("fixed"),state.isFixed=!1)}function switchTab(t){state.activeTab=t,elements.buttonItems.forEach((e=>e.classList.toggle("active",e.dataset.tab===t))),elements.tabContents.forEach((e=>e.classList.toggle("active",e.id===t)))}function switchNav(t){state.currentNav=t,elements.navItems.forEach((e=>{e.classList.toggle("active",e.textContent.trim()===("home"===t?"首页":"教程"))})),elements.pageContents.forEach((e=>{e.classList.toggle("active",e.id===`${t}-page`)})),showToast(`已切换到${"home"===t?"首页":"教程"}页面`)}function showPopup(t,e){e&&e.stopPropagation(),state.link=t,elements.linkText.textContent=t,elements.popupMask.style.display="flex",state.isPopupShow=!0}function showPopupWithLink(t,e){showPopup(t,e)}function hidePopup(){elements.popupMask.style.display="none",state.isPopupShow=!1}function copyLink(t){if(t&&t.preventDefault(),navigator.clipboard)navigator.clipboard.writeText(state.link).then((()=>{showToast("复制成功"),hidePopup()})).catch((()=>{showToast("复制失败，请手动复制")}));else{const t=document.createElement("textarea");t.value=state.link,t.style.position="fixed",t.style.left="-9999px",document.body.appendChild(t),t.select();try{if(!document.execCommand("copy"))throw new Error("复制失败");showToast("复制成功"),hidePopup()}catch(t){showToast("请手动复制链接")}finally{document.body.removeChild(t)}}}function copyHiddenContent(t,e,n){t&&t.stopPropagation();const o=document.createElement("textarea");o.value=e,o.style.position="fixed",o.style.left="-9999px",document.body.appendChild(o);try{o.select(),o.setSelectionRange(0,e.length);if(!document.execCommand("copy"))throw new Error("复制失败");showToast(n||"领取成功")}catch(t){showToast("请手动复制: "+e.substring(0,10)+"..."),o.focus(),o.select()}finally{document.body.removeChild(o)}}function showToast(t){const e=elements.toast;clearTimeout(e.timer),e.textContent=t,e.classList.add("show"),e.timer=setTimeout((()=>e.classList.remove("show")),2e3)}function handleButtonClick(t){t.stopPropagation()}function goToMiniProgram(t,e){showToast(`正在跳转到小程序: ${t}`)}function navigateToMiniProgram(t,e){showToast(`正在跳转到小程序: ${t}`)}function goBack(){showToast("返回上一页"),window.history.length>1&&window.history.back()}"localhost"!==window.location.hostname&&"127.0.0.1"!==window.location.hostname&&document.addEventListener("keydown",(t=>{"F12"===t.key&&(t.preventDefault(),showToast("开发者工具已禁用")),t.ctrlKey&&t.shiftKey&&"I"===t.key&&(t.preventDefault(),showToast("开发者工具已禁用"))})),window.addEventListener("DOMContentLoaded",init)</script>
+  <!-- 头部区域 -->
+  <div class="header">
+    <div class="back-btn" onclick="goBack()"></div> <!-- 返回按钮 -->
+    <div class="title">外卖领券</div> <!-- 页面标题 -->
+  </div>
+
+  <!-- 内容容器 -->
+  <div class="content-container">
+    <!-- 首页内容 -->
+    <div id="home-page" class="page-content active">
+      <!-- 轮播图区域 -->
+      <div class="banner-swiper" id="bannerSwiper">
+        <div class="banner-slide active" onclick="goToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3DA6svCL9zwuZW')">
+          <img src="https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png" alt="美团神劵包" />
+        </div>
+        <div class="banner-slide" onclick="goToMiniProgram('wx91d27dbf599dff74', '/pages/union/proxy/proxy?spreadUrl=https%3A%2F%2Fu.jd.com%2FnGOlJQ1')">
+          <img src="https://picui.cn/thumbnails/901f6a65aff411e2c1c86b3d5508f137.png" alt="京东外卖" />
+        </div>
+        <div class="banner-slide" onclick="copyHiddenContent(null, '0副置此段 1:/＄46cocIe＄~.饿了么App【打开饿了么APP 扫红包】', '领取成功，请打开饿了么APP')">
+          <img src="https://picui.cn/thumbnails/8371117967ba9e25a3a1989b4e2ea139.png" alt="饿了么" />
+        </div>
+      </div>
+
+      <!-- 快捷按钮区域 -->
+      <div class="button-container">
+        <button class="btn big-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3DA6svCL9zwuZW')">
+          <img class="btn-img" src="https://picui.cn/thumbnails/aa0633d26e5b8291cd70bedbb3a1aff9.png" alt="美团" />
+        </button>
+        <div class="right-buttons">
+          <button class="btn small-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3DA6svCL9zwuZW')">
+            <img class="btn-img" src="https://picui.cn/thumbnails/ce9a8043103fb8e50834a1b8d8deeae9.png" alt="饿了么" />
+          </button>
+          <button class="btn small-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3DA6svCL9zwuZW')">
+            <img class="btn-img" src="https://picui.cn/thumbnails/78f421510067cfae3991f1e104a486de.png" alt="京东" />
+          </button>
+        </div>
+      </div>
+
+      <!-- 标签切换栏 -->
+      <div class="page">
+        <div class="button-bar-container">
+          <div class="button-bar-placeholder" id="buttonBarPlaceholder"></div>
+          <div class="button-bar" id="buttonBar">
+            <button class="button-item active" data-tab="tab1" onclick="switchTab('tab1')">美团</button>
+            <button class="button-item" data-tab="tab2" onclick="switchTab('tab2')">饿了么</button>
+            <button class="button-item" data-tab="tab3" onclick="switchTab('tab3')">闪购</button>
+            <button class="button-item" data-tab="tab4" onclick="switchTab('tab4')">秒送</button>
+            <button class="button-item" data-tab="tab5" onclick="switchTab('tab5')">出行·住</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 美团内容区域 -->
+      <div class="tab-content active" id="tab1">
+        <!-- 修改后的目标卡片 - 包含两个领取按钮 -->
+        <div class="card">
+          <img src="https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">1.美团神劵包</span>
+            <span class="card-desc">9.9元购600元神劵<br>包</span>
+            <span class="card-time">活动期至:<br>2025-07-31</span>
+            
+            <!-- 上方按钮：复制口令功能 -->
+            <span class="card-button top-btn" 
+                  onclick="copyHiddenContent(event, '0副置此段 1:/＄46cocIe＄~.饿了么App【打开饿了么APP 扫红包】', '领取成功，请打开饿了么APP')">领取口令</span>            
+            <!-- 下方按钮：跳转链接功能 -->
+            <span class="card-button" 
+                  onclick="window.open('https://kurl03.cn/7zT1BU'); showToast('正在跳转到活动页面')">
+              点击领取
+            </span>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">1.美团神劵包</span>
+            <span class="card-desc">9.9元购600元神劵<br>包</span>
+            <span class="card-time">活动期至:<br>2025-07-31</span>
+            
+            <!-- 上方按钮：复制口令功能 -->
+            <span class="card-button top-btn" 
+                  onclick="copyHiddenContent(event, '0副置此段 1:/＄46cocIe＄~.饿了么App【打开饿了么APP 扫红包】', '领取成功，请打开饿了么APP')">领取口令</span>            
+            <!-- 下方按钮：跳转链接功能 -->
+            <span class="card-button" 
+                  onclick="window.open('https://kurl03.cn/7zT1BU'); showToast('正在跳转到活动页面')">
+              点击领取
+            </span>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">1.美团神劵包</span>
+            <span class="card-desc">9.9元购600元神劵<br>包</span>
+            <span class="card-time">活动期至:<br>2025-07-31</span>
+            
+            <!-- 上方按钮：复制口令功能 -->
+            <span class="card-button top-btn" 
+                  onclick="copyHiddenContent(event, '0副置此段 1:/＄46cocIe＄~.饿了么App【打开饿了么APP 扫红包】', '领取成功，请打开饿了么APP')">领取口令</span>            
+            <!-- 下方按钮：跳转链接功能 -->
+            <span class="card-button" 
+                  onclick="window.open('https://kurl03.cn/7zT1BU'); showToast('正在跳转到活动页面')">
+              点击领取
+            </span>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">1.美团神劵包</span>
+            <span class="card-desc">9.9元购600元神劵<br>包</span>
+            <span class="card-time">活动期至:<br>2025-07-31</span>
+            
+            <!-- 上方按钮：复制口令功能 -->
+            <span class="card-button top-btn" 
+                  onclick="copyHiddenContent(event, '0副置此段 1:/＄46cocIe＄~.饿了么App【打开饿了么APP 扫红包】', '领取成功，请打开饿了么APP')">领取口令</span>            
+            <!-- 下方按钮：跳转链接功能 -->
+            <span class="card-button" 
+                  onclick="window.open('https://kurl03.cn/7zT1BU'); showToast('正在跳转到活动页面')">
+              点击领取
+            </span>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">1.美团神劵包</span>
+            <span class="card-desc">9.9元购600元神劵<br>包</span>
+            <span class="card-time">活动期至:<br>2025-07-31</span>
+            
+            <!-- 上方按钮：复制口令功能 -->
+            <span class="card-button top-btn" 
+                  onclick="copyHiddenContent(event, '0副置此段 1:/＄46cocIe＄~.饿了么App【打开饿了么APP 扫红包】', '领取成功，请打开饿了么APP')">领取口令</span>            
+            <!-- 下方按钮：跳转链接功能 -->
+            <span class="card-button" 
+                  onclick="window.open('https://kurl03.cn/7zT1BU'); showToast('正在跳转到活动页面')">
+              点击领取
+            </span>
+          </div>
+        </div>
+
+         <div class="card">
+          <img src="https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">1.美团神劵包</span>
+            <span class="card-desc">9.9元购600元神劵<br>包</span>
+            <span class="card-time">活动期至:<br>2025-07-31</span>
+            
+            <!-- 上方按钮：复制口令功能 -->
+            <span class="card-button top-btn" 
+                  onclick="copyHiddenContent(event, '0副置此段 1:/＄46cocIe＄~.饿了么App【打开饿了么APP 扫红包】', '领取成功，请打开饿了么APP')">领取口令</span>            
+            <!-- 下方按钮：跳转链接功能 -->
+            <span class="card-button" 
+                  onclick="window.open('https://kurl03.cn/7zT1BU'); showToast('正在跳转到活动页面')">
+              点击领取
+            </span>
+          </div>
+        </div>       
+
+
+        <div class="card" onclick="goToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3DA6svCL9zwuZW')">
+          <img src="https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">1.美团神劵包</span>
+            <span class="card-desc">9.9元购600元神劵包</span>
+            <div class="card-button" onclick="handleButtonClick(event)">点击领取</div>
+            <span class="card-time">活动期至:2025-07-31</span>
+          </div>
+        </div>
+        <div class="card" onclick="goToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3DUKNON79zP2qQ')">
+          <img src="https://picui.cn/thumbnails/5d36251649273e7fd1c23b5b62d55e98.png" alt="美团外卖节" />
+          <div class="card-content">
+            <span class="card-title">2.美团外卖节</span>
+            <span class="card-desc">1.惊喜红包</span>
+            <div class="card-button" onclick="handleButtonClick(event)">点击领取</div>
+            <span class="card-time">活动期至:2025-12-31</span>
+          </div>
+        </div>
+        <div class="card" onclick="showPopup('https://kzurl18.cn/7P0VId', event)">
+          <img src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="美团名创优品" />
+          <div class="card-content">
+            <span class="card-title">7.美团名创优品</span>
+            <span class="card-desc">满90减40</span>
+            <div class="card-button" onclick="showPopupWithLink('https://h5.ele.me/topic/123?activityId=111', event)">点击领取</div>
+            <span class="card-time">活动期至:2025-12-31</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 饿了么内容区域 -->
+      <div class="tab-content" id="tab2">
+        <div class="card" data-link="0副置此段 1:/＄46cocIe＄~.饿了么App【打开饿了么APP 扫红包】" onclick="copyHiddenContent(event, '0副置此段 1:/＄46cocIe＄~.饿了么App【打开饿了么APP 扫红包】', '领取成功，请打开饿了么APP')">
+          <img src="https://picui.cn/thumbnails/e1fc01b9a0f47c9b1917a488d5d009f1.png" alt="饿了么天天领红包" />
+          <div class="card-content">
+            <span class="card-title">1.饿了么天天领红包</span>
+            <span class="card-desc">最低0元吃外卖</span>
+            <div class="card-button" onclick="copyHiddenContent(event, '0副置此段 1:/＄46cocIe＄~.饿了么App【打开饿了么APP 扫红包】', '领取成功，请打开饿了么APP')">点击领取</div>
+            <span class="card-time">活动期至:2025-09-30</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 闪购内容区域 -->
+      <div class="tab-content" id="tab3">
+        <div class="card" data-link="88 HU7405   2:/yr5j46cIlSp三闪购新用户可领首单免单福利" onclick="copyHiddenContent(event, '88 HU7405   2:/yr5j46cIlSp三闪购新用户可领首单免单福利', '领取成功，请打开淘宝APP')">
+          <img src="https://cdn.picui.cn/vip/2025/07/12/68713f8a9a3f8.jpg" alt="闪购超级品牌日" />
+          <div class="card-content">
+            <span class="card-title">1.闪购超级品牌日</span>
+            <span class="card-desc">单单有福利</span>
+            <div class="card-button" onclick="copyHiddenContent(event, '88 HU7405   2:/yr5j46cIlSp三闪购新用户可领首单免单福利', '领取成功，请打开淘宝APP')">点击领取</div>
+            <span class="card-time">活动期至:2025-12-31</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 秒送内容区域 -->
+      <div class="tab-content" id="tab4">
+        <div class="card" onclick="goToMiniProgram('wx91d27dbf599dff74', '/pages/union/proxy/proxy?spreadUrl=https%3A%2F%2Fu.jd.com%2FnGOlJQ1')">
+          <img src="https://free.picui.cn/free/2025/07/12/68726c733cd99.png" alt="京东外卖百亿补贴" />
+          <div class="card-content">
+            <span class="card-title">1.京东外卖百亿补贴</span>
+            <span class="card-desc">满减劵，限时抢</span>
+            <div class="card-button" onclick="handleButtonClick(event)">点击领取</div>
+            <span class="card-time">活动期至:2026-12-31</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 出行·住内容区域 -->
+      <div class="tab-content" id="tab5">
+        <div class="card" onclick="goToMiniProgram('wxaf35009675aa0b2a', '/webx/entry/block-prevention?scene=YQwoRwR&source_id=118141jutuike15053713&ref_from=dunion')">
+          <img src="https://free.picui.cn/free/2025/07/13/6872a38007b68.png" alt="滴滴出行" />
+          <div class="card-content">
+            <span class="card-title">1.滴滴出行</span>
+            <span class="card-desc">打车5折起</span>
+            <div class="card-button" onclick="handleButtonClick(event)">点击领取</div>
+            <span class="card-time">活动期至:2026-12-31</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="more_hint">更多功能持续更新中，敬请期待...</div>
+      <button class="shareCon" onclick="showToast('分享功能已触发')">分享</button>
+    </div>
+
+    <!-- 教程内容页面 -->
+    <div id="tutorial-page" class="page-content">
+      <div class="tutorial-content">
+        <!-- 活动更新通知框 -->
+        <div class="notice-box">
+          <span class="notice-title">活动更新通知：</span>
+          <div class="notice-list">
+            <div class="notice-item">2025-08-08 闪购-1.零售品牌日</div>
+            <div class="notice-item">2025-08-02 饿了么-3.饿了么天天领红包</div>
+            <div class="notice-item">2025-07-25 美团-2.美团外卖节</div>
+            <div class="notice-item">2025-08-08 闪购-1.零售品牌日</div>
+            <div class="notice-item">2025-08-02 饿了么-3.饿了么天天领红包</div>
+            <div class="notice-item">2025-07-25 美团-2.美团外卖节</div>
+            <div class="notice-item">2025-08-10 京东-4.京东生鲜日</div>
+          </div>
+        </div>
+
+        <!-- 教程小技巧框 -->
+        <div class="tutorial-box">
+          <span class="tutorial-title">教程.外卖小技巧</span>
+          <div class="tutorial-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3Dn9cc2L9zlWoY')">
+            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程1">
+          </div>
+          <div class="tutorial-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3Dn9cc2L9zlWoY')">
+            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程2">
+          </div>
+          <div class="tutorial-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3Dn9cc2L9zlWoY')">
+            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程3">
+          </div>
+          <div class="tutorial-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3Dn9cc2L9zlWoY')">
+            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程3">
+          </div>
+          <div class="tutorial-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3Dn9cc2L9zlWoY')">
+            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程3">
+          </div>
+          <div class="tutorial-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3Dn9cc2L9zlWoY')">
+            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程3">
+          </div>
+          <div class="tutorial-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3Dn9cc2L9zlWoY')">
+            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程3">
+          </div>
+          <div class="tutorial-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3Dn9cc2L9zlWoY')">
+            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程3">
+          </div>
+          <div class="tutorial-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3Dn9cc2L9zlWoY')">
+            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程3">
+          </div>
+          <div class="tutorial-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3Dn9cc2L9zlWoY')">
+            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程3">
+          </div>
+          <div class="tutorial-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3Dn9cc2L9zlWoY')">
+            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程3">
+          </div>
+          <div class="tutorial-btn" onclick="navigateToMiniProgram('wxde8ac0a21135c07d', '/index/pages/h5/h5?weburl=https%3A%2F%2Fclick.meituan.com%2Ft%3Ft%3D1%26c%3D2%26p%3Dn9cc2L9zlWoY')">
+            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程3">
+          </div>
+
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 弹窗组件 -->
+  <div class="popup-mask" id="popupMask">
+    <div class="popup" id="popup">
+      <div class="popup-close" onclick="hidePopup()">×</div>
+      <div class="popup-title">美团H5链接</div>
+      <div class="link-container" oncontextmenu="copyLink(event)">
+        <text class="link-text" id="linkText"></text>
+      </div>
+      <div class="popup-desc-container">
+        <div class="popup-desc">✅长按文字或一键复制链接</div>
+        <div class="popup-desc">✅复制后把链接发送到任意聊天窗口，再点击发出去的链接就可以享受本地生活补贴啦.</div>
+      </div>
+      <button class="copy-btn" onclick="copyLink()">一键复制</button>
+    </div>
+  </div>
+
+  <!-- 提示框组件 -->
+  <div class="toast" id="toast"></div>
+
+  <!-- 底部导航栏 -->
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="switchNav('home')">
+      <text>首页</text>
+    </div>
+    <div class="nav-item" onclick="switchNav('tutorial')">
+      <text>教程</text>
+    </div>
+  </div>
+
+  <script>
+    // 全局状态管理 - 存储应用的各种状态变量
+    const state = {
+      currentNav: 'home',          // 当前导航页面
+      activeTab: 'tab1',           // 当前激活的标签
+      isFixed: false,              // 标签栏是否固定
+      barTop: 0,                   // 标签栏初始top值
+      barHeight: 0,                // 标签栏高度
+      isPopupShow: false,          // 弹窗是否显示
+      currentBanner: 0,            // 当前轮播图索引
+      bannerInterval: null,        // 轮播图定时器
+      link: ""                     // 当前链接
+    };
+
+    // DOM元素缓存 - 存储常用DOM元素的引用，避免重复查询
+    const elements = {
+      buttonBar: document.getElementById('buttonBar'),
+      buttonBarPlaceholder: document.getElementById('buttonBarPlaceholder'),
+      buttonItems: document.querySelectorAll('.button-item'),
+      tabContents: document.querySelectorAll('.tab-content'),
+      navItems: document.querySelectorAll('.nav-item'),
+      pageContents: document.querySelectorAll('.page-content'),
+      popupMask: document.getElementById('popupMask'),
+      popup: document.getElementById('popup'),
+      linkText: document.getElementById('linkText'),
+      toast: document.getElementById('toast'),
+      bannerSwiper: document.getElementById('bannerSwiper'),
+      bannerSlides: document.querySelectorAll('.banner-slide')
+    };
+
+    // 初始化函数 - 页面加载完成后执行的初始化操作
+    function init() {
+      initButtonBar();    // 初始化标签栏
+      initBanner();       // 初始化轮播图
+      bindEvents();       // 绑定事件
+    }
+
+    // 初始化标签栏 - 设置标签栏的初始位置和占位高度
+    function initButtonBar() {
+      const rect = elements.buttonBar.getBoundingClientRect();
+      state.barTop = rect.top;        // 记录初始位置
+      state.barHeight = rect.height;  // 记录高度
+      elements.buttonBarPlaceholder.style.height = `${state.barHeight}px`; // 设置占位高度
+    }
+
+    // 初始化轮播图 - 设置轮播定时器
+    function initBanner() {
+      // 每3秒切换一次轮播图
+      state.bannerInterval = setInterval(() => {
+        state.currentBanner = (state.currentBanner + 1) % elements.bannerSlides.length;
+        updateBanner();
+      }, 3000);
+    }
+
+    // 更新轮播图显示 - 根据当前索引显示对应的轮播项
+    function updateBanner() {
+      elements.bannerSlides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === state.currentBanner);
+        slide.style.display = index === state.currentBanner ? 'block' : 'none';
+      });
+    }
+
+    // 绑定事件 - 为页面元素绑定各种事件处理函数
+    function bindEvents() {
+      window.addEventListener('scroll', handleScroll); // 监听滚动
+      window.addEventListener('beforeunload', () => clearInterval(state.bannerInterval)); // 页面卸载清理
+    }
+
+    // 处理滚动事件（标签栏固定） - 滚动时固定标签栏在顶部
+    function handleScroll() {
+      const scrollTop = window.scrollY;
+      if (scrollTop >= state.barTop - 10 && !state.isFixed) {
+        elements.buttonBar.classList.add('fixed');
+        state.isFixed = true;
+      } else if (scrollTop < state.barTop - 10 && state.isFixed) {
+        elements.buttonBar.classList.remove('fixed');
+        state.isFixed = false;
+      }
+    }
+
+    // 切换标签页 - 显示选中标签对应的内容
+    function switchTab(tabId) {
+      state.activeTab = tabId;
+      elements.buttonItems.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tabId));
+      elements.tabContents.forEach(content => content.classList.toggle('active', content.id === tabId));
+    }
+
+    // 切换导航页面 - 在首页和教程页之间切换
+    function switchNav(navId) {
+      state.currentNav = navId;
+      elements.navItems.forEach(item => {
+        item.classList.toggle('active', item.textContent.trim() === (navId === 'home' ? '首页' : '教程'));
+      });
+      elements.pageContents.forEach(page => {
+        page.classList.toggle('active', page.id === `${navId}-page`);
+      });
+      showToast(`已切换到${navId === 'home' ? '首页' : '教程'}页面`);
+    }
+
+    // 显示弹窗 - 展示链接信息
+    function showPopup(link, event) {
+      if (event) event.stopPropagation();
+      state.link = link;
+      elements.linkText.textContent = link;
+      elements.popupMask.style.display = 'flex';
+      state.isPopupShow = true;
+    }
+
+    // 显示带链接的弹窗 - 调用showPopup的快捷方式
+    function showPopupWithLink(link, event) {
+      showPopup(link, event);
+    }
+
+    // 隐藏弹窗 - 关闭弹窗
+    function hidePopup() {
+      elements.popupMask.style.display = 'none';
+      state.isPopupShow = false;
+    }
+
+    // 复制链接 - 复制弹窗中的链接到剪贴板
+    function copyLink(event) {
+      if (event) event.preventDefault();
+      navigator.clipboard.writeText(state.link).then(() => {
+        showToast('复制成功');
+        hidePopup();
+      }).catch(() => {
+        showToast('复制失败，请手动复制');
+      });
+    }
+
+    // 复制隐藏内容 - 修复版，兼容更多浏览器
+    // 用于复制优惠券口令等内容
+    function copyHiddenContent(event, content, toastMsg) {
+      if (event) event.stopPropagation();
+      
+      // 创建隐藏的textarea元素用于复制操作（兼容更多浏览器）
+      const textarea = document.createElement('textarea');
+      textarea.value = content;
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      
+      try {
+        // 选择文本内容
+        textarea.select();
+        // 适配移动设备的选择范围设置
+        textarea.setSelectionRange(0, content.length);
+        
+        // 执行复制命令
+        const successful = document.execCommand('copy');
+        
+        if (successful) {
+          showToast(toastMsg || '领取成功');
+        } else {
+          throw new Error('复制失败');
+        }
+      } catch (err) {
+        // 复制失败时的降级处理
+        showToast('请手动复制: ' + content.substring(0, 10) + '...');
+        
+        // 选中内容方便用户手动复制
+        textarea.focus();
+        textarea.select();
+      } finally {
+        // 清理临时创建的元素
+        document.body.removeChild(textarea);
+      }
+    }
+
+    // 显示提示框 - 展示操作结果提示
+    function showToast(message) {
+      const toast = elements.toast;
+      clearTimeout(toast.timer);
+      toast.textContent = message;
+      toast.classList.add('show');
+      // 2秒后自动隐藏提示框
+      toast.timer = setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    // 处理按钮点击（阻止冒泡） - 防止按钮点击事件触发父元素的点击事件
+    function handleButtonClick(event) {
+      event.stopPropagation();
+    }
+
+    // 跳转到小程序 - 模拟跳转到对应小程序
+    function goToMiniProgram(appid, path) {
+      showToast(`正在跳转到小程序: ${appid}，路径: ${path}`);
+    }
+
+    // 导航到小程序 - 模拟导航到对应小程序
+    function navigateToMiniProgram(appid, path) {
+      showToast(`正在跳转到小程序: ${appid}`);
+    }
+
+    // 返回上一页 - 模拟返回上一页操作
+    function goBack() {
+      showToast('返回上一页');
+      if (window.history.length > 1) window.history.back();
+    }
+
+    // 页面加载完成后初始化
+    window.addEventListener('DOMContentLoaded', init);
+
+
+    // 禁止F12和Ctrl+Shift+I - 防止用户打开开发者工具
+    document.addEventListener('keydown', e => {
+      // F12键
+      if (e.key === 'F12') {
+        e.preventDefault();
+        showToast('开发者工具已禁用');
+      }
+      // Ctrl+Shift+I组合键
+      if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+        e.preventDefault();
+        showToast('开发者工具已禁用');
+      }
+    });
+  </script>
 </body>
 </html>
+    
