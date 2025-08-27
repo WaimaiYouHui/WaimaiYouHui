@@ -8,7 +8,7 @@
        maximum-scale=1.0, minimum-scale=1.0: 最大和最小缩放比例为1
        user-scalable=no: 禁止用户手动缩放 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-  <title>外卖免费领券中心</title>
+  <title>外卖活动劵免费领取中心</title>
   <!-- 引入Tailwind CSS框架，用于快速构建UI -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- 引入Font Awesome图标库，用于显示各种图标 -->
@@ -109,13 +109,14 @@
     /* 轮播图优化 - 适配手机屏幕比例 */
     .banner-swiper {
       width: 96%;                 /* 宽度占屏幕96% */
-      height: 18rem;              /* 高度18rem */
+      height: 23rem;              /* 高度18rem */
       margin: 0 2%;               /* 左右各2%的外边距 */
       margin-top: 1rem;           /* 顶部1rem的外边距 */
-      margin: 0.9rem auto !important; /* 上下0.6rem外边距，水平居中 */
+      margin: 1.7rem auto !important; /* 上下0.6rem外边距，水平居中 */
       border-radius: 1rem;        /* 圆角1rem */
       overflow: hidden;           /* 超出部分隐藏 */
       position: relative;         /* 相对定位 */
+     
     }
     
     .banner-slide {
@@ -131,7 +132,7 @@
     .banner-swiper img {
       width: 100% !important;     /* 图片宽度100% */
       height: 100% !important;    /* 图片高度100% */
-      object-fit: cover !important; /* 图片裁剪填充，保持比例 */
+      object-fit: fill !important; /* 强制拉伸图片填充容器，允许变形 */
     }
     
     /* 快捷按钮区域 - 优化手机触摸区域 */
@@ -161,7 +162,7 @@
     
     .big-btn {
       width: 50%;                 /* 大按钮宽度50% */
-      height: 13.5rem;              /* 大按钮高度12rem */
+      height: 14.2rem;              /* 大按钮高度12rem */
     }
     
     .right-buttons {
@@ -191,92 +192,107 @@
       opacity: 0.7;               /* 点击时变浅色（透明度降低） */
     }
     
-    /* 标签栏容器 - 优化手机滚动体验 */
-    .button-bar-container {
-      position: relative;         /* 相对定位 */
-      margin-top: 0.5rem;         /* 顶部0.5rem的外边距 */
-    }
-    
-    .button-bar-placeholder {
-      width: 100%;                /* 宽度100%，用于占位 */
-    }
-    
-    .button-bar {
-      position: absolute;         /* 绝对定位 */
-      top: 0;                     /* 顶部对齐 */
-      left: 0;                    /* 左侧对齐 */
-      width: 100%;                /* 宽度100% */
-      background-color: #f5f5f4;  /* 背景色 */
-      padding: 0.8rem 0.5rem 0.5rem; /* 内边距 */
-      box-sizing: border-box;     /* 盒模型为border-box */
-      white-space: nowrap;        /* 不换行 */
-      transition: all 0.2s ease;  /* 过渡动画 */
-      display: flex;              /* 弹性布局 */
-      justify-content: space-between; /* 均匀分布 */
-    }
-    
-    .button-bar.fixed {
-      position: fixed;            /* 固定定位 */
-      z-index: 999;               /* 层级999，确保在上方 */
-      box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1); /* 阴影效果 */
-      top: 0;                     /* 顶部对齐 */
-    }
-    
-    .button-item {
-      flex: 1;                    /* 平均分配空间 */
-      display: inline-block;      /*  inline-block布局 */
-      padding: 0.6rem 0;          /* 上下内边距0.6rem */
-      font-size: 2rem;          /* 字体大小1.6rem */
-      color: #333;                /* 文字颜色 */
-      margin: 0 0.3rem;           /* 左右外边距0.3rem */
-      border-radius: 3rem;        /* 圆角3rem */
-      background-color: #ffffff;  /* 白色背景 */
-      transition: all 0.3s;       /* 过渡动画 */
-      border: none;               /* 无边框 */
-      cursor: pointer;            /* 鼠标指针为手型 */
-      text-align: center;         /* 文字居中 */
-      max-width: 20%;             /* 最大宽度20% */
-      /* 增大点击区域 */
-      min-height: 39px;
-      display: flex;              /* 弹性布局 */
-      align-items: center;        /* 垂直居中 */
-      justify-content: center;    /* 水平居中 */
-    }
-    
-    .button-item.active {
-      font-weight: bold;          /* 粗体 */
-      box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.2); /* 阴影效果 */
-    }
-    
-    /* 各平台标签按钮激活状态 */
-    .button-item[data-tab="tab1"].active,
-    .button-item[data-tab="tab1"]:active {
-      background-color: #F5CA20; color: #ffffff; transform: scale(0.96);
-    }
-    .button-item[data-tab="tab2"].active,
-    .button-item[data-tab="tab2"]:active {
-      background-color: #27AAE2; color: #ffffff; transform: scale(0.96);
-    }
-    .button-item[data-tab="tab3"].active,
-    .button-item[data-tab="tab3"]:active {
-      background-color: #E16942; color: #ffffff; transform: scale(0.96);
-    }
-    .button-item[data-tab="tab4"].active,
-    .button-item[data-tab="tab4"]:active {
-      background-color: #be0e17; color: #ffffff; transform: scale(0.96);
-    }
-    .button-item[data-tab="tab5"].active,
-    .button-item[data-tab="tab5"]:active {
-      background-color: #e92d34; color: #ffffff; transform: scale(0.96);
-    }
+/* 标签栏容器 - 优化手机滚动体验 */
+.button-bar-container {
+  position: relative;         /* 相对定位 */
+  margin-top: 1rem;           /* 顶部1rem的外边距 */
+  margin-bottom: 2rem;        /* 底部2rem的外边距 */
+  margin-left: 2%;            /* 左侧2%的边距 */
+  margin-right: 2%;           /* 右侧2%的边距 */
+  border-radius: 1rem;        /* 圆角1rem */
+  overflow: hidden;           /* 关键：让内部元素不超出圆角范围 */
+}
+
+/* 调整按钮栏样式配合容器圆角 */
+.button-bar {
+  /* 移除原有的left:0和width:100%，改用继承容器宽度 */
+  left: 0;
+  right: 0;
+  width: auto;                /* 自动适应容器宽度 */
+  border-radius: inherit;     /* 继承容器的圆角 */
+}
+
+.button-bar-placeholder {
+  width: 100%;                /* 宽度100%，用于占位 */
+}
+
+.button-bar {
+  position: absolute;         /* 绝对定位 */
+  top: 0;                     /* 顶部对齐 */
+  left: 0;                    /* 左侧对齐 */
+  width: 100%;                /* 宽度100% */
+  background-color: #ffffff;  /* 整体容器白色背景框 */
+  padding: 0.8rem 0.5rem 0.5rem; /* 内边距 */
+  box-sizing: border-box;     /* 盒模型为border-box */
+  white-space: nowrap;        /* 不换行 */
+  transition: all 0.2s ease;  /* 过渡动画 */
+  display: flex;              /* 弹性布局 */
+  justify-content: space-between; /* 均匀分布 */
+}
+
+.button-bar.fixed {
+  position: fixed;            /* 固定定位 */
+  z-index: 999;               /* 层级999，确保在上方 */
+  box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1); /* 阴影效果 */
+  top: 0;                     /* 顶部对齐 */
+}
+
+.button-item {
+  flex: 1;                    /* 平均分配空间 */
+  display: inline-block;      /*  inline-block布局 */
+  padding: 1rem 1;          /* 上下内边距0.6rem */
+  font-size: 2rem;          /* 字体大小1.6rem */
+  color: #333;                /* 文字颜色 */
+  margin: 0 0.5rem;           /* 左右外边距0.3rem */
+  border-radius: 1rem;        /* 圆角3rem */
+  background-color: #f5f5f4;  /* 每个标签灰色背景框 */
+  transition: all 0.3s;       /* 过渡动画 */
+  border: none;               /* 无边框 */
+  cursor: pointer;            /* 鼠标指针为手型 */
+  text-align: center;         /* 文字居中 */
+  max-width: 20%;             /* 最大宽度20% */
+  /* 增大点击区域 */
+  min-height: 39px;
+  display: flex;              /* 弹性布局 */
+  align-items: center;        /* 垂直居中 */
+  justify-content: center;    /* 水平居中 */
+}
+
+/* 以下为原有样式，保持不变 */
+.button-item.active {
+  font-weight: bold;          /* 粗体 */
+  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.2); /* 阴影效果 */
+}
+
+/* 各平台标签按钮激活状态 */
+.button-item[data-tab="tab1"].active,
+.button-item[data-tab="tab1"]:active {
+  background-color: #F5CA20; color: #ffffff; transform: scale(0.96);
+}
+.button-item[data-tab="tab2"].active,
+.button-item[data-tab="tab2"]:active {
+  background-color: #27AAE2; color: #ffffff; transform: scale(0.96);
+}
+.button-item[data-tab="tab3"].active,
+.button-item[data-tab="tab3"]:active {
+  background-color: #E16942; color: #ffffff; transform: scale(0.96);
+}
+.button-item[data-tab="tab4"].active,
+.button-item[data-tab="tab4"]:active {
+  background-color: #be0e17; color: #ffffff; transform: scale(0.96);
+}
+.button-item[data-tab="tab5"].active,
+.button-item[data-tab="tab5"]:active {
+  background-color: #e92d34; color: #ffffff; transform: scale(0.96);
+}
     
     /* 卡片样式 - 优化手机显示 */
     .card {
       width: 96% !important;      /* 宽度96% */
-      height: 15rem !important; /* 高度15rem */
+      height: 21rem !important; /* 高度15rem */
       min-height: 15rem;          /* 最小高度15rem */
       margin-top: 0.7rem !important; /* 上1.2rem */
-      margin-bottom: 1.5rem !important; /* 下0.5rem */
+      margin-bottom: 1.7rem !important; /* 下0.5rem */
       margin: 0 1rem; /* 左右0.3rem间距 */
       background-color: #fff;     /* 白色背景 */
       border-radius: 1rem !important; /* 圆角1rem */
@@ -287,14 +303,17 @@
       cursor: pointer;            /* 鼠标指针为手型 */
     }
     
-    .card img {
-      width: 41% !important;      /* 图片宽度35% */
-      height: auto !important;    /* 高度自适应 */
-      min-height: 12rem;          /* 最小高度12rem */
-      margin: 1rem !important;    /* 外边距1rem */
-      border-radius: 0.8rem !important; /* 圆角0.8rem */
-      object-fit: fill !important; /* 改为fill，强制铺满容器（会拉伸变形） */
-    }
+.card img {
+  width: 40% !important;      /* 图片宽度占卡片40%（注释与数值一致，避免混淆） */
+      height: 10rem !important; /* 高度15rem */
+  min-height: 12rem;          /* 最小高度12rem，防止图片过矮导致变形 */
+   margin-top: 1.5rem !important; /* 上1.2rem */
+        margin: 0 1rem; /* 左右0.3rem间距 */
+  border-radius: 0.8rem !important; /* 图片圆角0.8rem，与卡片风格统一 */
+  object-fit: fill !important; /* 强制铺满容器（按需求保留，若想保持比例可改为cover） */
+  display: block;             /* 清除图片默认inline特性的额外间距 */
+
+}
     
     .card-content {
       flex: 1;                    /* 占据剩余空间 */
@@ -304,23 +323,26 @@
       position: relative;         /* 相对定位 */
     }
     
-    .card-title {
-      display: block !important;  /* 块级显示 */
-      color: #030303 !important;  /* 文字颜色 */
-      font-size: 2rem !important; /* 字体大小1.8rem */
-      font-weight: bold !important; /* 粗体 */
-      margin: 0.3rem 0.8rem !important; /* 外边距 */
-      text-align: left !important; /* 左对齐 */
-      line-height: 1.2 !important; /* 行高1.2 */
-      white-space: nowrap;        /* 不换行 */
-      overflow: hidden;           /* 超出部分隐藏 */
-      text-overflow: ellipsis;    /* 超出部分显示省略号 */
-    }
+.card-title {
+  display: block !important;  /* 块级显示，独占一行，方便控制上下间距 */
+  color: #030303 !important;  /* 文字颜色：深黑色，保证标题醒目 */
+  font-size: 2.6rem !important; /* 字体大小：2.6rem（修正原注释与数值不一致问题，确保手机端清晰） */
+  font-weight: bold !important; /* 粗体样式，突出标题层级，与正文区分 */
+  margin-top: 1rem !important; /* 标题上方间距：0.8rem，与卡片内容区顶部保持呼吸感 */
+  margin-bottom: 0.5rem !important; /* 标题下方间距：0.5rem，与下方的card-desc拉开距离，避免拥挤 */
+  margin-left: 0.8rem !important; /* 标题左侧间距：0.8rem，与卡片图片/边缘对齐，保持整体排版统一 */
+  margin-right: 0.8rem !important; /* 标题右侧间距：0.8rem，避免文字贴紧卡片边缘，提升美观度 */
+  text-align: left !important; /* 文字左对齐，符合中文阅读习惯 */
+  line-height: 1.2 !important; /* 行高：1.2，控制标题文字垂直密度，避免过高或过矮 */
+  white-space: nowrap;        /* 文字不换行，确保标题在一行内显示 */
+  overflow: hidden;           /* 超出卡片宽度的文字隐藏，防止破坏布局 */
+  text-overflow: ellipsis;    /* 超出部分显示省略号（...），提示用户有未显示内容 */
+}
     
     .card-desc {
       display: block !important;  /* 块级显示 */
       color: #5E5D5D !important;  /* 文字颜色 */
-      font-size: 1.7rem !important; /* 字体大小1.5rem */
+      font-size: 1.9rem !important; /* 字体大小1.5rem */
       margin: 0.5rem 0.8rem !important; /* 外边距 */
       text-align: left !important; /* 左对齐 */
       line-height: 1.4 !important; /* 行高1.4 */
@@ -330,56 +352,71 @@
       overflow: hidden;           /* 超出部分隐藏 */
     }
     
-    /* 按钮样式 - 优化手机点击体验 */
-    .card-button {
-      position: absolute;         /* 绝对定位 */
-      right: 1.2rem;              /* 距离右侧1.2rem */
-      bottom: 1.2rem;             /* 距离底部1.2rem */
-      background-color: #FFC837 !important; /* 背景色 */
-      color: #f8f7f6 !important;  /* 文字颜色 */
-      font-size: 1.7rem !important; /* 字体大小1.5rem */
-      font-weight: bold !important; /* 粗体 */
-      width: 10.5rem !important;     /* 宽度9rem */
-      height: 4.9rem !important;  /* 高度4.5rem */
-      line-height: 4.9rem !important; /* 行高等于高度，垂直居中 */
-      text-align: center;         /* 水平居中 */
-      border-radius: 0.8rem !important; /* 圆角0.8rem */
-      cursor: pointer;            /* 鼠标指针为手型 */
-      -webkit-tap-highlight-color: transparent !important; /* 移除点击高亮 */
-      /* 移除原有的背景色过渡，改为transform过渡以实现缩放效果 */
-      transition: transform 0.2s ease;
-    }
-    
-    /* 删除：卡片内按钮原有的点击变浅色效果 */
-    /* 移除了以下样式，避免与新的缩放效果冲突
-    .card-button.top-btn:active {
-      background-color: #e6b02d !important; 
-    }
-    .card-button:not(.top-btn):active {
-      background-color: #e6b02d !important;
-    }
-    */
-    
-    /* 卡片内两个按钮点击缩小98%的效果 */
-    .card-button:active {
-      transform: scale(0.90); /* 点击时缩小至原尺寸的98% */
-    }
-    
-    .card-button.top-btn {
-      bottom: 7.9rem;               /* 上方按钮距离底部7rem */
-      background-color: #FF9500 !important; /* 上方按钮背景色 */
-    }
-    
-    .card-time {
-      display: block !important;  /* 块级显示 */
-      color: #CFCBCB !important;  /* 文字颜色 */
-      font-size: 1.6rem !important; /* 字体大小1.4rem */
-      margin-top: auto;           /* 自动顶部外边距，推至下方 */
-      margin-left: 0.8rem !important; /* 左侧外边距0.8rem */
-      margin-bottom: -0.3rem !important; /* 底部外边距，为按钮留出空间 */
-      text-align: left !important; /* 左对齐 */
-      line-height: 1.2 !important; /* 行高1.2 */
-    }
+/* 按钮容器 - 统一控制位置 */
+.card-buttons-row {
+  position: absolute;         /* 固定在卡片底部 */
+  bottom: 1.2rem;             /* 距离底部1.2rem（与原设计一致） */
+  left: 1.2rem;               /* 左右边距与原按钮对齐 */
+  right: 1.2rem;
+  display: flex;              /* 水平布局 */
+  gap: 0.8rem;                /* 按钮间距（两个按钮时生效） */
+}
+
+/* 按钮容器样式：用于承载按钮，控制按钮的整体布局 */
+.card-buttons-row {
+  position: absolute;         /* 绝对定位，脱离文档流，方便精准控制在卡片底部 */
+  bottom: 1.5rem;             /* 距离卡片底部 1.2rem，固定在底部区域 */
+  left: 1.2rem;               /* 距离卡片左侧 1.2rem，与卡片内容保持边距一致 */
+  right: 1.2rem;              /* 距离卡片右侧 1.2rem，让按钮容器左右对齐卡片内容 */
+  display: flex;              /* 弹性布局，让按钮在水平方向排列 */
+  gap: 0.8rem;                /* 按钮之间的间距，营造呼吸感，避免拥挤 */
+}
+
+/* 按钮基础样式：统一控制按钮的外观和交互逻辑 */
+.card-button {
+  height: 4.9rem !important;  /* 固定按钮高度，确保不同设备/场景下按钮高度一致 */
+  line-height: 4.9rem !important; /* 让按钮文字垂直居中，与高度配合使用 */
+  font-size: 1.7rem !important; /* 按钮文字大小，保证在手机端清晰可读 */
+  font-weight: bold !important; /* 文字加粗，突出按钮可点击的特性 */
+  color: #f8f7f6 !important;  /* 按钮文字颜色，白色文字搭配彩色背景更醒目 */
+  text-align: center;         /* 文字水平居中，让按钮内容排版整齐 */
+  border-radius: 0.8rem !important; /* 按钮圆角，让按钮外观更柔和 */
+  cursor: pointer;            /* 鼠标悬停时显示手型，提示用户可点击 */
+  -webkit-tap-highlight-color: transparent !important; /* 移除手机端点击时的高亮效果，提升交互体验 */
+  transition: transform 0.2s ease; /* 点击时的缩放动画过渡效果，让交互更丝滑 */
+  flex: 1; /* 核心！让按钮自动分配容器空间：多个按钮时均分宽度，只剩1个时占满容器 */
+}
+
+/* 按钮背景色区分：通过 :nth-child 给不同位置的按钮设置不同背景色，方便视觉区分功能 */
+.card-buttons-row :nth-child(1) {
+  background-color: #FF9500 !important; /* 第一个按钮设为橙色，可根据需求调整 */
+}
+.card-buttons-row :nth-child(2) {
+  background-color: #FFC837 !important; /* 第二个按钮设为黄色，与第一个按钮区分 */
+}
+
+/* 按钮点击动画：点击时缩小，模拟物理按钮按下的反馈 */
+.card-button:active {
+  transform: scale(0.9) !important; /* 点击时缩小到 90%，松开后恢复，增强交互感 */
+}
+
+/* 卡片内容区：预留按钮空间，避免文字被遮挡 */
+.card-content {
+  position: relative;         /* 作为按钮绝对定位的父容器 */
+  padding-bottom: 6rem;       /* 底部预留按钮高度+间距，防止文字被挡 */
+}
+
+.card-time {
+  display: block !important; /* 块级元素 */
+  color: #CFCBCB !important; /* 时间颜色 */
+  font-size: 1.7rem !important; /* 1.6rem字体 */
+  margin-top: 3rem !important; /* 添加上方间距（可调整数值） */
+  margin-bottom: 1rem !important; /* 添加下方间距（可调整数值） */
+  margin-left: 0.8rem !important; /* 左0.8rem */
+  text-align: left !important; /* 左对齐 */
+  line-height: 1 !important; /* 行高1.2 */
+}
+
     
     /* 通知容器 */
     .notice-container {
@@ -520,29 +557,6 @@
       transform: translateY(0.1rem); /* 点击时轻微下移 */
     }
     
-    /* 分享按钮 */
-    .shareCon {
-      background-image: linear-gradient(#ffd622, #eb7200, hsla(0, 0%, 100%, 0)); /* 渐变背景 */
-      border-radius: 6rem 0 0 6rem; /* 左侧圆角 */
-      top: 15rem;                 /* 距离顶部15rem */
-      right: -1rem;               /* 右侧超出1rem */
-      position: fixed;            /* 固定定位 */
-      color: rgb(253, 253, 253);  /* 文字颜色 */
-      width: 7rem;                /* 宽度7rem */
-      height: 5rem;               /* 高度5rem */
-      font-size: 1.6rem;          /* 字体大小1.6rem */
-      display: flex;              /* 弹性布局 */
-      align-items: center;        /* 垂直居中 */
-      justify-content: center;    /* 水平居中 */
-      padding: 0;                 /* 无内边距 */
-      line-height: 1;             /* 行高1 */
-      border: none;               /* 无边框 */
-      cursor: pointer;            /* 鼠标指针为手型 */
-    }
-    
-    .shareget:active {
-      transform: scale(0.95);     /* 点击时轻微缩小 */
-    }
     
     .more_hint {
       align-items: center;        /* 垂直居中 */
@@ -701,11 +715,7 @@
   </style>
 </head>
 <body>
-  <!-- 头部区域 -->
-  <div class="header">
-    <div class="back-btn" onclick="goBack()"></div>
-    <div class="title">外卖领券</div>
-  </div>
+
 
   <!-- 内容容器 -->
   <div class="content-container">
@@ -713,28 +723,28 @@
     <div id="home-page" class="page-content active">
 <!-- 轮播图区域 -->
 <div class="banner-swiper" id="bannerSwiper">
-        <div class="banner-slide active" onclick="window.location.href='https://kurl01.cn/763YDG'">
-          <img src="https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png" alt="美团神劵包" />
+        <div class="banner-slide active" onclick="window.location.href='https://mp.weixin.qq.com/s/se04dew47CdXqpKiylLDqw'">
+          <img src="https://picui.cn/thumbnails/3eca5e11e94bd67fd61eb4d37d83f3d8.png" alt="瑞幸" />
         </div>
-        <div class="banner-slide" onclick="window.location.href='https://activity01.yunzhanxinxi.com/link/100048368a476b9251431000tDtMAyvI'">
-          <img src="https://picui.cn/thumbnails/901f6a65aff411e2c1c86b3d5508f137.png" alt="京东外卖" />
+        <div class="banner-slide" onclick="window.location.href='https://activity01.yunzhanxinxi.com/link/100112468abe80a5673a1000rcXqNys1'">
+          <img src="https://picui.cn/thumbnails/2bf13b551c0d147bd2d51938e7b3b3aa.png" alt="瑞幸" />
         </div>
-        <div class="banner-slide" onclick="window.location.href='https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q'">
-          <img src="https://picui.cn/thumbnails/8371117967ba9e25a3a1989b4e2ea139.png" alt="饿了么" />
+        <div class="banner-slide" onclick="window.location.href='https://kurl08.cn/76id41'">
+          <img src="https://picui.cn/thumbnails/e1fc01b9a0f47c9b1917a488d5d009f1.png" alt="太二酸菜鱼" />
         </div>
       </div>
 
 <!-- 快捷按钮区域 -->
 <div class="button-container">
   <!-- 美团按钮：与其他按钮保持一致的元素类型和事件逻辑 -->
-  <button class="btn big-btn touch-active btn-touch" onclick="event.stopPropagation(); window.open('https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q')">
+  <button class="btn big-btn touch-active btn-touch" onclick="event.stopPropagation(); window.open('https://mp.weixin.qq.com/s/se04dew47CdXqpKiylLDqw')">
     <img class="btn-img" src="https://picui.cn/thumbnails/aa0633d26e5b8291cd70bedbb3a1aff9.png" alt="美团" />
   </button>
   <div class="right-buttons">
-    <button class="btn small-btn touch-active btn-touch" onclick="event.stopPropagation(); window.open('https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q')">
+    <button class="btn small-btn touch-active btn-touch" onclick="event.stopPropagation(); window.open('http://dpurl.cn/QLByytFz')">
       <img class="btn-img" src="https://picui.cn/thumbnails/ce9a8043103fb8e50834a1b8d8deeae9.png" alt="饿了么" />
     </button>
-    <button class="btn small-btn touch-active btn-touch" onclick="event.stopPropagation(); window.open('https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q')">
+    <button class="btn small-btn touch-active btn-touch" onclick="event.stopPropagation(); window.open('https://mp.weixin.qq.com/s/K2LU1IlxMwfVKYNmbmS3RQ')">
       <img class="btn-img" src="https://picui.cn/thumbnails/78f421510067cfae3991f1e104a486de.png" alt="京东" />
     </button>
   </div>
@@ -762,81 +772,103 @@
           <img src="https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png" alt="美团神劵包" />
           <div class="card-content">
             <span class="card-title">1.美团神劵包</span>
-            <span class="card-desc">9.9元购600元神劵<br>包</span>
-            <span class="card-time">活动期至:<br>2025-08-21</span>
-            
-            <!-- 卡片内上方按钮（领取口令）：点击时缩小98% -->
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥rxZmJhYWUxYmQ¥一起领', '领取成功，请打开美团APP')">领取口令</span>            
-            
+            <span class="card-desc">9.9元购600元神劵包</span>
+            <span class="card-time">活动期至:2025-08-21</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+               <div class="card-buttons-row">
+            <!-- 按钮1（可删除）：领取口令 -->
+            <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,  '1 %复制信息#% 打开团App http:/¥rxZmJhYWUxYmQ¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+             </div>
           </div>
         </div>
 
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/5d36251649273e7fd1c23b5b62d55e98.png" alt="美团神劵包" />
-          <div class="card-content">
-            <span class="card-title">2.美团外卖节</span>
-            <span class="card-desc">惊喜大额红包</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <!-- 卡片内上方按钮（领取口令）：点击时缩小98% -->
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥uuNDUyMjM5MmU¥一起领', '领取成功，请打开美团APP')">领取口令</span>            
-            
-            <!-- 卡片内下方按钮（点击领取）：点击时缩小98% -->
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kzurl20.cn/7z5eCO'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
-          </div>
-        </div>
+<div class="card touch-active">
+  <img src="https://picui.cn/thumbnails/5d36251649273e7fd1c23b5b62d55e98.png" alt="美团神劵包" />
+  <div class="card-content">
+    <span class="card-title">2.美团外卖节</span>
+    <span class="card-desc">惊喜大额红包</span>
+    <span class="card-time">活动期至:2025-12-31</span>
+    
+    <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥uuNDUyMjM5MmU¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kzurl20.cn/7z5eCO'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
+  </div>
+</div>
 
-        <!-- 其余卡片结构相同，均已按要求修改按钮效果 -->
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/0d25d5f4c0fa9d2c0a3742c1c2c70955.png" alt="美团神劵包" />
-          <div class="card-content">
-            <span class="card-title">3.美团外卖品质<br>会场🔥🔥</span>
-            <span class="card-desc">畅领高额优惠</span>
-            <span class="card-time">活动期至:<br>2025-12-01</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥3wNTQxNDc0NDk¥一起领', '领取成功，请打开美团APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kurl02.cn/7670JW'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
-          </div>
-        </div>
+<div class="card touch-active">
+  <img src="https://picui.cn/thumbnails/0d25d5f4c0fa9d2c0a3742c1c2c70955.png" alt="美团神劵包" />
+  <div class="card-content">
+    <span class="card-title">3.美团外卖品质会场</span>
+    <span class="card-desc">畅领高额优惠</span>
+    <span class="card-time">活动期至:2025-12-01</span>
+    
+    <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥3wNTQxNDc0NDk¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kurl02.cn/7670JW'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
+  </div>
+</div>
 
         <div class="card touch-active">
           <img src="https://picui.cn/thumbnails/9eb60d86e8433a25a74d7f24d9a9a928.png" alt="美团神劵包" />
           <div class="card-content">
-            <span class="card-title">4.美团外卖商品<br>券</span>
+            <span class="card-title">4.美团外卖商品券</span>
             <span class="card-desc">整点抢0.1元奶茶</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥9xZjA5MTdkNjg¥一起领', '领取成功，请打开美团APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kurl06.cn/7672oC'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+    <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,'1 %复制信息#% 打开团App http:/¥9xZjA5MTdkNjg¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kurl06.cn/7672oC'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
         <div class="card touch-active">
           <img src="https://picui.cn/thumbnails/6bd8781451be27188ffcb3fd5b403470.png" alt="美团神劵包" />
           <div class="card-content">
-            <span class="card-title">5.美团【团购优<br>惠】</span>
+            <span class="card-title">5.美团【团购优惠】</span>
             <span class="card-desc">套餐折上折</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥ffNThlZWIyNmE¥一起领', '领取成功，请打开美团APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kzurl12.cn/7ziTVu'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+    <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥ffNThlZWIyNmE¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kzurl12.cn/7ziTVu'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -845,14 +877,20 @@
           <div class="card-content">
             <span class="card-title">6.十点爆品疯抢</span>
             <span class="card-desc">先领劵再下单</span>
-            <span class="card-time">活动期至:<br>2025-09-01</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥ncNDE2OTZmOWQ¥一起领', '领取成功，请打开美团APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kurl04.cn/767cLb'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-time">活动期至:2025-09-01</span>
+
+    <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,  '1 %复制信息#% 打开团App http:/¥ncNDE2OTZmOWQ¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kurl04.cn/767cLb'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -861,14 +899,20 @@
           <div class="card-content">
             <span class="card-title">7.吃喝玩乐2折起</span>
             <span class="card-desc">吃喝玩乐神劵</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥zcNjc5MjIxNjM¥一起领', '领取成功，请打开美团APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kurl15.cn/767cKs'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥zcNjc5MjIxNjM¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kurl15.cn/767cKs'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
       </div>
@@ -879,16 +923,22 @@
         <div class="card touch-active">
           <img src="https://picui.cn/thumbnails/e1fc01b9a0f47c9b1917a488d5d009f1.png" alt="饿了么" />
           <div class="card-content">
-            <span class="card-title">1.饿了么天天领<br>红包</span>
+            <span class="card-title">1.饿了么天天领红包</span>
             <span class="card-desc">最低0元吃外卖</span>
-            <span class="card-time">活动期至:<br>2025-09-30</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '0複制这个 666:/＄4ka44AV＄~.饿了么App【打开饿了么APP 扫红包】', '领取成功，请打开饿了么APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kzurl19.cn/767TBl'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-time">活动期至:2025-09-30</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event, '0複制这个 666:/＄4ka44AV＄~.饿了么App【打开饿了么APP 扫红包】', '领取成功，请打开饿了么APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kzurl19.cn/767TBl'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
         
@@ -896,13 +946,17 @@
           <img src="https://picui.cn/thumbnails/8371117967ba9e25a3a1989b4e2ea139.png" alt="饿了么" />
           <div class="card-content">
             <span class="card-title">2.饿了么极限暴涨</span>
-            <span class="card-desc">天天必得18元<br>暴涨立省18元</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-                   
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://5kma.cn/7ziTQa'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-desc">天天必得18元暴涨立省18元</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://5kma.cn/7ziTQa'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -910,29 +964,39 @@
           <img src="https://picui.cn/thumbnails/523282645324ecceb37285d23126953c.png" alt="饿了么" />
           <div class="card-content">
             <span class="card-title">3.饿了么天天领红包</span>
-            <span class="card-desc">每周五5折红包<br>每月18日红包节</span>
-            <span class="card-time">活动期至:<br>2026-02-28</span>
-                   
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://5kma.cn/7ziTQa'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-desc">每周五5折红包每月18日红包</span>
+            <span class="card-time">活动期至:2026-02-28</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://5kma.cn/7ziTQa'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
         <div class="card touch-active">
           <img src="https://picui.cn/thumbnails/f64a2891e7a8513b5c600ace0255b8d8.png" alt="饿了么" />
           <div class="card-content">
-            <span class="card-title">4.饿了么红包组<br>合</span>
+            <span class="card-title">4.饿了么红包组合</span>
             <span class="card-desc">天天领红包</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
+            <span class="card-time">活动期至:2025-12-31</span>
 
-                        <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '69 HU7405   1:/《hZhY4kZwBOW₴三最高抢66元大额红包', '领取成功，请打开饿了么APP')">领取口令</span>                   
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kurl11.cn/7zjpEa'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,'69 HU7405   1:/《hZhY4kZwBOW₴三最高抢66元大额红包', '领取成功，请打开饿了么APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kurl11.cn/7zjpEa'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -940,13 +1004,17 @@
           <img src="https://picui.cn/thumbnails/f643287ce9ebea8a15b075f574a4cd62.png" alt="饿了么" />
           <div class="card-content">
             <span class="card-title">5.饿了么超市</span>
-            <span class="card-desc">有满减活动<br>可叠加</span>
-            <span class="card-time">活动期至:<br>2025-012-31</span>
-                   
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kurl01.cn/767abC'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-desc">有满减活动可叠加</span>
+            <span class="card-time">活动期至:2025-012-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">  
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kurl01.cn/767abC'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
       </div>
@@ -957,16 +1025,22 @@
         <div class="card touch-active">
           <img src="https://picui.cn/thumbnails/c77deada1b014012543914d8aaf6b0c7.png" alt="闪购" />
           <div class="card-content">
-            <span class="card-title">1.闪购超级品牌<br>日</span>
+            <span class="card-title">1.闪购超级品牌日</span>
             <span class="card-desc">单单有福利</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '79 HU7405   1:/c9x94k0wOFf₴欢闪购新用户可领首单免单', '领取成功，请打开淘宝APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://2kma.cn/767mFF'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,  '79 HU7405   1:/c9x94k0wOFf₴欢闪购新用户可领首单免单', '领取成功，请打开淘宝APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://5kma.cn/764T6i'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -975,14 +1049,20 @@
           <div class="card-content">
             <span class="card-title">2.闪购-爆品团</span>
             <span class="card-desc">免凑单，免运费</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '08 HU7405   1:/efBa4kbqWyK₴三免凑单 免配送', '领取成功，请打开淘宝APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kzurl11.cn/767Vr2'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event, '08 HU7405   1:/efBa4kbqWyK₴三免凑单 免配送', '领取成功，请打开淘宝APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kzurl11.cn/767Vr2'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -990,15 +1070,21 @@
           <img src="https://picui.cn/thumbnails/260e3a788eabfef53475fc40777c53c6.png" alt="闪购" />
           <div class="card-content">
             <span class="card-title">3.新用户专享</span>
-            <span class="card-desc">必得无门槛18元<br>免单卡</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '28 HU7405   2:/₴4k3K4kbcQw1₴四闪购新用户可领首单免单', '领取成功，请打开淘宝APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kzurl17.cn/767jgJ'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-desc">必得无门槛18元免单卡</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,  '28 HU7405   2:/₴4k3K4kbcQw1₴四闪购新用户可领首单免单', '领取成功，请打开淘宝APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kzurl17.cn/767jgJ'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -1007,14 +1093,20 @@
           <div class="card-content">
             <span class="card-title">4.闪购惊喜福利</span>
             <span class="card-desc">抽免单卡</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '08 HU7405   2:/₤jFVs4kbnLb2₤十1分钱喝奶茶 领大额红包', '领取成功，请打开淘宝APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kzurl15.cn/767Bm7'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,  '08 HU7405   2:/₤jFVs4kbnLb2₤十1分钱喝奶茶 领大额红包', '领取成功，请打开淘宝APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kzurl15.cn/767Bm7'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -1023,14 +1115,20 @@
           <div class="card-content">
             <span class="card-title">5.淘天版-全国</span>
             <span class="card-desc">叠加红包</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '97 HU7405   2:/《wXlW4kb3xqU₤十邀请好友，共享福利', '领取成功，请打开淘宝APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://activity01.yunzhanxinxi.com/link/100070068a4a0dc2410010002cMGtLx7'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,  '97 HU7405   2:/《wXlW4kb3xqU₤十邀请好友，共享福利', '领取成功，请打开淘宝APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://activity01.yunzhanxinxi.com/link/100070068a4a0dc2410010002cMGtLx7'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -1038,15 +1136,21 @@
           <img src="https://picui.cn/thumbnails/62d1bb5e228acfb9b29db37d52c78a80.png" alt="闪购" />
           <div class="card-content">
             <span class="card-title">6.闪购-爆品好价</span>
-            <span class="card-desc">爆品加倍补<br>好价天天抢</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '58 HU7405   2:/₴gLPi4kbxaLO£四超值爆品加倍补贴！', '领取成功，请打开淘宝APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://2kma.cn/767fFW'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-desc">爆品加倍补好价天天抢</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event, '58 HU7405   2:/₴gLPi4kbxaLO£四超值爆品加倍补贴！', '领取成功，请打开淘宝APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://2kma.cn/767fFW'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -1054,15 +1158,21 @@
           <img src="https://picui.cn/thumbnails/ed5e248c4bfe523c995bf3a84c6de077.png" alt="闪购" />
           <div class="card-content">
             <span class="card-title">7.闪购-零售品牌日</span>
-            <span class="card-desc">超市好价<br>即刻送达</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '79 HU7405   2:/₴qEzH4kY1bsP£欢超市好价 即刻送达', '领取成功，请打开淘宝APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kurl03.cn/767vee'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-desc">超市好价即刻送达</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event, '79 HU7405   2:/₴qEzH4kY1bsP£欢超市好价 即刻送达', '领取成功，请打开淘宝APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kurl03.cn/767vee'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -1070,15 +1180,21 @@
           <img src="https://picui.cn/thumbnails/0e8f3530e896d4d6cff91125cbcee5c1.png" alt="闪购" />
           <div class="card-content">
             <span class="card-title">8.闪购-单单返</span>
-            <span class="card-desc">单单有礼<br>单单返</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '28 HU7405   666:/《KTuU4kYS19F✔欢下单写优评，高额返现金', '领取成功，请打开淘宝APP')">领取口令</span>            
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kzurl12.cn/767vrT'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-desc">单单有礼单单返</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,  '28 HU7405   666:/《KTuU4kYS19F✔欢下单写优评，高额返现金', '领取成功，请打开淘宝APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kzurl12.cn/767vrT'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
       </div>
@@ -1088,19 +1204,22 @@
         <div class="card touch-active">
           <img src="https://picui.cn/thumbnails/901f6a65aff411e2c1c86b3d5508f137.png" alt="秒送" />
           <div class="card-content">
-            <span class="card-title">1.京东外卖百亿<br>补贴</span>
+            <span class="card-title">1.京东外卖百亿补贴</span>
             <span class="card-desc">满减劵 限时抢</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <!-- 卡片内上方按钮（领取口令）：点击时缩小98% -->
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '17:/￥NBCTzB6QuNZPV8OT￥ MF3390 ，⇶𝒥𝓲𝓲𝓲𝓷𝓰▢倲热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>            
-            
-            <!-- 卡片内下方按钮（点击领取）：点击时缩小98% -->
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kurl15.cn/767Qf9'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,'17:/￥NBCTzB6QuNZPV8OT￥ MF3390 ，⇶𝒥𝓲𝓲𝓲𝓷𝓰▢倲热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kurl15.cn/767Qf9'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -1108,18 +1227,21 @@
           <img src="https://picui.cn/thumbnails/07143169c51f9d12736a9a12c8990529.png" alt="秒送" />
           <div class="card-content">
             <span class="card-title">2.京东百亿补贴</span>
-            <span class="card-desc">早8晚8限时抢<br>最高20元</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <!-- 卡片内上方按钮（领取口令）：点击时缩小98% -->
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '18:/热门促销会场！⇛椋◄Dσσδng￥G07GfBeuYm59AbuJ￥ MF8335 ', '领取成功，请打开京东APP')">领取口令</span>            
-            
-            <!-- 卡片内下方按钮（点击领取）：点击时缩小98% -->
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kurl15.cn/767Yu2'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-desc">早8晚8限时抢最高20元</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+    <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event, '18:/热门促销会场！⇛椋◄Dσσδng￥G07GfBeuYm59AbuJ￥ MF8335 ', '领取成功，请打开京东APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kurl15.cn/767Yu2'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -1127,18 +1249,21 @@
           <img src="https://picui.cn/thumbnails/b50e0129b3e82dc72d9de1489ada5c1f.png" alt="秒送" />
           <div class="card-content">
             <span class="card-title">3.京东百亿补贴</span>
-            <span class="card-desc">往下滑有满减<br>对半减</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <!-- 卡片内上方按钮（领取口令）：点击时缩小98% -->
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '14:/！ZEU7W78qQ1K4Q6cO！ MF5681 ，↦椋◗D○σδng热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>            
-            
-            <!-- 卡片内下方按钮（点击领取）：点击时缩小98% -->
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kurl14.cn/767YLE'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-desc">往下滑有满减.对半减</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,  '14:/！ZEU7W78qQ1K4Q6cO！ MF5681 ，↦椋◗D○σδng热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kurl14.cn/767YLE'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -1146,18 +1271,21 @@
           <img src="https://picui.cn/thumbnails/1bd53694963660d96af7594f67a9aec8.png" alt="秒送" />
           <div class="card-content">
             <span class="card-title">4.外卖奶茶饮品</span>
-            <span class="card-desc">奶茶低至<br>3.9元起</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <!-- 卡片内上方按钮（领取口令）：点击时缩小98% -->
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '10:/热门促销会场！⇒🐋▬Dσδδng￥C9vHK1cr5zVkn9z5￥ ZH9112 ', '领取成功，请打开京东APP')">领取口令</span>            
-            
-            <!-- 卡片内下方按钮（点击领取）：点击时缩小98% -->
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://2kma.cn/767Yyn'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-desc">奶茶低至3.9元起</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,'10:/热门促销会场！⇒🐋▬Dσδδng￥C9vHK1cr5zVkn9z5￥ ZH9112 ', '领取成功，请打开京东APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://2kma.cn/767Yyn'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -1165,18 +1293,21 @@
           <img src="https://picui.cn/thumbnails/1bd53694963660d96af7594f67a9aec8.png" alt="秒送" />
           <div class="card-content">
             <span class="card-title">5.外卖库迪咖啡</span>
-            <span class="card-desc">满11减10<br>限时抢</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <!-- 卡片内上方按钮（领取口令）：点击时缩小98% -->
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '18:/！M2DX42Cq7EfrBfvZ！ MF8335 ，⇶Jι🆖◰東热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>            
-            
-            <!-- 卡片内下方按钮（点击领取）：点击时缩小98% -->
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kzurl15.cn/767YST'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-desc">满11减10限时抢</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event, '18:/！M2DX42Cq7EfrBfvZ！ MF8335 ，⇶Jι🆖◰東热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kzurl15.cn/767YST'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -1185,17 +1316,20 @@
           <div class="card-content">
             <span class="card-title">6.麦当劳（免运费）</span>
             <span class="card-desc">【仅北京 上海】</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <!-- 卡片内上方按钮（领取口令）：点击时缩小98% -->
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '15:/热门促销会场！↪猄▪D○ōσng￥R17wv7fyCgTqER6G￥ MF5681 ', '领取成功，请打开京东APP')">领取口令</span>            
-            
-            <!-- 卡片内下方按钮（点击领取）：点击时缩小98% -->
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kzurl20.cn/767Yqa'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event, '15:/热门促销会场！↪猄▪D○ōσng￥R17wv7fyCgTqER6G￥ MF5681 ', '领取成功，请打开京东APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kzurl20.cn/767Yqa'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -1203,18 +1337,21 @@
           <img src="https://picui.cn/thumbnails/b4721b7fd194d3fc831ad43c4684e7aa.png" />
           <div class="card-content">
             <span class="card-title">7.外卖宵夜专场</span>
-            <span class="card-desc">每日20-24点<br>最高立减10元</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <!-- 卡片内上方按钮（领取口令）：点击时缩小98% -->
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '17:/热门促销会场！→Jι🆖◄崠￥Z9RCJ78T4YL2H7nx￥ MF3390 ', '领取成功，请打开京东APP')">领取口令</span>            
-            
-            <!-- 卡片内下方按钮（点击领取）：点击时缩小98% -->
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kzurl16.cn/767YWN'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-desc">每日20-24点最高立减10元</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,'17:/热门促销会场！→Jι🆖◄崠￥Z9RCJ78T4YL2H7nx￥ MF3390 ', '领取成功，请打开京东APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kzurl16.cn/767YWN'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
 
@@ -1223,28 +1360,23 @@
           <div class="card-content">
             <span class="card-title">8.球迷专属劵</span>
             <span class="card-desc">领10元</span>
-            <span class="card-time">活动期至:<br>2025-12-31</span>
-            
-            <!-- 卡片内上方按钮（领取口令）：点击时缩小98% -->
-            <span class="card-button top-btn touch-active btn-touch" 
-                  onclick="copyHiddenContent(event, '10:/！ACs07AIUgs78fXn7！ MF5681 ，↪京◪Dσσδng热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>            
-            
-            <!-- 卡片内下方按钮（点击领取）：点击时缩小98% -->
-            <span class="card-button touch-active btn-touch" 
-                  onclick="window.open('https://kzurl11.cn/767rl8'); showToast('正在跳转到活动页面')">
-              点击领取
-            </span>
+            <span class="card-time">活动期至:2025-12-31</span>
+
+                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
+    <div class="card-buttons-row">
+      <!-- 按钮1（可删除）：领取口令 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="copyHiddenContent(event,  '10:/！ACs07AIUgs78fXn7！ MF5681 ，↪京◪Dσσδng热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>
+      
+      <!-- 按钮2（可删除）：点击领取 -->
+      <span class="card-button touch-active btn-touch" 
+            onclick="window.open('https://kzurl11.cn/767rl8'); showToast('正在跳转到活动页面')">
+        点击领取
+      </span>
+    </div>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
+        
       </div>
 
       <div class="tab-content" id="tab5">
@@ -1261,7 +1393,6 @@
       </div>
 
       <div class="more_hint">更多功能持续更新中，敬请期待...</div>
-      <button class="shareCon touch-active btn-touch" onclick="showToast('分享功能已触发')">分享</button>
     </div>
 
     <!-- 教程内容页面 -->
@@ -1627,7 +1758,7 @@
         }
       } catch (err) {
         // 复制失败时提示手动复制
-        showToast('请手动复制: ' + content.substring(0, 10) + '...');
+        showToast('点歪啦！: ' + content.substring(0, 10) + '...');
         textarea.focus();
         textarea.select();  // 选中内容，方便用户手动复制
       } finally {
@@ -1686,7 +1817,6 @@
     // 页面加载完成后初始化
     window.addEventListener('DOMContentLoaded', init);
   </script>
-
 <!-- Default Statcounter code for WAIMAILINGJUAN
 https://www.doubao.com/share/code/28a738b031e4ca62 -->
 <script type="text/javascript">
@@ -1701,6 +1831,5 @@ href="https://statcounter.com/" target="_blank"><img class="statcounter"
 src="https://c.statcounter.com/13161411/0/3146d64f/1/" alt="Web Analytics"
 referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 <!-- End of Statcounter Code -->
-  
 </body>
 </html>
