@@ -1,40 +1,14 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+<html lang=zh-CN>
 <head>
-  <meta charset="UTF-8">
-  <!-- 优化视口配置，确保在各种移动设备上正确缩放
-       width=device-width: 视口宽度等于设备宽度
-       initial-scale=1.0: 初始缩放比例为1
-       maximum-scale=1.0, minimum-scale=1.0: 最大和最小缩放比例为1
-       user-scalable=no: 禁止用户手动缩放 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-  <title>外卖活动劵免费领取中心</title>
-  <!-- 引入Tailwind CSS框架，用于快速构建UI -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 引入Font Awesome图标库，用于显示各种图标 -->
-  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  
-  <!-- 配置Tailwind自定义主题 -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#FF7D00',       // 主色调：橙色
-            meituan: '#F5CA20',       // 美团黄色
-            eleme: '#27AAE2',         // 饿了么蓝色
-            flashbuy: '#E16942',      // 闪购红色
-            express: '#be0e17',       // 快递红色
-            travel: '#e92d34',        // 出行红色
-          },
-        },
-      }
-    }
-  </script>
-  
-  <!-- 自定义Tailwind工具类 -->
-  <style type="text/tailwindcss">
-    @layer utilities {
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+<title>外卖活动劵免费领取中心</title>
+<script src=https://cdn.tailwindcss.com></script>
+<link href=https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css rel=stylesheet>
+<script>tailwind.config={theme:{extend:{colors:{primary:"#FF7D00",meituan:"#F5CA20",eleme:"#27AAE2",flashbuy:"#E16942",express:"#be0e17",travel:"#e92d34"}}}}</script>
+<style type=text/tailwindcss>
+@layer utilities {
       .content-auto {
         content-visibility: auto;  /* 自动控制内容可见性，优化性能 */
       }
@@ -59,1764 +33,576 @@
         transform: scale(0.98);  /* 按钮被点击时缩小至98% */
       }
     }
-  </style>
-  
-  <!-- 全局样式定义 -->
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;  /* 盒模型设置为border-box，便于布局计算 */
-      /* 设置默认字体，优先使用系统字体，提升性能和用户体验 */
-      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
-    
-    html {
-      /* 优化移动端字体计算方式，基于屏幕宽度动态调整 */
-      font-size: calc(100vw / 375 * 7);
-    }
-    
-    body {
-      background-color: #f5f5f5;  /* 浅灰色背景 */
-      color: #333;                /* 深灰色文字 */
-      font-size: 1.4rem;          /* 基础字体大小 */
-      overflow-x: hidden;         /* 隐藏水平滚动条 */
-      padding-bottom: 7rem;       /* 底部留出导航栏高度的空间 */
-    }
-    
-    /* 头部区域样式 */
-    .header {
-      height: 6.5rem;             /* 头部高度 */
-      line-height: 6.5rem;        /* 行高等于高度，实现文字垂直居中 */
-      text-align: center;         /* 文字水平居中 */
-      font-size: 1.8rem;          /* 标题字体大小 */
-      background-color: #fff;     /* 白色背景 */
-      border-bottom: 1px solid #eee;  /* 底部边框 */
-      position: relative;         /* 相对定位，用于子元素绝对定位 */
-    }
-    
-    .back-btn {
-      position: absolute;         /* 绝对定位 */
-      left: 1.2rem;               /* 距离左侧1.2rem */
-      top: 50%;                   /* 垂直居中定位 */
-      transform: translateY(-50%); /* 向上移动自身高度的一半，实现垂直居中 */
-      width: 3rem;                /* 宽度 */
-      height: 3rem;               /* 高度 */
-      /* 背景为一个左箭头SVG图标 */
-      background: url('data:image/svg+xml;utf8,<svg fill="%23333" viewBox="0 0 1024 1024" width="16" height="16"><path d="M328.448 512l339.712 339.712c10.24 10.24 10.24 26.624 0 36.864s-26.624 10.24-36.864 0L291.136 548.864c-10.24-10.24-10.24-26.624 0-36.864l339.136-339.712c10.24-10.24 26.624-10.24 36.864 0s10.24 26.624 0 36.864L328.448 512z"/></svg>') no-repeat center;
-    }
-    
-    /* 轮播图优化 - 适配手机屏幕比例 */
-    .banner-swiper {
-      width: 96%;                 /* 宽度占屏幕96% */
-      height: 23rem;              /* 高度18rem */
-      margin: 0 2%;               /* 左右各2%的外边距 */
-      margin-top: 1rem;           /* 顶部1rem的外边距 */
-      margin: 1.7rem auto !important; /* 上下0.6rem外边距，水平居中 */
-      border-radius: 1rem;        /* 圆角1rem */
-      overflow: hidden;           /* 超出部分隐藏 */
-      position: relative;         /* 相对定位 */
-     
-    }
-    
-    .banner-slide {
-      width: 100%;                /* 宽度100% */
-      height: 100%;               /* 高度100% */
-      display: none;              /* 默认隐藏 */
-    }
-    
-    .banner-slide.active {
-      display: block;             /* 激活状态显示 */
-    }
-    
-    .banner-swiper img {
-      width: 100% !important;     /* 图片宽度100% */
-      height: 100% !important;    /* 图片高度100% */
-      object-fit: fill !important; /* 强制拉伸图片填充容器，允许变形 */
-    }
-    
-    /* 快捷按钮区域 - 优化手机触摸区域 */
-    .button-container {
-      display: flex;              /* 弹性布局 */
-      padding: 1rem;              /* 内边距1rem */
-      gap: 1rem;                  /* 子元素间距1rem */
-      box-sizing: border-box;     /* 盒模型为border-box */
-      background-color: #f5f5f5;  /* 背景色与页面一致 */
-    }
-    
-    .btn {
-      border: none;               /* 无边框 */
-      padding: 0;                 /* 无内边距 */
-      margin: 0;                  /* 无外边距 */
-      background: transparent;    /* 透明背景 */
-      display: flex;              /* 弹性布局 */
-      align-items: center;        /* 垂直居中 */
-      justify-content: center;    /* 水平居中 */
-      overflow: hidden;           /* 超出部分隐藏 */
-      border-radius: 1rem;        /* 圆角1rem */
-      position: relative;         /* 相对定位 */
-      /* 增大点击区域，符合移动端设计规范 */
-      min-height: 48px;
-      min-width: 48px;
-    }
-    
-    .big-btn {
-      width: 50%;                 /* 大按钮宽度50% */
-      height: 14.2rem;              /* 大按钮高度12rem */
-    }
-    
-    .right-buttons {
-      display: flex;              /* 弹性布局 */
-      flex-direction: column;     /* 垂直排列 */
-      gap: 1rem;                  /* 子元素间距1rem */
-      flex: 1;                    /* 占据剩余空间 */
-    }
-    
-    .small-btn {
-      width: 100%;                /* 小按钮宽度100% */
-      height: 5.5rem;             /* 小按钮高度5.5rem */
-    }
-    
-    .btn-img {
-      position: absolute;         /* 绝对定位 */
-      top: 0;                     /* 顶部对齐 */
-      left: 0;                    /* 左侧对齐 */
-      width: 100% !important;     /* 宽度100% */
-      height: 100% !important;    /* 高度100% */
-      object-fit: cover;          /* 图片裁剪填充 */
-      flex-shrink: 0;             /* 不缩小 */
-    }
-    
-    .btn:active {
-      transform: scale(0.90);     /* 点击时轻微缩小 */
-      opacity: 0.7;               /* 点击时变浅色（透明度降低） */
-    }
-    
-/* 标签栏容器 - 优化手机滚动体验 */
-.button-bar-container {
-  position: relative;         /* 相对定位 */
-  margin-top: 1rem;           /* 顶部1rem的外边距 */
-  margin-bottom: 2rem;        /* 底部2rem的外边距 */
-  margin-left: 2%;            /* 左侧2%的边距 */
-  margin-right: 2%;           /* 右侧2%的边距 */
-  border-radius: 1rem;        /* 圆角1rem */
-  overflow: hidden;           /* 关键：让内部元素不超出圆角范围 */
-}
-
-/* 调整按钮栏样式配合容器圆角 */
-.button-bar {
-  /* 移除原有的left:0和width:100%，改用继承容器宽度 */
-  left: 0;
-  right: 0;
-  width: auto;                /* 自动适应容器宽度 */
-  border-radius: inherit;     /* 继承容器的圆角 */
-}
-
-.button-bar-placeholder {
-  width: 100%;                /* 宽度100%，用于占位 */
-}
-
-.button-bar {
-  position: absolute;         /* 绝对定位 */
-  top: 0;                     /* 顶部对齐 */
-  left: 0;                    /* 左侧对齐 */
-  width: 100%;                /* 宽度100% */
-  background-color: #ffffff;  /* 整体容器白色背景框 */
-  padding: 0.8rem 0.5rem 0.5rem; /* 内边距 */
-  box-sizing: border-box;     /* 盒模型为border-box */
-  white-space: nowrap;        /* 不换行 */
-  transition: all 0.2s ease;  /* 过渡动画 */
-  display: flex;              /* 弹性布局 */
-  justify-content: space-between; /* 均匀分布 */
-}
-
-.button-bar.fixed {
-  position: fixed;            /* 固定定位 */
-  z-index: 999;               /* 层级999，确保在上方 */
-  box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1); /* 阴影效果 */
-  top: 0;                     /* 顶部对齐 */
-}
-
-.button-item {
-  flex: 1;                    /* 平均分配空间 */
-  display: inline-block;      /*  inline-block布局 */
-  padding: 1rem 1;          /* 上下内边距0.6rem */
-  font-size: 2rem;          /* 字体大小1.6rem */
-  color: #333;                /* 文字颜色 */
-  margin: 0 0.5rem;           /* 左右外边距0.3rem */
-  border-radius: 1rem;        /* 圆角3rem */
-  background-color: #f5f5f4;  /* 每个标签灰色背景框 */
-  transition: all 0.3s;       /* 过渡动画 */
-  border: none;               /* 无边框 */
-  cursor: pointer;            /* 鼠标指针为手型 */
-  text-align: center;         /* 文字居中 */
-  max-width: 20%;             /* 最大宽度20% */
-  /* 增大点击区域 */
-  min-height: 39px;
-  display: flex;              /* 弹性布局 */
-  align-items: center;        /* 垂直居中 */
-  justify-content: center;    /* 水平居中 */
-}
-
-/* 以下为原有样式，保持不变 */
-.button-item.active {
-  font-weight: bold;          /* 粗体 */
-  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.2); /* 阴影效果 */
-}
-
-/* 各平台标签按钮激活状态 */
-.button-item[data-tab="tab1"].active,
-.button-item[data-tab="tab1"]:active {
-  background-color: #F5CA20; color: #ffffff; transform: scale(0.96);
-}
-.button-item[data-tab="tab2"].active,
-.button-item[data-tab="tab2"]:active {
-  background-color: #27AAE2; color: #ffffff; transform: scale(0.96);
-}
-.button-item[data-tab="tab3"].active,
-.button-item[data-tab="tab3"]:active {
-  background-color: #E16942; color: #ffffff; transform: scale(0.96);
-}
-.button-item[data-tab="tab4"].active,
-.button-item[data-tab="tab4"]:active {
-  background-color: #be0e17; color: #ffffff; transform: scale(0.96);
-}
-.button-item[data-tab="tab5"].active,
-.button-item[data-tab="tab5"]:active {
-  background-color: #e92d34; color: #ffffff; transform: scale(0.96);
-}
-    
-    /* 卡片样式 - 优化手机显示 */
-    .card {
-      width: 96% !important;      /* 宽度96% */
-      height: 21rem !important; /* 高度15rem */
-      min-height: 15rem;          /* 最小高度15rem */
-      margin-top: 0.7rem !important; /* 上1.2rem */
-      margin-bottom: 1.7rem !important; /* 下0.5rem */
-      margin: 0 1rem; /* 左右0.3rem间距 */
-      background-color: #fff;     /* 白色背景 */
-      border-radius: 1rem !important; /* 圆角1rem */
-      border: 1px solid #eee !important; /* 边框 */
-      box-shadow: 0 0.1rem 0.5rem rgba(0,0,0,0.05) !important; /* 阴影 */
-      display: flex;              /* 弹性布局 */
-      overflow: hidden;           /* 超出部分隐藏 */
-      cursor: pointer;            /* 鼠标指针为手型 */
-    }
-    
-.card img {
-  width: 40% !important;      /* 图片宽度占卡片40%（注释与数值一致，避免混淆） */
-      height: 10rem !important; /* 高度15rem */
-  min-height: 12rem;          /* 最小高度12rem，防止图片过矮导致变形 */
-   margin-top: 1.5rem !important; /* 上1.2rem */
-        margin: 0 1rem; /* 左右0.3rem间距 */
-  border-radius: 0.8rem !important; /* 图片圆角0.8rem，与卡片风格统一 */
-  object-fit: fill !important; /* 强制铺满容器（按需求保留，若想保持比例可改为cover） */
-  display: block;             /* 清除图片默认inline特性的额外间距 */
-
-}
-    
-    .card-content {
-      flex: 1;                    /* 占据剩余空间 */
-      padding: 1.2rem 0.5rem;     /* 内边距 */
-      display: flex;              /* 弹性布局 */
-      flex-direction: column;     /* 垂直排列 */
-      position: relative;         /* 相对定位 */
-    }
-    
-.card-title {
-  display: block !important;  /* 块级显示，独占一行，方便控制上下间距 */
-  color: #030303 !important;  /* 文字颜色：深黑色，保证标题醒目 */
-  font-size: 2.6rem !important; /* 字体大小：2.6rem（修正原注释与数值不一致问题，确保手机端清晰） */
-  font-weight: bold !important; /* 粗体样式，突出标题层级，与正文区分 */
-  margin-top: 1rem !important; /* 标题上方间距：0.8rem，与卡片内容区顶部保持呼吸感 */
-  margin-bottom: 0.5rem !important; /* 标题下方间距：0.5rem，与下方的card-desc拉开距离，避免拥挤 */
-  margin-left: 0.8rem !important; /* 标题左侧间距：0.8rem，与卡片图片/边缘对齐，保持整体排版统一 */
-  margin-right: 0.8rem !important; /* 标题右侧间距：0.8rem，避免文字贴紧卡片边缘，提升美观度 */
-  text-align: left !important; /* 文字左对齐，符合中文阅读习惯 */
-  line-height: 1.2 !important; /* 行高：1.2，控制标题文字垂直密度，避免过高或过矮 */
-  white-space: nowrap;        /* 文字不换行，确保标题在一行内显示 */
-  overflow: hidden;           /* 超出卡片宽度的文字隐藏，防止破坏布局 */
-  text-overflow: ellipsis;    /* 超出部分显示省略号（...），提示用户有未显示内容 */
-}
-    
-    .card-desc {
-      display: block !important;  /* 块级显示 */
-      color: #5E5D5D !important;  /* 文字颜色 */
-      font-size: 1.9rem !important; /* 字体大小1.5rem */
-      margin: 0.5rem 0.8rem !important; /* 外边距 */
-      text-align: left !important; /* 左对齐 */
-      line-height: 1.4 !important; /* 行高1.4 */
-      display: -webkit-box;       /* WebKit盒模型 */
-      -webkit-line-clamp: 2;      /* 最多显示2行 */
-      -webkit-box-orient: vertical; /* 垂直排列 */
-      overflow: hidden;           /* 超出部分隐藏 */
-    }
-    
-/* 按钮容器 - 统一控制位置 */
-.card-buttons-row {
-  position: absolute;         /* 固定在卡片底部 */
-  bottom: 1.2rem;             /* 距离底部1.2rem（与原设计一致） */
-  left: 1.2rem;               /* 左右边距与原按钮对齐 */
-  right: 1.2rem;
-  display: flex;              /* 水平布局 */
-  gap: 0.8rem;                /* 按钮间距（两个按钮时生效） */
-}
-
-/* 按钮容器样式：用于承载按钮，控制按钮的整体布局 */
-.card-buttons-row {
-  position: absolute;         /* 绝对定位，脱离文档流，方便精准控制在卡片底部 */
-  bottom: 1.5rem;             /* 距离卡片底部 1.2rem，固定在底部区域 */
-  left: 1.2rem;               /* 距离卡片左侧 1.2rem，与卡片内容保持边距一致 */
-  right: 1.2rem;              /* 距离卡片右侧 1.2rem，让按钮容器左右对齐卡片内容 */
-  display: flex;              /* 弹性布局，让按钮在水平方向排列 */
-  gap: 0.8rem;                /* 按钮之间的间距，营造呼吸感，避免拥挤 */
-}
-
-/* 按钮基础样式：统一控制按钮的外观和交互逻辑 */
-.card-button {
-  height: 4.9rem !important;  /* 固定按钮高度，确保不同设备/场景下按钮高度一致 */
-  line-height: 4.9rem !important; /* 让按钮文字垂直居中，与高度配合使用 */
-  font-size: 1.7rem !important; /* 按钮文字大小，保证在手机端清晰可读 */
-  font-weight: bold !important; /* 文字加粗，突出按钮可点击的特性 */
-  color: #f8f7f6 !important;  /* 按钮文字颜色，白色文字搭配彩色背景更醒目 */
-  text-align: center;         /* 文字水平居中，让按钮内容排版整齐 */
-  border-radius: 0.8rem !important; /* 按钮圆角，让按钮外观更柔和 */
-  cursor: pointer;            /* 鼠标悬停时显示手型，提示用户可点击 */
-  -webkit-tap-highlight-color: transparent !important; /* 移除手机端点击时的高亮效果，提升交互体验 */
-  transition: transform 0.2s ease; /* 点击时的缩放动画过渡效果，让交互更丝滑 */
-  flex: 1; /* 核心！让按钮自动分配容器空间：多个按钮时均分宽度，只剩1个时占满容器 */
-}
-
-/* 按钮背景色区分：通过 :nth-child 给不同位置的按钮设置不同背景色，方便视觉区分功能 */
-.card-buttons-row :nth-child(1) {
-  background-color: #FF9500 !important; /* 第一个按钮设为橙色，可根据需求调整 */
-}
-.card-buttons-row :nth-child(2) {
-  background-color: #FFC837 !important; /* 第二个按钮设为黄色，与第一个按钮区分 */
-}
-
-/* 按钮点击动画：点击时缩小，模拟物理按钮按下的反馈 */
-.card-button:active {
-  transform: scale(0.9) !important; /* 点击时缩小到 90%，松开后恢复，增强交互感 */
-}
-
-/* 卡片内容区：预留按钮空间，避免文字被遮挡 */
-.card-content {
-  position: relative;         /* 作为按钮绝对定位的父容器 */
-  padding-bottom: 6rem;       /* 底部预留按钮高度+间距，防止文字被挡 */
-}
-
-.card-time {
-  display: block !important; /* 块级元素 */
-  color: #CFCBCB !important; /* 时间颜色 */
-  font-size: 1.7rem !important; /* 1.6rem字体 */
-  margin-top: 3rem !important; /* 添加上方间距（可调整数值） */
-  margin-bottom: 1rem !important; /* 添加下方间距（可调整数值） */
-  margin-left: 0.8rem !important; /* 左0.8rem */
-  text-align: left !important; /* 左对齐 */
-  line-height: 1 !important; /* 行高1.2 */
-}
-
-    
-    /* 通知容器 */
-    .notice-container {
-      background: #eeeeec;        /* 背景色 */
-      border-radius: 1rem;        /* 圆角1rem */
-      margin: 1.5rem;             /* 外边距1.5rem */
-      padding: 1.2rem;            /* 内边距1.2rem */
-      box-shadow: 0 0.1rem 0.5rem rgba(0,0,0,0.05); /* 阴影 */
-    }
-    
-    .notice-title {
-      font-size: 1.8rem;          /* 字体大小1.8rem */
-      font-weight: bold;          /* 粗体 */
-      color: #333;                /* 文字颜色 */
-      margin-bottom: 0.8rem;      /* 底部外边距0.8rem */
-    }
-    
-    .notice-list {
-      max-height: 20rem;          /* 最大高度20rem */
-      overflow-y: auto;           /* 垂直滚动 */
-    }
-    
-    .notice-item {
-      font-size: 1.5rem;          /* 字体大小1.5rem */
-      color: rgb(43, 43, 43);     /* 文字颜色 */
-      line-height: 3rem;          /* 行高3rem */
-      border-bottom: 1px solid #aaaaaa; /* 底部边框 */
-    }
-    
-    /* 弹窗组件 - 优化手机显示 */
-    .popup-mask {
-      position: fixed;            /* 固定定位 */
-      top: 0;                     /* 顶部对齐 */
-      left: 0;                    /* 左侧对齐 */
-      width: 100%;                /* 宽度100% */
-      height: 100%;               /* 高度100% */
-      background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
-      z-index: 998;               /* 层级998 */
-      display: none;              /* 默认隐藏 */
-      justify-content: center;    /* 水平居中 */
-      align-items: center;        /* 垂直居中 */
-    }
-    
-    .popup {
-      position: fixed;            /* 固定定位 */
-      top: 50%;                   /* 垂直居中定位 */
-      left: 50%;                  /* 水平居中定位 */
-      transform: translate(-50%, -50%); /* 居中对齐 */
-      width: 90% !important;      /* 宽度90% */
-      max-width: 500px;           /* 最大宽度500px */
-      background-color: #fff;     /* 白色背景 */
-      border-radius: 1rem;        /* 圆角1rem */
-      box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.15); /* 阴影 */
-      z-index: 999;               /* 层级999 */
-      padding: 2rem;              /* 内边距2rem */
-      box-sizing: border-box;     /* 盒模型为border-box */
-      max-height: 90vh;           /* 最大高度90%视口高度 */
-      overflow-y: auto;           /* 垂直滚动 */
-    }
-    
-    .popup-close {
-      position: absolute;         /* 绝对定位 */
-      top: 1.5rem;                /* 距离顶部1.5rem */
-      right: 1.5rem;              /* 距离右侧1.5rem */
-      width: 3rem;                /* 宽度3rem */
-      height: 3rem;               /* 高度3rem */
-      line-height: 2.8rem;        /* 行高2.8rem */
-      text-align: center;         /* 水平居中 */
-      font-size: 2rem;            /* 字体大小2rem */
-      color: #999;                /* 文字颜色 */
-      border-radius: 50%;         /* 圆形 */
-      background-color: #f5f5f5;  /* 背景色 */
-      cursor: pointer;            /* 鼠标指针为手型 */
-    }
-    
-    .popup-close:active {
-      background-color: #e0e0e0;  /* 点击时背景色变化 */
-    }
-    
-    .popup-title {
-      font-size: 1.8rem;          /* 字体大小1.8rem */
-      font-weight: bold;          /* 粗体 */
-      color: #333;                /* 文字颜色 */
-      text-align: center;         /* 水平居中 */
-      margin-bottom: 1.5rem;      /* 底部外边距1.5rem */
-      padding-top: 0.5rem;        /* 顶部内边距0.5rem */
-    }
-    
-    .link-container {
-      width: 100%;                /* 宽度100% */
-      background-color: #FFF9E6;  /* 背景色 */
-      border-radius: 0.8rem;      /* 圆角0.8rem */
-      padding: 1.5rem;            /* 内边距1.5rem */
-      box-sizing: border-box;     /* 盒模型为border-box */
-      margin-bottom: 1.5rem;      /* 底部外边距1.5rem */
-      border: 1px solid #FFE8A3;  /* 边框 */
-    }
-    
-    .link-text {
-      font-size: 1.4rem;          /* 字体大小1.4rem */
-      color: #333;                /* 文字颜色 */
-      word-break: break-all;      /* 允许在单词内换行 */
-      line-height: 1.5;           /* 行高1.5 */
-    }
-    
-    .popup-desc-container {
-      width: 100%;                /* 宽度100% */
-      margin-bottom: 1.5rem;      /* 底部外边距1.5rem */
-    }
-    
-    .popup-desc {
-      font-size: 1.3rem;          /* 字体大小1.3rem */
-      color: #666;                /* 文字颜色 */
-      text-align: left;           /* 左对齐 */
-      line-height: 1.4;           /* 行高1.4 */
-      margin-bottom: 0.5rem;      /* 底部外边距0.5rem */
-    }
-    
-    .copy-btn {
-      width: 100%;                /* 宽度100% */
-      height: 5rem;               /* 高度5rem */
-      line-height: 5rem;          /* 行高等于高度，垂直居中 */
-      text-align: center;         /* 水平居中 */
-      background-color: #FF7D00;  /* 背景色 */
-      color: #fff;                /* 文字颜色 */
-      font-size: 1.6rem;          /* 字体大小1.6rem */
-      font-weight: bold;          /* 粗体 */
-      border-radius: 0.8rem;      /* 圆角0.8rem */
-      box-shadow: 0 0.2rem 0 #E06A00; /* 阴影 */
-      margin-top: 0.5rem;         /* 顶部外边距0.5rem */
-      border: none;               /* 无边框 */
-      cursor: pointer;            /* 鼠标指针为手型 */
-    }
-    
-    .copy-btn:active {
-      background-color: #E06A00;  /* 点击时背景色变化 */
-      box-shadow: 0 0.1rem 0 #C05A00; /* 点击时阴影变化 */
-      transform: translateY(0.1rem); /* 点击时轻微下移 */
-    }
-    
-    
-    .more_hint {
-      align-items: center;        /* 垂直居中 */
-      color: rgb(94, 92, 92);     /* 文字颜色 */
-      display: flex;              /* 弹性布局 */
-      font-size: 1.4rem;          /* 字体大小1.4rem */
-      justify-content: center;    /* 水平居中 */
-      margin-top: 2rem;           /* 顶部外边距2rem */
-      padding: 0.5rem;            /* 内边距0.5rem */
-    }
-    
-    /* 底部导航栏 */
-    .bottom-nav {
-      position: fixed;            /* 固定定位 */
-      bottom: 0;                  /* 底部对齐 */
-      left: 0;                    /* 左侧对齐 */
-      width: 100%;                /* 宽度100% */
-      height: 7rem;               /* 高度7rem */
-      display: flex;              /* 弹性布局 */
-      background-color: #fff;     /* 白色背景 */
-      border-top: 1px solid #eee; /* 顶部边框 */
-      z-index: 9999;              /* 层级9999，确保在最上方 */
-    }
-    
-    .nav-item {
-      flex: 1;                    /* 平均分配空间 */
-      display: flex;              /* 弹性布局 */
-      justify-content: center;    /* 水平居中 */
-      align-items: center;        /* 垂直居中 */
-      font-size: 2rem;            /* 字体大小2rem */
-      color: #666;                /* 文字颜色 */
-      position: relative;         /* 相对定位 */
-      cursor: pointer;            /* 鼠标指针为手型 */
-      min-height: 48px;           /* 确保足够的点击区域 */
-    }
-    
-    .nav-item.active {
-      color: #FF7D00;             /* 激活状态文字颜色 */
-    }
-    
-    .nav-item.active::after {
-      content: '';                /* 伪元素内容为空 */
-      position: absolute;         /* 绝对定位 */
-      bottom: 0;                  /* 底部对齐 */
-      left: 50%;                  /* 水平居中定位 */
-      transform: translateX(-50%); /* 居中对齐 */
-      width: 3rem;                /* 宽度3rem */
-      height: 0.4rem;             /* 高度0.4rem */
-      background-color: #FF7D00;  /* 背景色 */
-      border-radius: 0.2rem;      /* 圆角0.2rem */
-    }
-    
-    .content-container {
-      padding-bottom: 1rem;       /* 底部内边距1rem */
-    }
-    
-    .tutorial-content {
-      padding: 1rem 0.5rem;       /* 内边距 */
-      background-color: #f5f5f5;  /* 背景色 */
-      min-height: calc(100vh - 7rem); /* 最小高度为视口高度减去导航栏高度 */
-      box-sizing: border-box;     /* 盒模型为border-box */
-    }
-    
-    .tutorial-box {
-      background-color: #ffd622;  /* 背景色 */
-      border-radius: 1rem;        /* 圆角1rem */
-      padding: 1.5rem;            /* 内边距1.5rem */
-      width: calc(100% - 1rem);   /* 宽度为100%减去1rem */
-      margin: 0.6rem 0.5rem;      /* 外边距 */
-      box-sizing: border-box;     /* 盒模型为border-box */
-    }
-    
-    .notice-box {
-      border: 2px solid #f7ca20;  /* 边框 */
-      border-radius: 1rem;        /* 圆角1rem */
-      padding: 1rem 1.5rem;       /* 内边距 */
-      width: calc(100% - 1rem);   /* 宽度为100%减去1rem */
-      margin-top: 1rem;           /* 顶部外边距1rem */
-      margin-bottom: 2rem;        /* 底部外边距2rem */
-      margin-left: 0.5rem;        /* 左侧外边距0.5rem */
-      margin-right: 0.5rem;       /* 右侧外边距0.5rem */
-      background-color: #fdfdfd;  /* 背景色 */
-      box-sizing: border-box;     /* 盒模型为border-box */
-    }
-    
-    .tutorial-title {
-      font-size: 2rem;            /* 字体大小2rem */
-      font-weight: bold;          /* 粗体 */
-      color: rgb(7, 7, 7);        /* 文字颜色 */
-      display: block;             /* 块级显示 */
-      margin-bottom: 1.5rem;      /* 底部外边距1.5rem */
-      padding-left: 0.5rem;       /* 左侧内边距0.5rem */
-      text-align: left;           /* 左对齐 */
-    }
-    
-    .tutorial-btn {
-      width: 100%;                /* 宽度100% */
-      margin-bottom: 1.5rem;      /* 底部外边距1.5rem */
-      border-radius: 0.8rem;      /* 圆角0.8rem */
-      overflow: hidden;           /* 超出部分隐藏 */
-      box-shadow: 0 0.1rem 0.3rem rgba(0,0,0,0.1); /* 阴影 */
-      cursor: pointer;            /* 鼠标指针为手型 */
-      transition: opacity 0.2s ease; /* 添加过渡效果 */
-    }
-    
-    /* 教程页面按钮点击变浅色效果 */
-    .tutorial-btn:active {
-      opacity: 0.7;               /* 点击时变浅色（透明度降低） */
-      transform: scale(0.95);     /* 点击时轻微缩小 */
-    }
-    
-    .tutorial-btn:last-child {
-      margin-bottom: 0.5rem;      /* 最后一个按钮底部外边距0.5rem */
-    }
-    
-    .tutorial-img {
-      width: 100%;                /* 宽度100% */
-      height: 10rem;              /* 高度10rem */
-      object-fit: cover;          /* 图片裁剪填充 */
-      display: block;             /* 块级显示 */
-    }
-    
-    /* 标签内容与页面内容显示控制 */
-    .tab-content, .page-content {
-      display: none;              /* 默认隐藏 */
-    }
-    
-    .tab-content.active, .page-content.active {
-      display: block;             /* 激活状态显示 */
-    }
-    
-    /* 提示框样式 */
-    .toast {
-      position: fixed;            /* 固定定位 */
-      top: 40%;                   /* 垂直居中 */
-      left: 50%;                  /* 水平居中 */
-      transform: translate(-50%, -50%); /* 平移居中 */
-      background-color: rgba(0, 0, 0, 0.7); /* 半透明黑 */
-      color: #fff;                /* 白色文字 */
-      padding: 0.8rem 1.5rem;     /* 内边距 */
-      border-radius: 0.5rem;      /* 0.5rem圆角 */
-      font-size: 2rem;            /* 1.4rem字体 */
-      z-index: 1000;              /* 层级1000 */
-      opacity: 0;                 /* 默认透明 */
-      transition: opacity 0.3s;   /* 透明度过渡 */
-    }
-    
-    .toast.show {
-      opacity: 1;                 /* 显示时不透明 */
-    }
-    
-    /* 轮播图点击变浅色效果 */
-    .banner-slide:active {
-      opacity: 0.7;               /* 点击时变浅色（透明度降低） */
-    }
-  </style>
+</style>
+<style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif}html{font-size:calc(100vw / 375 * 7)}body{background-color:#f5f5f5;color:#333;font-size:1.4rem;overflow-x:hidden;padding-bottom:7rem}.header{height:6.5rem;line-height:6.5rem;text-align:center;font-size:1.8rem;background-color:#fff;border-bottom:1px solid #eee;position:relative}.back-btn{position:absolute;left:1.2rem;top:50%;transform:translateY(-50%);width:3rem;height:3rem;background:url('data:image/svg+xml;utf8,<svg fill="%23333" viewBox="0 0 1024 1024" width="16" height="16"><path d="M328.448 512l339.712 339.712c10.24 10.24 10.24 26.624 0 36.864s-26.624 10.24-36.864 0L291.136 548.864c-10.24-10.24-10.24-26.624 0-36.864l339.136-339.712c10.24-10.24 26.624-10.24 36.864 0s10.24 26.624 0 36.864L328.448 512z"/></svg>') no-repeat center}.banner-swiper{width:96%;height:23rem;margin:0 2%;margin-top:1rem;margin:1.7rem auto!important;border-radius:1rem;overflow:hidden;position:relative}.banner-slide{width:100%;height:100%;display:none}.banner-slide.active{display:block}.banner-swiper img{width:100%!important;height:100%!important;object-fit:fill!important}.button-container{display:flex;margin:3rem 3rem;gap:1.7rem;box-sizing:border-box;justify-content:center;padding:0 .5rem}.btn{display:flex;flex-direction:column;align-items:center;justify-content:center;width:11.5rem!important;min-width:11.5rem!important;max-width:none!important;height:14.4rem;border:none;border-radius:10px;background-color:#fdfdfd;box-shadow:0 2px 6px rgba(0,0,0,.08);cursor:pointer;text-decoration:none;color:#333;transition:transform .15s cubic-bezier(.34, 1.56, .64, 1)!important;-webkit-transition:transform .15s cubic-bezier(.34, 1.56, .64, 1)!important}.btn:hover{transform:none!important;box-shadow:0 2px 6px rgba(0,0,0,.08)!important}.btn:active{transform:scale(.9)!important;-webkit-transform:scale(.9)!important}.btn-icon{display:inline-block;width:7rem;height:7rem;margin-bottom:1rem;border-radius:50%;overflow:hidden}.btn-icon img{width:100%;height:100%;object-fit:cover}.meituan-icon{background-color:#ffe699}.eleme-icon{background-color:#c9f3ff}.shangou-icon{background-color:#ffd9d9}.miaosong-icon{background-color:#f9d1d1}.btn-text{font-size:2rem;text-align:center}@keyframes meituanBounce{0%{transform:translateY(0)}20%{transform:translateY(-8px)}40%{transform:translateY(0)}60%{transform:translateY(-6px)}80%{transform:translateY(0)}100%{transform:translateY(0)}}.meituan-btn-bounce{animation:meituanBounce 2s ease forwards;animation-delay:.3s}.button-bar-container{position:relative;margin-top:1rem;margin-bottom:2rem;margin-left:2%;margin-right:2%;border-radius:1rem;overflow:hidden}.button-bar{left:0;right:0;width:auto;border-radius:inherit}.button-bar-placeholder{width:100%}.button-bar{position:absolute;top:0;left:0;width:100%;background-color:#fff;padding:1rem 1rem 1rem;height:7.5rem;box-sizing:border-box;white-space:nowrap;transition:all .2s ease;display:flex;justify-content:space-between}.button-bar.fixed{position:fixed;z-index:999;box-shadow:0 .1rem .5rem rgba(0,0,0,.1);top:0}.button-item{flex:1;display:inline-block;padding:1rem 1;font-size:2rem;font-weight:700;color:#333;margin:0 .5rem;border-radius:1rem;background-color:#f5f5f4;transition:all .3s;border:none;cursor:pointer;text-align:center;max-width:20%;min-height:39px;display:flex;align-items:center;justify-content:center}.button-item.active{font-weight:700;box-shadow:0 .2rem .6rem rgba(0,0,0,.2)}.button-item[data-tab=tab1].active,.button-item[data-tab=tab1]:active{background-color:#f5ca20;color:#fff;transform:scale(.96)}.button-item[data-tab=tab2].active,.button-item[data-tab=tab2]:active{background-color:#27aae2;color:#fff;transform:scale(.96)}.button-item[data-tab=tab3].active,.button-item[data-tab=tab3]:active{background-color:#e16942;color:#fff;transform:scale(.96)}.button-item[data-tab=tab4].active,.button-item[data-tab=tab4]:active{background-color:#be0e17;color:#fff;transform:scale(.96)}.button-item[data-tab=tab5].active,.button-item[data-tab=tab5]:active{background-color:#e92d34;color:#fff;transform:scale(.96)}.card{width:96%!important;height:21rem!important;min-height:15rem;margin-top:.7rem!important;margin-bottom:1.7rem!important;margin:0 1rem;background-color:#fff;border-radius:1rem!important;border:1px solid #eee!important;box-shadow:0 .1rem .5rem rgba(0,0,0,.05)!important;display:flex;overflow:hidden;cursor:pointer}.card img{width:40%!important;height:15rem!important;min-height:12rem;margin-top:2.9rem!important;margin:0 1rem;border-radius:.8rem!important;object-fit:fill!important;display:block}.card-content{flex:1;padding:1.2rem .5rem;display:flex;flex-direction:column;position:relative}.card-title{display:block!important;color:#030303!important;font-size:2.6rem!important;font-weight:700!important;margin-top:1rem!important;margin-bottom:.5rem!important;margin-left:.8rem!important;margin-right:.8rem!important;text-align:left!important;line-height:1.2!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.card-desc{display:block!important;color:#5e5d5d!important;font-size:1.9rem!important;margin:.5rem .8rem!important;text-align:left!important;line-height:1.4!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.card-buttons-row{position:absolute;bottom:1.2rem;left:1.2rem;right:1.2rem;display:flex;gap:.8rem}.card-buttons-row{position:absolute;bottom:1.5rem;left:1.2rem;right:1.2rem;display:flex;gap:.8rem}.card-button{height:4.9rem!important;line-height:4.9rem!important;font-size:1.7rem!important;font-weight:700!important;color:#f8f7f6!important;text-align:center;border-radius:.8rem!important;cursor:pointer;-webkit-tap-highlight-color:transparent!important;transition:transform .2s ease;flex:1}.card-buttons-row :first-child{background-color:#ff9500!important}.card-buttons-row :nth-child(2){background-color:#ffc837!important}.card-button:active{transform:scale(.9)!important}.card-content{position:relative;padding-bottom:6rem}.card-time{display:block!important;color:#cfcbcb!important;font-size:1.7rem!important;margin-top:3rem!important;margin-bottom:1rem!important;margin-left:.8rem!important;text-align:left!important;line-height:1!important}.notice-container{background:#eeeeec;border-radius:1rem;margin:1.5rem;padding:1.2rem;box-shadow:0 .1rem .5rem rgba(0,0,0,.05)}.notice-title{font-size:2.2rem;font-weight:700;color:#333;margin-bottom:.8rem}.notice-list{max-height:20rem;overflow-y:auto}.notice-item{font-size:1.9rem;color:#2b2b2b;line-height:3rem;border-bottom:1px solid #aaa}.popup-mask{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.5);z-index:998;display:none;justify-content:center;align-items:center}.popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:90%!important;max-width:500px;background-color:#fff;border-radius:1rem;box-shadow:0 .3rem 1rem rgba(0,0,0,.15);z-index:999;padding:2rem;box-sizing:border-box;max-height:90vh;overflow-y:auto}.popup-close{position:absolute;top:1.5rem;right:1.5rem;width:3rem;height:3rem;line-height:2.8rem;text-align:center;font-size:2rem;color:#999;border-radius:50%;background-color:#f5f5f5;cursor:pointer}.popup-close:active{background-color:#e0e0e0}.popup-title{font-size:1.8rem;font-weight:700;color:#333;text-align:center;margin-bottom:1.5rem;padding-top:.5rem}.link-container{width:100%;background-color:#fff9e6;border-radius:.8rem;padding:1.5rem;box-sizing:border-box;margin-bottom:1.5rem;border:1px solid #ffe8a3}.link-text{font-size:1.4rem;color:#333;word-break:break-all;line-height:1.5}.popup-desc-container{width:100%;margin-bottom:1.5rem}.popup-desc{font-size:1.3rem;color:#666;text-align:left;line-height:1.4;margin-bottom:.5rem}.copy-btn{width:100%;height:5rem;line-height:5rem;text-align:center;background-color:#ff7d00;color:#fff;font-size:1.6rem;font-weight:700;border-radius:.8rem;box-shadow:0 .2rem 0 #e06a00;margin-top:.5rem;border:none;cursor:pointer}.copy-btn:active{background-color:#e06a00;box-shadow:0 .1rem 0 #c05a00;transform:translateY(.1rem)}.more_hint{align-items:center;color:#5e5c5c;display:flex;font-size:1.4rem;justify-content:center;margin-top:2rem;padding:.5rem}.bottom-nav{position:fixed;bottom:0;left:0;width:100%;height:7rem;display:flex;background-color:#fff;border-top:1px solid #eee;z-index:9999}.nav-item{flex:1;display:flex;justify-content:center;align-items:center;font-size:2.5rem;color:#666;position:relative;cursor:pointer;min-height:48px}.nav-item.active{color:#ff7d00}.nav-item.active::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:3rem;height:.4rem;background-color:#ff7d00;border-radius:.2rem}.content-container{padding-bottom:1rem}.tutorial-content{padding:1rem .5rem;background-color:#f5f5f5;min-height:calc(100vh - 7rem);box-sizing:border-box}.tutorial-box{background-color:#ffd622;border-radius:1rem;padding:1.5rem;width:calc(100% - 1rem);margin:.6rem .5rem;box-sizing:border-box}.notice-box{border:2px solid #f7ca20;border-radius:1rem;padding:1rem 1.5rem;width:calc(100% - 1rem);margin-top:1rem;margin-bottom:2rem;margin-left:.5rem;margin-right:.5rem;background-color:#fdfdfd;box-sizing:border-box}.tutorial-title{font-size:2.6rem;font-weight:700;color:#070707;display:block;margin-bottom:1.5rem;padding-left:.5rem;text-align:left}.tutorial-btn{width:100%;margin-bottom:1.5rem;border-radius:.8rem;overflow:hidden;box-shadow:0 .1rem .3rem rgba(0,0,0,.1);cursor:pointer;transition:opacity .2s ease}.tutorial-btn:active{opacity:.7;transform:scale(.95)}.tutorial-btn:last-child{margin-bottom:.5rem}.tutorial-img{width:100%;height:10rem;object-fit:cover;display:block}.page-content,.tab-content{display:none}.page-content.active,.tab-content.active{display:block}.toast{position:fixed;top:40%;left:50%;transform:translate(-50%,-50%);background-color:rgba(0,0,0,.7);color:#fff;padding:.8rem 1.5rem;border-radius:.5rem;font-size:2rem;z-index:1000;opacity:0;transition:opacity .3s}.toast.show{opacity:1}.banner-slide:active{opacity:.7}</style>
 </head>
 <body>
-
-
-  <!-- 内容容器 -->
-  <div class="content-container">
-    <!-- 首页内容 -->
-    <div id="home-page" class="page-content active">
-<!-- 轮播图区域 -->
-<div class="banner-swiper" id="bannerSwiper">
-        <div class="banner-slide active" onclick="window.location.href='https://mp.weixin.qq.com/s/se04dew47CdXqpKiylLDqw'">
-          <img src="https://picui.cn/thumbnails/3eca5e11e94bd67fd61eb4d37d83f3d8.png" alt="瑞幸" />
-        </div>
-        <div class="banner-slide" onclick="window.location.href='https://activity01.yunzhanxinxi.com/link/100112468abe80a5673a1000rcXqNys1'">
-          <img src="https://picui.cn/thumbnails/2bf13b551c0d147bd2d51938e7b3b3aa.png" alt="瑞幸" />
-        </div>
-        <div class="banner-slide" onclick="window.location.href='https://kurl08.cn/76id41'">
-          <img src="https://picui.cn/thumbnails/e1fc01b9a0f47c9b1917a488d5d009f1.png" alt="太二酸菜鱼" />
-        </div>
-      </div>
-
-<!-- 快捷按钮区域 -->
-<div class="button-container">
-  <!-- 美团按钮：与其他按钮保持一致的元素类型和事件逻辑 -->
-  <button class="btn big-btn touch-active btn-touch" onclick="event.stopPropagation(); window.open('https://mp.weixin.qq.com/s/se04dew47CdXqpKiylLDqw')">
-    <img class="btn-img" src="https://picui.cn/thumbnails/aa0633d26e5b8291cd70bedbb3a1aff9.png" alt="美团" />
-  </button>
-  <div class="right-buttons">
-    <button class="btn small-btn touch-active btn-touch" onclick="event.stopPropagation(); window.open('http://dpurl.cn/QLByytFz')">
-      <img class="btn-img" src="https://picui.cn/thumbnails/ce9a8043103fb8e50834a1b8d8deeae9.png" alt="饿了么" />
-    </button>
-    <button class="btn small-btn touch-active btn-touch" onclick="event.stopPropagation(); window.open('https://mp.weixin.qq.com/s/K2LU1IlxMwfVKYNmbmS3RQ')">
-      <img class="btn-img" src="https://picui.cn/thumbnails/78f421510067cfae3991f1e104a486de.png" alt="京东" />
-    </button>
-  </div>
+<div class=content-container>
+<div id=home-page class="page-content active">
+<div class=banner-swiper id=bannerSwiper>
+<div class="banner-slide active" onclick='window.location.href="https://mp.weixin.qq.com/s/se04dew47CdXqpKiylLDqw"'>
+<img src=https://picui.cn/thumbnails/3eca5e11e94bd67fd61eb4d37d83f3d8.png alt=瑞幸>
 </div>
-
-      <!-- 标签切换栏 -->
-      <div class="page">
-        <div class="button-bar-container">
-          <div class="button-bar-placeholder" id="buttonBarPlaceholder"></div>
-          <div class="button-bar" id="buttonBar">
-            <button class="button-item active touch-active" data-tab="tab1" onclick="switchTab('tab1')">美团</button>
-            <button class="button-item touch-active" data-tab="tab2" onclick="switchTab('tab2')">饿了么</button>
-            <button class="button-item touch-active" data-tab="tab3" onclick="switchTab('tab3')">闪购</button>
-            <button class="button-item touch-active" data-tab="tab4" onclick="switchTab('tab4')">秒送</button>
-            <button class="button-item touch-active" data-tab="tab5" onclick="switchTab('tab5')">出行/住</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 美团内容区域 -->
-      <div class="tab-content active" id="tab1">
-        
-        <!-- 卡片优化 -->
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png" alt="美团神劵包" />
-          <div class="card-content">
-            <span class="card-title">1.美团神劵包</span>
-            <span class="card-desc">9.9元购600元神劵包</span>
-            <span class="card-time">活动期至:2025-08-21</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-               <div class="card-buttons-row">
-            <!-- 按钮1（可删除）：领取口令 -->
-            <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,  '1 %复制信息#% 打开团App http:/¥rxZmJhYWUxYmQ¥一起领', '领取成功，请打开美团APP')">领取口令</span>
-             </div>
-          </div>
-        </div>
-
+<div class=banner-slide onclick='window.location.href="https://kzurl11.cn/767Vr2"'>
+<img src=https://picui.cn/thumbnails/2bf13b551c0d147bd2d51938e7b3b3aa.png alt=瑞幸>
+</div>
+<div class=banner-slide onclick='window.location.href="https://kurl08.cn/76id41"'>
+<img src=https://picui.cn/thumbnails/e1fc01b9a0f47c9b1917a488d5d009f1.png alt=太二酸菜鱼>
+</div>
+</div>
+<div class=button-container>
+<a href=https://mp.weixin.qq.com/s/se04dew47CdXqpKiylLDqw class="btn meituan-btn-bounce" target=_blank>
+<span class="btn-icon meituan-icon">
+<img src=https://picui.cn/thumbnails/efbf40f8c431665dcca455eea8c94d75.png alt=美团图标>
+</span>
+<span class=btn-text>超值兑换券</span>
+</a>
+<a href=http://dpurl.cn/QLByytFz class=btn target=_blank>
+<span class="btn-icon eleme-icon">
+<img src=https://picui.cn/thumbnails/6e9e48bc9e244e4ba9e8d82524312cec.png alt=饿了么图标>
+</span>
+<span class=btn-text>四个朋友</span>
+</a>
+<a href=https://kurl01.cn/76fgK0 class=btn target=_blank>
+<span class="btn-icon shangou-icon">
+<img src=https://free.picui.cn/free/2025/08/28/68afdeb7a47bc.png alt=小红书>
+</span>
+<span class=btn-text>抽奖活动</span>
+</a>
+<a href=https://mp.weixin.qq.com/s/K2LU1IlxMwfVKYNmbmS3RQ class=btn target=_blank>
+<span class="btn-icon miaosong-icon">
+<img src=https://picui.cn/thumbnails/f2447cb9663abfdf94848494599a2277.png alt=服务号>
+</span>
+<span class=btn-text>服务号</span>
+</a>
+</div>
+<div class=page>
+<div class=button-bar-container>
+<div class=button-bar-placeholder id=buttonBarPlaceholder></div>
+<div class=button-bar id=buttonBar>
+<button class="button-item active touch-active" data-tab=tab1 onclick='switchTab("tab1")'>美团</button>
+<button class="button-item touch-active" data-tab=tab2 onclick='switchTab("tab2")'>饿了么</button>
+<button class="button-item touch-active" data-tab=tab3 onclick='switchTab("tab3")'>闪购</button>
+<button class="button-item touch-active" data-tab=tab4 onclick='switchTab("tab4")'>秒送</button>
+<button class="button-item touch-active" data-tab=tab5 onclick='switchTab("tab5")'>出行/住</button>
+</div>
+</div>
+</div>
+<div class="tab-content active" id=tab1>
 <div class="card touch-active">
-  <img src="https://picui.cn/thumbnails/5d36251649273e7fd1c23b5b62d55e98.png" alt="美团神劵包" />
-  <div class="card-content">
-    <span class="card-title">2.美团外卖节</span>
-    <span class="card-desc">惊喜大额红包</span>
-    <span class="card-time">活动期至:2025-12-31</span>
-    
-    <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥uuNDUyMjM5MmU¥一起领', '领取成功，请打开美团APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kzurl20.cn/7z5eCO'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-  </div>
+<img src=https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png alt=美团神劵包>
+<div class=card-content>
+<span class=card-title>1.美团神劵包</span>
+<span class=card-desc>9.9元购600元神劵包</span>
+<span class=card-time>活动期至:2025-08-21</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥rxZmJhYWUxYmQ¥一起领","领取成功，请打开美团APP")'>领取口令</span>
 </div>
-
+</div>
+</div>
 <div class="card touch-active">
-  <img src="https://picui.cn/thumbnails/0d25d5f4c0fa9d2c0a3742c1c2c70955.png" alt="美团神劵包" />
-  <div class="card-content">
-    <span class="card-title">3.美团外卖品质会场</span>
-    <span class="card-desc">畅领高额优惠</span>
-    <span class="card-time">活动期至:2025-12-01</span>
-    
-    <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥3wNTQxNDc0NDk¥一起领', '领取成功，请打开美团APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kurl02.cn/7670JW'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-  </div>
+<img src=https://picui.cn/thumbnails/5d36251649273e7fd1c23b5b62d55e98.png alt=美团神劵包>
+<div class=card-content>
+<span class=card-title>2.美团外卖节</span>
+<span class=card-desc>惊喜大额红包</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥uuNDUyMjM5MmU¥一起领","领取成功，请打开美团APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl20.cn/7z5eCO"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
 </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/9eb60d86e8433a25a74d7f24d9a9a928.png" alt="美团神劵包" />
-          <div class="card-content">
-            <span class="card-title">4.美团外卖商品券</span>
-            <span class="card-desc">整点抢0.1元奶茶</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-    <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,'1 %复制信息#% 打开团App http:/¥9xZjA5MTdkNjg¥一起领', '领取成功，请打开美团APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kurl06.cn/7672oC'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/6bd8781451be27188ffcb3fd5b403470.png" alt="美团神劵包" />
-          <div class="card-content">
-            <span class="card-title">5.美团【团购优惠】</span>
-            <span class="card-desc">套餐折上折</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-    <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥ffNThlZWIyNmE¥一起领', '领取成功，请打开美团APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kzurl12.cn/7ziTVu'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/4a754a8133c426ba8b7e176b45a060bf.png" alt="美团神劵包" />
-          <div class="card-content">
-            <span class="card-title">6.十点爆品疯抢</span>
-            <span class="card-desc">先领劵再下单</span>
-            <span class="card-time">活动期至:2025-09-01</span>
-
-    <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,  '1 %复制信息#% 打开团App http:/¥ncNDE2OTZmOWQ¥一起领', '领取成功，请打开美团APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kurl04.cn/767cLb'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/0366a02e84a8b7a54b3f88c63556c495.png" alt="美团神劵包" />
-          <div class="card-content">
-            <span class="card-title">7.吃喝玩乐2折起</span>
-            <span class="card-desc">吃喝玩乐神劵</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥zcNjc5MjIxNjM¥一起领', '领取成功，请打开美团APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kurl15.cn/767cKs'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 饿了么内容区域 -->
-      <div class="tab-content" id="tab2">
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/e1fc01b9a0f47c9b1917a488d5d009f1.png" alt="饿了么" />
-          <div class="card-content">
-            <span class="card-title">1.饿了么天天领红包</span>
-            <span class="card-desc">最低0元吃外卖</span>
-            <span class="card-time">活动期至:2025-09-30</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event, '0複制这个 666:/＄4ka44AV＄~.饿了么App【打开饿了么APP 扫红包】', '领取成功，请打开饿了么APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kzurl19.cn/767TBl'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-        
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/8371117967ba9e25a3a1989b4e2ea139.png" alt="饿了么" />
-          <div class="card-content">
-            <span class="card-title">2.饿了么极限暴涨</span>
-            <span class="card-desc">天天必得18元暴涨立省18元</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://5kma.cn/7ziTQa'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/523282645324ecceb37285d23126953c.png" alt="饿了么" />
-          <div class="card-content">
-            <span class="card-title">3.饿了么天天领红包</span>
-            <span class="card-desc">每周五5折红包每月18日红包</span>
-            <span class="card-time">活动期至:2026-02-28</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://5kma.cn/7ziTQa'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/f64a2891e7a8513b5c600ace0255b8d8.png" alt="饿了么" />
-          <div class="card-content">
-            <span class="card-title">4.饿了么红包组合</span>
-            <span class="card-desc">天天领红包</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,'69 HU7405   1:/《hZhY4kZwBOW₴三最高抢66元大额红包', '领取成功，请打开饿了么APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kurl11.cn/7zjpEa'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/f643287ce9ebea8a15b075f574a4cd62.png" alt="饿了么" />
-          <div class="card-content">
-            <span class="card-title">5.饿了么超市</span>
-            <span class="card-desc">有满减活动可叠加</span>
-            <span class="card-time">活动期至:2025-012-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">  
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kurl01.cn/767abC'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 闪购内容区域 -->
-      <div class="tab-content" id="tab3">
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/c77deada1b014012543914d8aaf6b0c7.png" alt="闪购" />
-          <div class="card-content">
-            <span class="card-title">1.闪购超级品牌日</span>
-            <span class="card-desc">单单有福利</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,  '79 HU7405   1:/c9x94k0wOFf₴欢闪购新用户可领首单免单', '领取成功，请打开淘宝APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://5kma.cn/764T6i'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-          <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/2bf13b551c0d147bd2d51938e7b3b3aa.png" alt="闪购" />
-          <div class="card-content">
-            <span class="card-title">2.闪购-爆品团</span>
-            <span class="card-desc">免凑单，免运费</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event, '08 HU7405   1:/efBa4kbqWyK₴三免凑单 免配送', '领取成功，请打开淘宝APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kzurl11.cn/767Vr2'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/260e3a788eabfef53475fc40777c53c6.png" alt="闪购" />
-          <div class="card-content">
-            <span class="card-title">3.新用户专享</span>
-            <span class="card-desc">必得无门槛18元免单卡</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,  '28 HU7405   2:/₴4k3K4kbcQw1₴四闪购新用户可领首单免单', '领取成功，请打开淘宝APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kzurl17.cn/767jgJ'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/ecd20b17655a87adbccd172df5de3e02.png" alt="闪购" />
-          <div class="card-content">
-            <span class="card-title">4.闪购惊喜福利</span>
-            <span class="card-desc">抽免单卡</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,  '08 HU7405   2:/₤jFVs4kbnLb2₤十1分钱喝奶茶 领大额红包', '领取成功，请打开淘宝APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kzurl15.cn/767Bm7'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-          <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/be92cefd16ea31a158d263514ec5f357.png" alt="闪购" />
-          <div class="card-content">
-            <span class="card-title">5.淘天版-全国</span>
-            <span class="card-desc">叠加红包</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,  '97 HU7405   2:/《wXlW4kb3xqU₤十邀请好友，共享福利', '领取成功，请打开淘宝APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://activity01.yunzhanxinxi.com/link/100070068a4a0dc2410010002cMGtLx7'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-          <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/62d1bb5e228acfb9b29db37d52c78a80.png" alt="闪购" />
-          <div class="card-content">
-            <span class="card-title">6.闪购-爆品好价</span>
-            <span class="card-desc">爆品加倍补好价天天抢</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event, '58 HU7405   2:/₴gLPi4kbxaLO£四超值爆品加倍补贴！', '领取成功，请打开淘宝APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://2kma.cn/767fFW'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-          <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/ed5e248c4bfe523c995bf3a84c6de077.png" alt="闪购" />
-          <div class="card-content">
-            <span class="card-title">7.闪购-零售品牌日</span>
-            <span class="card-desc">超市好价即刻送达</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event, '79 HU7405   2:/₴qEzH4kY1bsP£欢超市好价 即刻送达', '领取成功，请打开淘宝APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kurl03.cn/767vee'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-          <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/0e8f3530e896d4d6cff91125cbcee5c1.png" alt="闪购" />
-          <div class="card-content">
-            <span class="card-title">8.闪购-单单返</span>
-            <span class="card-desc">单单有礼单单返</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,  '28 HU7405   666:/《KTuU4kYS19F✔欢下单写优评，高额返现金', '领取成功，请打开淘宝APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kzurl12.cn/767vrT'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-content" id="tab4">
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/901f6a65aff411e2c1c86b3d5508f137.png" alt="秒送" />
-          <div class="card-content">
-            <span class="card-title">1.京东外卖百亿补贴</span>
-            <span class="card-desc">满减劵 限时抢</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,'17:/￥NBCTzB6QuNZPV8OT￥ MF3390 ，⇶𝒥𝓲𝓲𝓲𝓷𝓰▢倲热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kurl15.cn/767Qf9'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/07143169c51f9d12736a9a12c8990529.png" alt="秒送" />
-          <div class="card-content">
-            <span class="card-title">2.京东百亿补贴</span>
-            <span class="card-desc">早8晚8限时抢最高20元</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-    <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event, '18:/热门促销会场！⇛椋◄Dσσδng￥G07GfBeuYm59AbuJ￥ MF8335 ', '领取成功，请打开京东APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kurl15.cn/767Yu2'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/b50e0129b3e82dc72d9de1489ada5c1f.png" alt="秒送" />
-          <div class="card-content">
-            <span class="card-title">3.京东百亿补贴</span>
-            <span class="card-desc">往下滑有满减.对半减</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,  '14:/！ZEU7W78qQ1K4Q6cO！ MF5681 ，↦椋◗D○σδng热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kurl14.cn/767YLE'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/1bd53694963660d96af7594f67a9aec8.png" alt="秒送" />
-          <div class="card-content">
-            <span class="card-title">4.外卖奶茶饮品</span>
-            <span class="card-desc">奶茶低至3.9元起</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,'10:/热门促销会场！⇒🐋▬Dσδδng￥C9vHK1cr5zVkn9z5￥ ZH9112 ', '领取成功，请打开京东APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://2kma.cn/767Yyn'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/1bd53694963660d96af7594f67a9aec8.png" alt="秒送" />
-          <div class="card-content">
-            <span class="card-title">5.外卖库迪咖啡</span>
-            <span class="card-desc">满11减10限时抢</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event, '18:/！M2DX42Cq7EfrBfvZ！ MF8335 ，⇶Jι🆖◰東热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kzurl15.cn/767YST'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/0bb4b683693fb30d43b51395380e0818.png" alt="秒送" />
-          <div class="card-content">
-            <span class="card-title">6.麦当劳（免运费）</span>
-            <span class="card-desc">【仅北京 上海】</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event, '15:/热门促销会场！↪猄▪D○ōσng￥R17wv7fyCgTqER6G￥ MF5681 ', '领取成功，请打开京东APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kzurl20.cn/767Yqa'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://picui.cn/thumbnails/b4721b7fd194d3fc831ad43c4684e7aa.png" />
-          <div class="card-content">
-            <span class="card-title">7.外卖宵夜专场</span>
-            <span class="card-desc">每日20-24点最高立减10元</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,'17:/热门促销会场！→Jι🆖◄崠￥Z9RCJ78T4YL2H7nx￥ MF3390 ', '领取成功，请打开京东APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kzurl16.cn/767YWN'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-
-        <div class="card touch-active">
-          <img src="https://static.sichuanyunzhan.com//static/alliance/business_auto/20250723112813243/cover_190691.png" alt="秒送" />
-          <div class="card-content">
-            <span class="card-title">8.球迷专属劵</span>
-            <span class="card-desc">领10元</span>
-            <span class="card-time">活动期至:2025-12-31</span>
-
-                <!-- 按钮容器：两个按钮均可删除，剩余按钮自动填满容器 -->
-    <div class="card-buttons-row">
-      <!-- 按钮1（可删除）：领取口令 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="copyHiddenContent(event,  '10:/！ACs07AIUgs78fXn7！ MF5681 ，↪京◪Dσσδng热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>
-      
-      <!-- 按钮2（可删除）：点击领取 -->
-      <span class="card-button touch-active btn-touch" 
-            onclick="window.open('https://kzurl11.cn/767rl8'); showToast('正在跳转到活动页面')">
-        点击领取
-      </span>
-    </div>
-          </div>
-        </div>
-        
-      </div>
-
-      <div class="tab-content" id="tab5">
-        <div class="card touch-active" onclick="goToMiniProgram('wxaf35009675aa0b2a', '/webx/entry/block-prevention?scene=YQwoRwR&source_id=118141jutuike15053713&ref_from=dunion')">
-          <img src="https://free.picui.cn/free/2025/07/13/6872a38007b68.png" alt="滴滴出行" />
-          <div class="card-content">
-            <span class="card-title">1.滴滴出行</span>
-            <span class="card-desc">打车5折起</span>
-            <!-- 卡片内按钮：点击时缩小98% -->
-            <div class="card-button touch-active btn-touch" onclick="handleButtonClick(event)">点击领取</div>
-            <span class="card-time">活动期至:2026-12-31</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="more_hint">更多功能持续更新中，敬请期待...</div>
-    </div>
-
-    <!-- 教程内容页面 -->
-    <div id="tutorial-page" class="page-content">
-      <div class="tutorial-content">
-        <div class="notice-box">
-          <span class="notice-title">活动更新通知：</span>
-          <div class="notice-list">
-            <div class="notice-item">2025-08-08 闪购-1.零售品牌日</div>
-            <div class="notice-item">2025-08-02 饿了么-3.饿了么天天领红包</div>
-            <div class="notice-item">2025-07-25 美团-2.美团外卖节</div>
-            <div class="notice-item">2025-08-10 京东-4.京东生鲜日</div>
-            <div class="notice-item">2025-08-08 闪购-1.零售品牌日</div>
-            <div class="notice-item">2025-08-02 饿了么-3.饿了么天天领红包</div>
-            <div class="notice-item">2025-07-25 美团-2.美团外卖节</div>
-            <div class="notice-item">2025-08-10 京东-4.京东生鲜日</div>
-            <div class="notice-item">2025-08-08 闪购-1.零售品牌日</div>
-            <div class="notice-item">2025-08-02 饿了么-3.饿了么天天领红包</div>
-            <div class="notice-item">2025-07-25 美团-2.美团外卖节</div>
-            <div class="notice-item">2025-08-10 京东-4.京东生鲜日</div>
-            <div class="notice-item">2025-08-08 闪购-1.零售品牌日</div>
-            <div class="notice-item">2025-08-02 饿了么-3.饿了么天天领红包</div>
-            <div class="notice-item">2025-07-25 美团-2.美团外卖节</div>
-            <div class="notice-item">2025-08-10 京东-4.京东生鲜日</div>
-            <div class="notice-item">2025-08-08 闪购-1.零售品牌日</div>
-            <div class="notice-item">2025-08-02 饿了么-3.饿了么天天领红包</div>
-            <div class="notice-item">2025-07-25 美团-2.美团外卖节</div>
-            <div class="notice-item">2025-08-10 京东-4.京东生鲜日</div>
-
-
-
-
-            
-          </div>
-        </div>
-
-<div class="tutorial-box">
-          <span class="tutorial-title">教程.外卖小技巧</span>
-          <!-- 为教程图片添加btn-touch类以实现点击变浅色效果 -->
-          <div class="tutorial-btn touch-active btn-touch" onclick="event.stopPropagation(); window.open('https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q')">
-            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程1">
-          </div>
-          <div class="tutorial-btn touch-active btn-touch" onclick="event.stopPropagation(); window.open('https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q')">
-            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程2">
-          </div>
-          <div class="tutorial-btn touch-active btn-touch" onclick="event.stopPropagation(); window.open('https://mp.weixin.qq.com/s/jnYBfXZPGsowvTCK_Cvq2Q')">
-            <img class="tutorial-img" src="https://picui.cn/thumbnails/d0c47c32122d6fa4cbdd7b5bea02ac37.png" alt="教程3">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 弹窗组件 -->
-  <div class="popup-mask" id="popupMask">
-    <div class="popup" id="popup">
-      <div class="popup-close touch-active btn-touch" onclick="hidePopup()">×</div>
-      <div class="popup-title">美团H5链接</div>
-      <div class="link-container" oncontextmenu="copyLink(event)">
-        <text class="link-text" id="linkText"></text>
-      </div>
-      <div class="popup-desc-container">
-        <div class="popup-desc">✅长按文字或一键复制链接</div>
-        <div class="popup-desc">✅复制后把链接发送到任意聊天窗口，再点击发出去的链接就可以享受本地生活补贴啦.</div>
-      </div>
-      <button class="copy-btn touch-active btn-touch" onclick="copyLink()">一键复制</button>
-    </div>
-  </div>
-
-  <!-- 提示框组件 -->
-  <div class="toast" id="toast"></div>
-
-  <!-- 底部导航栏 -->
-  <div class="bottom-nav">
-    <div class="nav-item active touch-active btn-touch" onclick="switchNav('home')">
-      <text>首页</text>
-    </div>
-    <div class="nav-item touch-active btn-touch" onclick="switchNav('tutorial')">
-      <text>教程</text>
-    </div>
-  </div>
-
-  <script>
-    // 全局状态管理
-    const state = {
-      currentNav: 'home',               // 当前导航页面，默认为首页
-      activeTab: 'tab1',                // 当前激活的标签页，默认为美团
-      isFixed: false,                   // 标签栏是否固定定位
-      barTop: 0,                        // 标签栏初始顶部位置
-      barHeight: 0,                     // 标签栏高度
-      isPopupShow: false,               // 弹窗是否显示
-      currentBanner: 0,                 // 当前轮播图索引
-      bannerInterval: null,             // 轮播图定时器
-      link: "",                         // 当前要复制的链接
-      // 新增触摸相关状态
-      touchStartX: 0,                   // 触摸开始时的X坐标
-      touchStartTime: 0                 // 触摸开始的时间戳
-    };
-
-    // DOM元素缓存 - 存储常用DOM元素，避免重复查询
-    const elements = {
-      buttonBar: document.getElementById('buttonBar'),
-      buttonBarPlaceholder: document.getElementById('buttonBarPlaceholder'),
-      buttonItems: document.querySelectorAll('.button-item'),
-      tabContents: document.querySelectorAll('.tab-content'),
-      navItems: document.querySelectorAll('.nav-item'),
-      pageContents: document.querySelectorAll('.page-content'),
-      popupMask: document.getElementById('popupMask'),
-      popup: document.getElementById('popup'),
-      linkText: document.getElementById('linkText'),
-      toast: document.getElementById('toast'),
-      bannerSwiper: document.getElementById('bannerSwiper'),
-      bannerSlides: document.querySelectorAll('.banner-slide')
-    };
-
-    // 初始化函数 - 页面加载完成后执行
-    function init() {
-      initButtonBar();       // 初始化标签栏
-      initBanner();          // 初始化轮播图
-      bindEvents();          // 绑定基础事件
-      bindTouchEvents();     // 绑定触摸事件，增强移动端体验
-    }
-
-    // 初始化标签栏 - 设置初始位置和高度
-    function initButtonBar() {
-      const rect = elements.buttonBar.getBoundingClientRect();
-      state.barTop = rect.top + window.scrollY;  // 计算标签栏的绝对顶部位置
-      state.barHeight = rect.height;             // 获取标签栏高度
-      elements.buttonBarPlaceholder.style.height = `${state.barHeight}px`;  // 设置占位元素高度
-    }
-
-    // 初始化轮播图 - 设置自动轮播和触摸滑动
-    function initBanner() {
-      // 设置自动轮播，每3秒切换一次
-      state.bannerInterval = setInterval(() => {
-        state.currentBanner = (state.currentBanner + 1) % elements.bannerSlides.length;
-        updateBanner();
-      }, 3000);
-      
-      // 添加轮播图触摸支持
-      let startX, endX;
-      // 触摸开始时记录起始X坐标并暂停自动轮播
-      elements.bannerSwiper.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        clearInterval(state.bannerInterval);
-      });
-      
-      // 触摸结束时计算滑动距离并处理
-      elements.bannerSwiper.addEventListener('touchend', (e) => {
-        endX = e.changedTouches[0].clientX;
-        handleSwipe();
-        // 恢复自动轮播
-        state.bannerInterval = setInterval(() => {
-          state.currentBanner = (state.currentBanner + 1) % elements.bannerSlides.length;
-          updateBanner();
-        }, 3000);
-      });
-      
-      // 处理滑动逻辑
-      function handleSwipe() {
-        // 滑动距离超过50px才切换图片
-        if (startX - endX > 50) {
-          // 向右滑动，显示下一张
-          state.currentBanner = (state.currentBanner + 1) % elements.bannerSlides.length;
-        } else if (endX - startX > 50) {
-          // 向左滑动，显示上一张
-          state.currentBanner = (state.currentBanner - 1 + elements.bannerSlides.length) % elements.bannerSlides.length;
-        }
-        updateBanner();  // 更新轮播图显示
-      }
-    }
-
-    // 更新轮播图显示状态
-    function updateBanner() {
-      elements.bannerSlides.forEach((slide, index) => {
-        // 激活当前轮播图，隐藏其他轮播图
-        slide.classList.toggle('active', index === state.currentBanner);
-        slide.style.display = index === state.currentBanner ? 'block' : 'none';
-      });
-    }
-
-    // 绑定基础事件
-    function bindEvents() {
-      // 监听滚动事件，用于标签栏固定定位
-      window.addEventListener('scroll', handleScroll);
-      // 页面卸载前清除轮播图定时器
-      window.addEventListener('beforeunload', () => clearInterval(state.bannerInterval));
-    }
-
-    // 绑定触摸事件 - 增强移动端体验
-    function bindTouchEvents() {
-      // 为所有按钮添加触摸反馈
-      document.querySelectorAll('.btn-touch').forEach(el => {
-        // 触摸开始时记录位置和时间，并改变透明度
-        el.addEventListener('touchstart', (e) => {
-          e.stopPropagation();  // 阻止事件冒泡到卡片
-          state.touchStartX = e.touches[0].clientX;
-          state.touchStartTime = Date.now();
-          el.style.opacity = '0.7';  // 触摸时的视觉反馈
-        });
-        
-        // 触摸结束时恢复样式，并判断是否为有效点击
-        el.addEventListener('touchend', (e) => {
-          e.stopPropagation();  // 阻止事件冒泡到卡片
-          el.style.opacity = '1';  // 恢复透明度
-          
-          // 获取触摸结束时的位置和时间
-          const touchEndX = e.changedTouches[0].clientX;
-          const touchTime = Date.now() - state.touchStartTime;
-          const touchDistance = Math.abs(touchEndX - state.touchStartX);
-          
-          // 如果滑动距离小且时间短，视为有效点击
-          if (touchDistance < 10 && touchTime < 300) {
-            // 触发元素的click事件
-            const clickEvent = new MouseEvent('click', {
-              view: window,
-              bubbles: true,
-              cancelable: true
-            });
-            el.dispatchEvent(clickEvent);
-          }
-        });
-      });
-
-      // 为卡片添加触摸事件，但不应用按钮的样式变化
-      document.querySelectorAll('.card.touch-active').forEach(card => {
-        card.addEventListener('touchstart', (e) => {
-          // 只有当触摸目标不是按钮时才应用卡片的反馈
-          if (!e.target.closest('.btn-touch')) {
-            card.style.opacity = '0.95';  // 触摸时的视觉反馈
-          }
-        });
-        
-        card.addEventListener('touchend', (e) => {
-          // 只有当触摸目标不是按钮时才恢复卡片样式
-          if (!e.target.closest('.btn-touch')) {
-            card.style.opacity = '1';  // 恢复透明度
-          }
-        });
-      });
-    }
-
-    // 处理滚动事件 - 控制标签栏是否固定
-    function handleScroll() {
-      const scrollTop = window.scrollY;
-      // 当滚动到标签栏位置附近时，将标签栏固定
-      if (scrollTop >= state.barTop - 10 && !state.isFixed) {
-        elements.buttonBar.classList.add('fixed');
-        state.isFixed = true;
-      } else if (scrollTop < state.barTop - 10 && state.isFixed) {
-        // 当滚动回标签栏原位置时，取消固定
-        elements.buttonBar.classList.remove('fixed');
-        state.isFixed = false;
-      }
-    }
-
-    // 切换标签页
-    function switchTab(tabId) {
-      state.activeTab = tabId;
-      // 更新标签按钮状态
-      elements.buttonItems.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tabId));
-      // 更新标签内容显示
-      elements.tabContents.forEach(content => content.classList.toggle('active', content.id === tabId));
-    }
-
-    // 切换导航页面（首页/教程）
-    function switchNav(navId) {
-      state.currentNav = navId;
-      // 更新导航按钮状态
-      elements.navItems.forEach(item => {
-        item.classList.toggle('active', item.textContent.trim() === (navId === 'home' ? '首页' : '教程'));
-      });
-      // 更新页面内容显示
-      elements.pageContents.forEach(page => {
-        page.classList.toggle('active', page.id === `${navId}-page`);
-      });
-      // 显示提示信息
-      showToast(`已切换到${navId === 'home' ? '首页' : '教程'}页面`);
-    }
-
-    // 显示弹窗
-    function showPopup(link, event) {
-      if (event) event.stopPropagation();  // 阻止事件冒泡
-      state.link = link;                   // 保存要显示的链接
-      elements.linkText.textContent = link; // 设置链接文本
-      elements.popupMask.style.display = 'flex';  // 显示弹窗遮罩
-      state.isPopupShow = true;            // 更新弹窗状态
-    }
-
-    // 带链接显示弹窗的快捷方法
-    function showPopupWithLink(link, event) {
-      showPopup(link, event);
-    }
-
-    // 隐藏弹窗
-    function hidePopup() {
-      elements.popupMask.style.display = 'none';  // 隐藏弹窗遮罩
-      state.isPopupShow = false;                 // 更新弹窗状态
-    }
-
-    // 复制链接 - 增强移动端兼容性
-    function copyLink(event) {
-      if (event) event.preventDefault();  // 阻止右键菜单默认行为
-      
-      // 移动端兼容性处理：检查浏览器是否支持Clipboard API
-      if (!navigator.clipboard) {
-        // 降级处理：创建textarea元素并选中内容
-        const textarea = document.createElement('textarea');
-        textarea.value = state.link;
-        textarea.style.position = 'fixed';  // 固定定位，避免影响页面布局
-        textarea.style.left = '-9999px';    // 移出可视区域
-        document.body.appendChild(textarea);
-        textarea.select();  // 选中内容
-        
-        try {
-          // 执行复制命令
-          const successful = document.execCommand('copy');
-          if (successful) {
-            showToast('复制成功');
-            hidePopup();
-          } else {
-            throw new Error('复制失败');
-          }
-        } catch (err) {
-          showToast('请手动复制链接');
-        } finally {
-          document.body.removeChild(textarea);  // 清理临时元素
-        }
-        return;
-      }
-      
-      // 现代浏览器处理：使用Clipboard API
-      navigator.clipboard.writeText(state.link).then(() => {
-        showToast('复制成功');
-        hidePopup();
-      }).catch(() => {
-        showToast('复制失败，请手动复制');
-      });
-    }
-
-    // 复制隐藏内容 - 优化移动端兼容性
-    function copyHiddenContent(event, content, toastMsg) {
-      if (event) event.stopPropagation();  // 阻止事件冒泡
-      
-      // 创建临时textarea元素
-      const textarea = document.createElement('textarea');
-      textarea.value = content;
-      textarea.style.position = 'fixed';
-      textarea.style.left = '-9999px';
-      document.body.appendChild(textarea);
-      
-      try {
-        textarea.select();  // 选中内容
-        textarea.setSelectionRange(0, content.length);  // 确保全选
-        
-        // 执行复制命令
-        const successful = document.execCommand('copy');
-        
-        if (successful) {
-          showToast(toastMsg || '领取成功');  // 显示提示信息
-        } else {
-          throw new Error('复制失败');
-        }
-      } catch (err) {
-        // 复制失败时提示手动复制
-        showToast('点歪啦！: ' + content.substring(0, 10) + '...');
-        textarea.focus();
-        textarea.select();  // 选中内容，方便用户手动复制
-      } finally {
-        document.body.removeChild(textarea);  // 清理临时元素
-      }
-    }
-
-    // 显示提示框
-    function showToast(message) {
-      const toast = elements.toast;
-      clearTimeout(toast.timer);  // 清除之前的定时器
-      toast.textContent = message;  // 设置提示文本
-      toast.classList.add('show');  // 显示提示框
-      // 2秒后隐藏提示框
-      toast.timer = setTimeout(() => toast.classList.remove('show'), 2000);
-    }
-
-    // 处理按钮点击 - 阻止事件冒泡
-    function handleButtonClick(event) {
-      event.stopPropagation();
-    }
-
-    // 跳转到小程序
-    function goToMiniProgram(appid, path) {
-      showToast(`正在跳转到小程序: ${appid}`);
-    }
-
-    // 导航到小程序
-    function navigateToMiniProgram(appid, path) {
-      showToast(`正在跳转到小程序: ${appid}`);
-    }
-
-    // 返回上一页
-    function goBack() {
-      showToast('返回上一页');
-      // 如果有历史记录，则返回上一页
-      if (window.history.length > 1) window.history.back();
-    }
-
-    // 优化：只在非生产环境禁用开发者工具（避免影响调试）
-    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-      document.addEventListener('keydown', e => {
-        // 阻止F12键打开开发者工具
-        if (e.key === 'F12') {
-          e.preventDefault();
-          showToast('开发者工具已禁用');
-        }
-        // 阻止Ctrl+Shift+I打开开发者工具
-        if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-          e.preventDefault();
-          showToast('开发者工具已禁用');
-        }
-      });
-    }
-
-    // 页面加载完成后初始化
-    window.addEventListener('DOMContentLoaded', init);
-  </script>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/0d25d5f4c0fa9d2c0a3742c1c2c70955.png alt=美团神劵包>
+<div class=card-content>
+<span class=card-title>3.美团外卖品质会场</span>
+<span class=card-desc>畅领高额优惠</span>
+<span class=card-time>活动期至:2025-12-01</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥3wNTQxNDc0NDk¥一起领","领取成功，请打开美团APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl02.cn/7670JW"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/9eb60d86e8433a25a74d7f24d9a9a928.png alt=美团神劵包>
+<div class=card-content>
+<span class=card-title>4.美团外卖商品券</span>
+<span class=card-desc>整点抢0.1元奶茶</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥9xZjA5MTdkNjg¥一起领","领取成功，请打开美团APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl06.cn/7672oC"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/6bd8781451be27188ffcb3fd5b403470.png alt=美团神劵包>
+<div class=card-content>
+<span class=card-title>5.美团【团购优惠】</span>
+<span class=card-desc>套餐折上折</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥ffNThlZWIyNmE¥一起领","领取成功，请打开美团APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl12.cn/7ziTVu"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/4a754a8133c426ba8b7e176b45a060bf.png alt=美团神劵包>
+<div class=card-content>
+<span class=card-title>6.十点爆品疯抢</span>
+<span class=card-desc>先领劵再下单</span>
+<span class=card-time>活动期至:2025-09-01</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥ncNDE2OTZmOWQ¥一起领","领取成功，请打开美团APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl04.cn/767cLb"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/0366a02e84a8b7a54b3f88c63556c495.png alt=美团神劵包>
+<div class=card-content>
+<span class=card-title>7.吃喝玩乐2折起</span>
+<span class=card-desc>吃喝玩乐神劵</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"1 %复制信息#% 打开团App http:/¥zcNjc5MjIxNjM¥一起领","领取成功，请打开美团APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl15.cn/767cKs"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+</div>
+<div class=tab-content id=tab2>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/e1fc01b9a0f47c9b1917a488d5d009f1.png alt=饿了么>
+<div class=card-content>
+<span class=card-title>1.饿了么天天领红包</span>
+<span class=card-desc>最低0元吃外卖</span>
+<span class=card-time>活动期至:2025-09-30</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"0複制这个 666:/＄4ka44AV＄~.饿了么App【打开饿了么APP 扫红包】","领取成功，请打开饿了么APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl19.cn/767TBl"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/8371117967ba9e25a3a1989b4e2ea139.png alt=饿了么>
+<div class=card-content>
+<span class=card-title>2.饿了么极限暴涨</span>
+<span class=card-desc>天天必得18元暴涨立省18元</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://5kma.cn/7ziTQa"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/523282645324ecceb37285d23126953c.png alt=饿了么>
+<div class=card-content>
+<span class=card-title>3.饿了么天天领红包</span>
+<span class=card-desc>每周五5折红包每月18日红包</span>
+<span class=card-time>活动期至:2026-02-28</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://5kma.cn/7ziTQa"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/f64a2891e7a8513b5c600ace0255b8d8.png alt=饿了么>
+<div class=card-content>
+<span class=card-title>4.饿了么红包组合</span>
+<span class=card-desc>天天领红包</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"69 HU7405   1:/《hZhY4kZwBOW₴三最高抢66元大额红包","领取成功，请打开饿了么APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl11.cn/7zjpEa"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/f643287ce9ebea8a15b075f574a4cd62.png alt=饿了么>
+<div class=card-content>
+<span class=card-title>5.饿了么超市</span>
+<span class=card-desc>有满减活动可叠加</span>
+<span class=card-time>活动期至:2025-012-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl01.cn/767abC"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+</div>
+<div class=tab-content id=tab3>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/c77deada1b014012543914d8aaf6b0c7.png alt=闪购>
+<div class=card-content>
+<span class=card-title>1.闪购超级品牌日</span>
+<span class=card-desc>单单有福利</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"79 HU7405   1:/c9x94k0wOFf₴欢闪购新用户可领首单免单","领取成功，请打开淘宝APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://5kma.cn/764T6i"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/2bf13b551c0d147bd2d51938e7b3b3aa.png alt=闪购>
+<div class=card-content>
+<span class=card-title>2.闪购-爆品团</span>
+<span class=card-desc>免凑单，免运费</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"08 HU7405   1:/efBa4kbqWyK₴三免凑单 免配送","领取成功，请打开淘宝APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl11.cn/767Vr2"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/260e3a788eabfef53475fc40777c53c6.png alt=闪购>
+<div class=card-content>
+<span class=card-title>3.新用户专享</span>
+<span class=card-desc>必得无门槛18元免单卡</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"28 HU7405   2:/₴4k3K4kbcQw1₴四闪购新用户可领首单免单","领取成功，请打开淘宝APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl17.cn/767jgJ"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/ecd20b17655a87adbccd172df5de3e02.png alt=闪购>
+<div class=card-content>
+<span class=card-title>4.闪购惊喜福利</span>
+<span class=card-desc>抽免单卡</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"08 HU7405   2:/₤jFVs4kbnLb2₤十1分钱喝奶茶 领大额红包","领取成功，请打开淘宝APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl15.cn/767Bm7"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/be92cefd16ea31a158d263514ec5f357.png alt=闪购>
+<div class=card-content>
+<span class=card-title>5.淘天版-全国</span>
+<span class=card-desc>叠加红包</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"97 HU7405   2:/《wXlW4kb3xqU₤十邀请好友，共享福利","领取成功，请打开淘宝APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://activity01.yunzhanxinxi.com/link/100070068a4a0dc2410010002cMGtLx7"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/62d1bb5e228acfb9b29db37d52c78a80.png alt=闪购>
+<div class=card-content>
+<span class=card-title>6.闪购-爆品好价</span>
+<span class=card-desc>爆品加倍补好价天天抢</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"58 HU7405   2:/₴gLPi4kbxaLO£四超值爆品加倍补贴！","领取成功，请打开淘宝APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://2kma.cn/767fFW"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/ed5e248c4bfe523c995bf3a84c6de077.png alt=闪购>
+<div class=card-content>
+<span class=card-title>7.闪购-零售品牌日</span>
+<span class=card-desc>超市好价即刻送达</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"79 HU7405   2:/₴qEzH4kY1bsP£欢超市好价 即刻送达","领取成功，请打开淘宝APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl03.cn/767vee"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/0e8f3530e896d4d6cff91125cbcee5c1.png alt=闪购>
+<div class=card-content>
+<span class=card-title>8.闪购-单单返</span>
+<span class=card-desc>单单有礼单单返</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"28 HU7405   666:/《KTuU4kYS19F✔欢下单写优评，高额返现金","领取成功，请打开淘宝APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl12.cn/767vrT"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+</div>
+<div class=tab-content id=tab4>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/901f6a65aff411e2c1c86b3d5508f137.png alt=秒送>
+<div class=card-content>
+<span class=card-title>1.京东外卖百亿补贴</span>
+<span class=card-desc>满减劵 限时抢</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"17:/￥NBCTzB6QuNZPV8OT￥ MF3390 ，⇶𝒥𝓲𝓲𝓲𝓷𝓰▢倲热门促销会场！","领取成功，请打开京东APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl15.cn/767Qf9"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/07143169c51f9d12736a9a12c8990529.png alt=秒送>
+<div class=card-content>
+<span class=card-title>2.京东百亿补贴</span>
+<span class=card-desc>早8晚8限时抢最高20元</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"18:/热门促销会场！⇛椋◄Dσσδng￥G07GfBeuYm59AbuJ￥ MF8335 ","领取成功，请打开京东APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl15.cn/767Yu2"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/b50e0129b3e82dc72d9de1489ada5c1f.png alt=秒送>
+<div class=card-content>
+<span class=card-title>3.京东百亿补贴</span>
+<span class=card-desc>往下滑有满减.对半减</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"14:/！ZEU7W78qQ1K4Q6cO！ MF5681 ，↦椋◗D○σδng热门促销会场！","领取成功，请打开京东APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl14.cn/767YLE"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/1bd53694963660d96af7594f67a9aec8.png alt=秒送>
+<div class=card-content>
+<span class=card-title>4.外卖奶茶饮品</span>
+<span class=card-desc>奶茶低至3.9元起</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"10:/热门促销会场！⇒🐋▬Dσδδng￥C9vHK1cr5zVkn9z5￥ ZH9112 ","领取成功，请打开京东APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://2kma.cn/767Yyn"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/1bd53694963660d96af7594f67a9aec8.png alt=秒送>
+<div class=card-content>
+<span class=card-title>5.外卖库迪咖啡</span>
+<span class=card-desc>满11减10限时抢</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"18:/！M2DX42Cq7EfrBfvZ！ MF8335 ，⇶Jι🆖◰東热门促销会场！","领取成功，请打开京东APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl15.cn/767YST"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/0bb4b683693fb30d43b51395380e0818.png alt=秒送>
+<div class=card-content>
+<span class=card-title>6.麦当劳（免运费）</span>
+<span class=card-desc>【仅北京 上海】</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"15:/热门促销会场！↪猄▪D○ōσng￥R17wv7fyCgTqER6G￥ MF5681 ","领取成功，请打开京东APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl20.cn/767Yqa"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/b4721b7fd194d3fc831ad43c4684e7aa.png>
+<div class=card-content>
+<span class=card-title>7.外卖宵夜专场</span>
+<span class=card-desc>每日20-24点最高立减10元</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"17:/热门促销会场！→Jι🆖◄崠￥Z9RCJ78T4YL2H7nx￥ MF3390 ","领取成功，请打开京东APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl16.cn/767YWN"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://static.sichuanyunzhan.com//static/alliance/business_auto/20250723112813243/cover_190691.png alt=秒送>
+<div class=card-content>
+<span class=card-title>8.球迷专属劵</span>
+<span class=card-desc>领10元</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='copyHiddenContent(event,"10:/！ACs07AIUgs78fXn7！ MF5681 ，↪京◪Dσσδng热门促销会场！","领取成功，请打开京东APP")'>领取口令</span>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl11.cn/767rl8"),showToast("正在跳转到活动页面")'>
+点击领取
+</span>
+</div>
+</div>
+</div>
+</div>
+<div class=tab-content id=tab5>
+<div class="card touch-active">
+<img src=https://free.picui.cn/free/2025/07/13/6872a38007b68.png alt=滴滴出行>
+<div class=card-content>
+<span class=card-title>1.滴滴出行</span>
+<span class=card-desc>打车劵天天可领</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl08.cn/76VDpe"),showToast("正在跳转到活动页面")'> 点击领取 </span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/bc16937dd365a20d466ce173b1bca592.png alt=滴滴出行>
+<div class=card-content>
+<span class=card-title>2.T3出行</span>
+<span class=card-desc>超值礼包天天领取</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl03.cn/76VeeT"),showToast("正在跳转到活动页面")'> 点击领取 </span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/bfa4d8f142cf6c7da311e87268414d02.png alt=滴滴出行>
+<div class=card-content>
+<span class=card-title>3.同程民宿</span>
+<span class=card-desc>每晚16点-23点 3折起</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl03.cn/76VLMy"),showToast("正在跳转到活动页面")'> 点击领取 </span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/5a73995ecf53fd553293f694bf7f4f34.png alt=滴滴出行>
+<div class=card-content>
+<span class=card-title>4.同程-酒店</span>
+<span class=card-desc>领劵后再下单更实惠</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kzurl16.cn/76VTXC"),showToast("正在跳转到活动页面")'> 点击领取 </span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://picui.cn/thumbnails/69370e8ca3ced09683b2cef22bf1906e.png alt=滴滴出行>
+<div class=card-content>
+<span class=card-title>5.同程酒店-预售房</span>
+<span class=card-desc>69起住全国</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl07.cn/76VRp1"),showToast("正在跳转到活动页面")'> 点击领取 </span>
+</div>
+</div>
+</div>
+<div class="card touch-active">
+<img src=https://free.picui.cn/free/2025/08/28/68afc109e930c.png alt=滴滴出行>
+<div class=card-content>
+<span class=card-title>6.境外酒店</span>
+<span class=card-desc>周三美团更便宜</span>
+<span class=card-time>活动期至:2025-12-31</span>
+<div class=card-buttons-row>
+<span class="card-button touch-active btn-touch" onclick='window.open("https://kurl14.cn/76VRjD"),showToast("正在跳转到活动页面")'> 点击领取 </span>
+</div>
+</div>
+</div>
+</div>
+<div class=more_hint>更多功能持续更新中，敬请期待...</div>
+</div>
+<div id=tutorial-page class=page-content>
+<div class=tutorial-content>
+<div class=notice-box>
+<span class=notice-title>活动更新通知：</span>
+<div class=notice-list>
+<div class=notice-item>2025-08-28-----【更新】-美化页面</div>
+<div class=notice-item>2025-08-12-----闪购-2.闪购-爆品团（上线）</div>
+<div class=notice-item>2025-08-10-----【更新】增加教程页面</div>
+<div class=notice-item>2025-08-01-----美团-1.美团外卖商品劵（上线）</div>
+<div class=notice-item>2025-07-15-----外卖领劵网页版正式上线</div>
+</div>
+</div>
+<div class=tutorial-box>
+<span class=tutorial-title>教程.外卖小技巧</span>
+<div class="tutorial-btn touch-active btn-touch" onclick='event.stopPropagation(),window.open("https://mp.weixin.qq.com/s/KhApM0bWPnoQLih6T8fsHw")'>
+<img class=tutorial-img src=https://free.picui.cn/free/2025/08/27/68af181f854e7.jpg alt=教程1>
+</div>
+<div class="tutorial-btn touch-active btn-touch" onclick='event.stopPropagation(),window.open("https://mp.weixin.qq.com/s/KhApM0bWPnoQLih6T8fsHw")'>
+<img class=tutorial-img src=https://picui.cn/thumbnails/3c993067498fd238fc1af46ccbb59042.png alt=教程2>
+</div>
+<div class="tutorial-btn touch-active btn-touch" onclick='event.stopPropagation(),window.open("https://mp.weixin.qq.com/s/KhApM0bWPnoQLih6T8fsHw")'>
+<img class=tutorial-img src=https://picui.cn/thumbnails/3c993067498fd238fc1af46ccbb59042.png alt=教程3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=popup-mask id=popupMask>
+<div class=popup id=popup>
+<div class="popup-close touch-active btn-touch" onclick=hidePopup()>×</div>
+<div class=popup-title>美团H5链接</div>
+<div class=link-container oncontextmenu=copyLink(event)>
+<text class=link-text id=linkText></text>
+</div>
+<div class=popup-desc-container>
+<div class=popup-desc>✅长按文字或一键复制链接</div>
+<div class=popup-desc>✅复制后把链接发送到任意聊天窗口，再点击发出去的链接就可以享受本地生活补贴啦.</div>
+</div>
+<button class="copy-btn touch-active btn-touch" onclick=copyLink()>一键复制</button>
+</div>
+</div>
+<div class=toast id=toast></div>
+<div class=bottom-nav>
+<div class="nav-item active touch-active btn-touch" onclick='switchNav("home")'>
+<text>首页</text>
+</div>
+<div class="nav-item touch-active btn-touch" onclick='switchNav("tutorial")'>
+<text>教程</text>
+</div>
+</div>
+<script>const state={currentNav:"home",activeTab:"tab1",isFixed:!1,barTop:0,barHeight:0,isPopupShow:!1,currentBanner:0,bannerInterval:null,link:"",touchStartX:0,touchStartTime:0},elements={buttonBar:document.getElementById("buttonBar"),buttonBarPlaceholder:document.getElementById("buttonBarPlaceholder"),buttonItems:document.querySelectorAll(".button-item"),tabContents:document.querySelectorAll(".tab-content"),navItems:document.querySelectorAll(".nav-item"),pageContents:document.querySelectorAll(".page-content"),popupMask:document.getElementById("popupMask"),popup:document.getElementById("popup"),linkText:document.getElementById("linkText"),toast:document.getElementById("toast"),bannerSwiper:document.getElementById("bannerSwiper"),bannerSlides:document.querySelectorAll(".banner-slide")};function init(){initButtonBar(),initBanner(),bindEvents(),bindTouchEvents()}function initButtonBar(){const t=elements.buttonBar.getBoundingClientRect();state.barTop=t.top+window.scrollY,state.barHeight=t.height,elements.buttonBarPlaceholder.style.height=`${state.barHeight}px`}function initBanner(){let t,e;state.bannerInterval=setInterval((()=>{state.currentBanner=(state.currentBanner+1)%elements.bannerSlides.length,updateBanner()}),3e3),elements.bannerSwiper.addEventListener("touchstart",(e=>{t=e.touches[0].clientX,clearInterval(state.bannerInterval)})),elements.bannerSwiper.addEventListener("touchend",(n=>{e=n.changedTouches[0].clientX,function(){t-e>50?state.currentBanner=(state.currentBanner+1)%elements.bannerSlides.length:e-t>50&&(state.currentBanner=(state.currentBanner-1+elements.bannerSlides.length)%elements.bannerSlides.length);updateBanner()}(),state.bannerInterval=setInterval((()=>{state.currentBanner=(state.currentBanner+1)%elements.bannerSlides.length,updateBanner()}),3e3)}))}function updateBanner(){elements.bannerSlides.forEach(((t,e)=>{t.classList.toggle("active",e===state.currentBanner),t.style.display=e===state.currentBanner?"block":"none"}))}function bindEvents(){window.addEventListener("scroll",handleScroll),window.addEventListener("beforeunload",(()=>clearInterval(state.bannerInterval)))}function bindTouchEvents(){document.querySelectorAll(".btn-touch").forEach((t=>{t.addEventListener("touchstart",(e=>{e.stopPropagation(),state.touchStartX=e.touches[0].clientX,state.touchStartTime=Date.now(),t.style.opacity="0.7"})),t.addEventListener("touchend",(e=>{e.stopPropagation(),t.style.opacity="1";const n=e.changedTouches[0].clientX,o=Date.now()-state.touchStartTime;if(Math.abs(n-state.touchStartX)<10&&o<300){const e=new MouseEvent("click",{view:window,bubbles:!0,cancelable:!0});t.dispatchEvent(e)}}))})),document.querySelectorAll(".card.touch-active").forEach((t=>{t.addEventListener("touchstart",(e=>{e.target.closest(".btn-touch")||(t.style.opacity="0.95")})),t.addEventListener("touchend",(e=>{e.target.closest(".btn-touch")||(t.style.opacity="1")}))}))}function handleScroll(){const t=window.scrollY;t>=state.barTop-10&&!state.isFixed?(elements.buttonBar.classList.add("fixed"),state.isFixed=!0):t<state.barTop-10&&state.isFixed&&(elements.buttonBar.classList.remove("fixed"),state.isFixed=!1)}function switchTab(t){state.activeTab=t,elements.buttonItems.forEach((e=>e.classList.toggle("active",e.dataset.tab===t))),elements.tabContents.forEach((e=>e.classList.toggle("active",e.id===t)))}function switchNav(t){state.currentNav=t,elements.navItems.forEach((e=>{e.classList.toggle("active",e.textContent.trim()===("home"===t?"首页":"教程"))})),elements.pageContents.forEach((e=>{e.classList.toggle("active",e.id===`${t}-page`)})),showToast(`已切换到${"home"===t?"首页":"教程"}页面`)}function showPopup(t,e){e&&e.stopPropagation(),state.link=t,elements.linkText.textContent=t,elements.popupMask.style.display="flex",state.isPopupShow=!0}function showPopupWithLink(t,e){showPopup(t,e)}function hidePopup(){elements.popupMask.style.display="none",state.isPopupShow=!1}function copyLink(t){if(t&&t.preventDefault(),navigator.clipboard)navigator.clipboard.writeText(state.link).then((()=>{showToast("复制成功"),hidePopup()})).catch((()=>{showToast("复制失败，请手动复制")}));else{const t=document.createElement("textarea");t.value=state.link,t.style.position="fixed",t.style.left="-9999px",document.body.appendChild(t),t.select();try{if(!document.execCommand("copy"))throw new Error("复制失败");showToast("复制成功"),hidePopup()}catch(t){showToast("请手动复制链接")}finally{document.body.removeChild(t)}}}function copyHiddenContent(t,e,n){t&&t.stopPropagation();const o=document.createElement("textarea");o.value=e,o.style.position="fixed",o.style.left="-9999px",document.body.appendChild(o);try{o.select(),o.setSelectionRange(0,e.length);if(!document.execCommand("copy"))throw new Error("复制失败");showToast(n||"领取成功")}catch(t){showToast("点歪啦！: "+e.substring(0,10)+"..."),o.focus(),o.select()}finally{document.body.removeChild(o)}}function showToast(t){const e=elements.toast;clearTimeout(e.timer),e.textContent=t,e.classList.add("show"),e.timer=setTimeout((()=>e.classList.remove("show")),2e3)}function handleButtonClick(t){t.stopPropagation()}function goToMiniProgram(t,e){showToast(`正在跳转到小程序: ${t}`)}function navigateToMiniProgram(t,e){showToast(`正在跳转到小程序: ${t}`)}function goBack(){showToast("返回上一页"),window.history.length>1&&window.history.back()}"localhost"!==window.location.hostname&&"127.0.0.1"!==window.location.hostname&&document.addEventListener("keydown",(t=>{"F12"===t.key&&(t.preventDefault(),showToast("开发者工具已禁用")),t.ctrlKey&&t.shiftKey&&"I"===t.key&&(t.preventDefault(),showToast("开发者工具已禁用"))})),window.addEventListener("DOMContentLoaded",init),window.addEventListener("DOMContentLoaded",(()=>{document.querySelectorAll(".btn").forEach((t=>{t.addEventListener("touchstart",(e=>{t.style.transform="scale(0.9)",t.style.transition="transform 0.15s ease",t.style.opacity="0.7",e.stopPropagation()}),{passive:!0}),t.addEventListener("touchend",(e=>{t.style.transform="scale(1)",t.style.opacity="1",e.stopPropagation()})),t.addEventListener("touchcancel",(()=>{t.style.transform="scale(1)",t.style.opacity="1"}))}))}))</script>
 <!-- Default Statcounter code for WAIMAILINGJUAN
 https://www.doubao.com/share/code/28a738b031e4ca62 -->
 <script type="text/javascript">
