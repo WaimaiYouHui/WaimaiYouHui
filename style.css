@@ -1,0 +1,498 @@
+// Cloudflare Workers 完整代码：存储所有敏感内容（卡片数据、领取口令等）
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request))
+})
+
+async function handleRequest(request) {
+  const url = new URL(request.url);
+  
+  // 处理标签内容请求（前端通过此接口获取敏感内容）
+  if (url.pathname === '/api/tab-content') {
+    return new Response(JSON.stringify({
+      // 1. 美团标签内容（tab1）
+      tab1: `
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/e87bc070e06ef882fa267efbb53f51c4.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">1.美团神劵包</span>
+            <span class="card-desc">9.9元购600元神劵包</span>
+            <span class="card-time">活动期至:2025-08-21</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥rxZmJhYWUxYmQ¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/5d36251649273e7fd1c23b5b62d55e98.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">2.美团外卖节</span>
+            <span class="card-desc">惊喜大额红包</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥uuNDUyMjM5MmU¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl20.cn/7z5eCO'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/0d25d5f4c0fa9d2c0a3742c1c2c70955.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">3.美团外卖品质会场</span>
+            <span class="card-desc">畅领高额优惠</span>
+            <span class="card-time">活动期至:2025-12-01</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥3wNTQxNDc0NDk¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kurl02.cn/7670JW'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/9eb60d86e8433a25a74d7f24d9a9a928.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">4.美团外卖商品券</span>
+            <span class="card-desc">整点抢0.1元奶茶</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event,'1 %复制信息#% 打开团App http:/¥9xZjA5MTdkNjg¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kurl06.cn/7672oC'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/6bd8781451be27188ffcb3fd5b403470.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">5.美团【团购优惠】</span>
+            <span class="card-desc">套餐折上折</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥ffNThlZWIyNmE¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl12.cn/7ziTVu'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/4a754a8133c426ba8b7e176b45a060bf.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">6.十点爆品疯抢</span>
+            <span class="card-desc">先领劵再下单</span>
+            <span class="card-time">活动期至:2025-09-01</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥ncNDE2OTZmOWQ¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kurl04.cn/767cLb'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/0366a02e84a8b7a54b3f88c63556c495.png" alt="美团神劵包" />
+          <div class="card-content">
+            <span class="card-title">7.吃喝玩乐2折起</span>
+            <span class="card-desc">吃喝玩乐神劵</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '1 %复制信息#% 打开团App http:/¥zcNjc5MjIxNjM¥一起领', '领取成功，请打开美团APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kurl15.cn/767cKs'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+      `,
+
+      // 2. 饿了么标签内容（tab2）
+      tab2: `
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/e1fc01b9a0f47c9b1917a488d5d009f1.png" alt="饿了么" />
+          <div class="card-content">
+            <span class="card-title">1.饿了么天天领红包</span>
+            <span class="card-desc">最低0元吃外卖</span>
+            <span class="card-time">活动期至:2025-09-30</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '0複制这个 666:/＄4ka44AV＄~.饿了么App【打开饿了么APP 扫红包】', '领取成功，请打开饿了么APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl19.cn/767TBl'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/8371117967ba9e25a3a1989b4e2ea139.png" alt="饿了么" />
+          <div class="card-content">
+            <span class="card-title">2.饿了么极限暴涨</span>
+            <span class="card-desc">天天必得18元暴涨立省18元</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://5kma.cn/7ziTQa'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/523282645324ecceb37285d23126953c.png" alt="饿了么" />
+          <div class="card-content">
+            <span class="card-title">3.饿了么天天领红包</span>
+            <span class="card-desc">每周五5折红包每月18日红包</span>
+            <span class="card-time">活动期至:2026-02-28</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://5kma.cn/7ziTQa'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/f64a2891e7a8513b5c600ace0255b8d8.png" alt="饿了么" />
+          <div class="card-content">
+            <span class="card-title">4.饿了么红包组合</span>
+            <span class="card-desc">天天领红包</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event,'69 HU7405   1:/《hZhY4kZwBOW₴三最高抢66元大额红包', '领取成功，请打开饿了么APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kurl11.cn/7zjpEa'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/f643287ce9ebea8a15b075f574a4cd62.png" alt="饿了么" />
+          <div class="card-content">
+            <span class="card-title">5.饿了么超市</span>
+            <span class="card-desc">有满减活动可叠加</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kurl01.cn/767abC'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+      `,
+
+      // 3. 闪购标签内容（tab3）
+      tab3: `
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/c77deada1b014012543914d8aaf6b0c7.png" alt="闪购" />
+          <div class="card-content">
+            <span class="card-title">1.闪购超级品牌日</span>
+            <span class="card-desc">单单有福利</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '79 HU7405   1:/c9x94k0wOFf₴欢闪购新用户可领首单免单', '领取成功，请打开淘宝APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://5kma.cn/764T6i'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/2bf13b551c0d147bd2d51938e7b3b3aa.png" alt="闪购" />
+          <div class="card-content">
+            <span class="card-title">2.闪购-爆品团</span>
+            <span class="card-desc">免凑单，免运费</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '08 HU7405   1:/efBa4kbqWyK₴三免凑单 免配送', '领取成功，请打开淘宝APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl11.cn/767Vr2'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/260e3a788eabfef53475fc40777c53c6.png" alt="闪购" />
+          <div class="card-content">
+            <span class="card-title">3.新用户专享</span>
+            <span class="card-desc">必得无门槛18元免单卡</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '28 HU7405   2:/₴4k3K4kbcQw1₴四闪购新用户可领首单免单', '领取成功，请打开淘宝APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl17.cn/767jgJ'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/ecd20b17655a87adbccd172df5de3e02.png" alt="闪购" />
+          <div class="card-content">
+            <span class="card-title">4.闪购惊喜福利</span>
+            <span class="card-desc">抽免单卡</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '08 HU7405   2:/₤jFVs4kbnLb2₤十1分钱喝奶茶 领大额红包', '领取成功，请打开淘宝APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl15.cn/767Bm7'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/be92cefd16ea31a158d263514ec5f357.png" alt="闪购" />
+          <div class="card-content">
+            <span class="card-title">5.淘天版-全国</span>
+            <span class="card-desc">叠加红包</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '97 HU7405   2:/《wXlW4kb3xqU₤十邀请好友，共享福利', '领取成功，请打开淘宝APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://activity01.yunzhanxinxi.com/link/100070068a4a0dc2410010002cMGtLx7'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/62d1bb5e228acfb9b29db37d52c78a80.png" alt="闪购" />
+          <div class="card-content">
+            <span class="card-title">6.闪购-爆品好价</span>
+            <span class="card-desc">爆品加倍补好价天天抢</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '58 HU7405   2:/₴gLPi4kbxaLO£四超值爆品加倍补贴！', '领取成功，请打开淘宝APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://2kma.cn/767fFW'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/ed5e248c4bfe523c995bf3a84c6de077.png" alt="闪购" />
+          <div class="card-content">
+            <span class="card-title">7.闪购-零售品牌日</span>
+            <span class="card-desc">超市好价即刻送达</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '79 HU7405   2:/₴qEzH4kY1bsP£欢超市好价 即刻送达', '领取成功，请打开淘宝APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kurl03.cn/767vee'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/0e8f3530e896d4d6cff91125cbcee5c1.png" alt="闪购" />
+          <div class="card-content">
+            <span class="card-title">8.闪购-单单返</span>
+            <span class="card-desc">单单有礼单单返</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '28 HU7405   666:/《KTuU4kYS19F✔欢下单写优评，高额返现金', '领取成功，请打开淘宝APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl12.cn/767vrT'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+      `,
+
+      // 4. 秒送标签内容（tab4）
+      tab4: `
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/901f6a65aff411e2c1c86b3d5508f137.png" alt="秒送" />
+          <div class="card-content">
+            <span class="card-title">1.京东外卖百亿补贴</span>
+            <span class="card-desc">满减劵 限时抢</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event,'17:/￥NBCTzB6QuNZPV8OT￥ MF3390 ，⇶𝒥𝓲𝓲𝓲𝓷𝓰▢倲热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kurl15.cn/767Qf9'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/07143169c51f9d12736a9a12c8990529.png" alt="秒送" />
+          <div class="card-content">
+            <span class="card-title">2.京东百亿补贴</span>
+            <span class="card-desc">早8晚8限时抢最高20元</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '18:/热门促销会场！⇛椋◄Dσσδng￥G07GfBeuYm59AbuJ￥ MF8335 ', '领取成功，请打开京东APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kurl15.cn/767Yu2'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/b50e0129b3e82dc72d9de1489ada5c1f.png" alt="秒送" />
+          <div class="card-content">
+            <span class="card-title">3.京东百亿补贴</span>
+            <span class="card-desc">往下滑有满减.对半减</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '14:/！ZEU7W78qQ1K4Q6cO！ MF5681 ，↦椋◗D○σδng热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kurl14.cn/767YLE'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/1bd53694963660d96af7594f67a9aec8.png" alt="秒送" />
+          <div class="card-content">
+            <span class="card-title">4.外卖奶茶饮品</span>
+            <span class="card-desc">奶茶低至3.9元起</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event,'10:/热门促销会场！⇒🐋▬Dσδδng￥C9vHK1cr5zVkn9z5￥ ZH9112 ', '领取成功，请打开京东APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://2kma.cn/767Yyn'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/1bd53694963660d96af7594f67a9aec8.png" alt="秒送" />
+          <div class="card-content">
+            <span class="card-title">5.外卖库迪咖啡</span>
+            <span class="card-desc">满11减10限时抢</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '18:/！M2DX42Cq7EfrBfvZ！ MF8335 ，⇶Jι🆖◰東热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl15.cn/767YST'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/0bb4b683693fb30d43b51395380e0818.png" alt="秒送" />
+          <div class="card-content">
+            <span class="card-title">6.麦当劳（免运费）</span>
+            <span class="card-desc">【仅北京 上海】</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '15:/热门促销会场！↪猄▪D○ōσng￥R17wv7fyCgTqER6G￥ MF5681 ', '领取成功，请打开京东APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl20.cn/767Yqa'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/b4721b7fd194d3fc831ad43c4684e7aa.png" />
+          <div class="card-content">
+            <span class="card-title">7.外卖宵夜专场</span>
+            <span class="card-desc">每日20-24点最高立减10元</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event,'17:/热门促销会场！→Jι🆖◄崠￥Z9RCJ78T4YL2H7nx￥ MF3390 ', '领取成功，请打开京东APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl16.cn/767YWN'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://static.sichuanyunzhan.com//static/alliance/business_auto/20250723112813243/cover_190691.png" alt="秒送" />
+          <div class="card-content">
+            <span class="card-title">8.球迷专属劵</span>
+            <span class="card-desc">领10元</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="copyHiddenContent(event, '10:/！ACs07AIUgs78fXn7！ MF5681 ，↪京◪Dσσδng热门促销会场！', '领取成功，请打开京东APP')">领取口令</span>
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl11.cn/767rl8'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+      `,
+
+      // 5. 出行/住标签内容（tab5）
+      tab5: `
+        <div class="card touch-active">
+          <img src="https://free.picui.cn/free/2025/07/13/6872a38007b68.png" alt="滴滴出行" />
+          <div class="card-content">
+            <span class="card-title">1.滴滴出行</span>
+            <span class="card-desc">打车劵天天可领</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl08.cn/76VDpe'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/bc16937dd365a20d466ce173b1bca592.png" alt="滴滴出行" />
+          <div class="card-content">
+            <span class="card-title">2.T3出行</span>
+            <span class="card-desc">超值礼包天天领取</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl03.cn/76VeeT'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/bfa4d8f142cf6c7da311e87268414d02.png" alt="滴滴出行" />
+          <div class="card-content">
+            <span class="card-title">3.同程民宿</span>
+            <span class="card-desc">每晚16点-23点 3折起</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl03.cn/76VLMy'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/5a73995ecf53fd553293f694bf7f4f34.png" alt="滴滴出行" />
+          <div class="card-content">
+            <span class="card-title">4.同程-酒店</span>
+            <span class="card-desc">领劵后再下单更实惠</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kzurl16.cn/76VTXC'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://picui.cn/thumbnails/69370e8ca3ced09683b2cef22bf1906e.png" alt="滴滴出行" />
+          <div class="card-content">
+            <span class="card-title">5.同程酒店-预售房</span>
+            <span class="card-desc">69起住全国</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kurl07.cn/76VRp1'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+        <div class="card touch-active">
+          <img src="https://free.picui.cn/free/2025/08/28/68afc109e930c.png" alt="滴滴出行" />
+          <div class="card-content">
+            <span class="card-title">6.境外酒店</span>
+            <span class="card-desc">周三美团更便宜</span>
+            <span class="card-time">活动期至:2025-12-31</span>
+            <div class="card-buttons-row">
+              <span class="card-button touch-active btn-touch" 
+                onclick="window.open('https://kurl14.cn/76VRjD'); showToast('正在跳转到活动页面')">点击领取</span>
+            </div>
+          </div>
+        </div>
+      `
+    }), {
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store', // 禁止缓存，确保内容实时更新
+        'Access-Control-Allow-Origin': '*' // 允许跨域（适配Pages与Workers同域名）
+      }
+    });
+  }
+
+  // 其他请求（如静态资源）直接代理到Cloudflare Pages
+  return fetch(request);
+}
